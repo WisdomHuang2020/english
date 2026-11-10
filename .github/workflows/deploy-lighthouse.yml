@@ -9,7 +9,7 @@ name: Deploy to Tencent Lighthouse
 # 实测 fetch 无限挂起 6 分钟），且服务器没有 deploy key、无法改走 SSH。
 # 因此不由服务器去拉，而由本工作流 `git push` 到服务器仓库
 # （服务器侧已设 receive.denyCurrentBranch=updateInstead，推送即更新工作区），
-# 再 SSH 调用 deploy/update.sh 做 chmod + nginx -t + reload。
+# 再 SSH 调用 deploy/update.sh 做 chmod + nginx -t + reload + 回环字节自检。
 # 整条链路只依赖「runner → 服务器:22」，该方向实测已通。
 #
 # 所需 repository secrets（5 条，站群统一命名）：
@@ -129,7 +129,12 @@ jobs:
           fi
           echo "::notice title=部署完成::服务器已更新至 $AFTER"
 
-      # ⚠️ 只体检、不设门禁：部署已由上一步断言，此处失败只出 warning
+      # 核验分层（技能 §五）：
+      #   1  状态码 / 301 收敛 → 本步（runner 侧，公网）
+      #   2b 磁盘真身 + 2c 经 vhost 取回 → 已下沉到 deploy/update.sh 内自检，
+      #      上一步 SSH 调用它时若字节不符即 exit 1，本工作流随之失败。
+      #   2  产物指纹 + 3 渲染简化版 → 本步标题/版本串断言
+      # ⚠️ 本步只体检、不设门禁：公网偶发抖动不应把已成功的部署判红。
       - name: Verify live site (self-check, never blocks)
         if: steps.cfg.outputs.ready == 'true'
         continue-on-error: true
@@ -137,20 +142,29 @@ jobs:
           LH_HOST: ${{ secrets.LH_HOST }}
         run: |
           set +e
-          URL="https://www.english.power-knowledge.tech/"
-          for i in 1 2 3; do
-            html=$(curl -sS -m 20 "$URL"); rc=$?
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 20 "$URL")
-            echo "第 ${i} 次：http=$code curl_exit=$rc"
-            if [ "$rc" = 0 ] && [ "$code" = "200" ]; then
-              if printf '%s' "$html" | grep -q '邮件英语学习站'; then
-                echo "::notice title=核验通过::线上 200 且页面标题命中"
-              else
-                echo "::warning title=核验存疑::线上 200 但内容指纹未命中，可能是缓存"
-              fi
-              exit 0
+          BASE="https://www.english.power-knowledge.tech"
+
+          # ── 1 状态码：公网 200，且 http:// 应收敛到 https ──────────────
+          for path in "/" "/glossary/"; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 20 "$BASE$path")
+            echo "HTTPS $path → $code"
+            if [ "$code" != "200" ]; then
+              echo "::warning title=核验存疑::$path 返回 $code（不影响本次部署）"
             fi
-            sleep 5
           done
-          echo "::warning title=自检未通过（不影响本次部署）::$URL 多次访问失败"
+          plain=$(curl -sS -o /dev/null -w '%{http_code}' -m 20 "http://www.english.power-knowledge.tech/")
+          echo "HTTP  / → $plain（期望 301）"
+
+          # ── 2/3 内容指纹：标题 + 版本串 ────────────────────────────────
+          html=$(curl -sS -m 20 "$BASE/")
+          if printf '%s' "$html" | grep -q '邮件英语学习站'; then
+            echo "::notice title=核验通过::线上可达且标题命中"
+          else
+            echo "::warning title=核验存疑::线上可达但内容指纹未命中，可能是缓存"
+          fi
+          if printf '%s' "$html" | grep -q 'v1\.1\.0'; then
+            echo "版本串 v1.1.0：命中"
+          else
+            echo "::warning title=版本串未命中::页脚未取到 v1.1.0，确认是否已发布该版本"
+          fi
           exit 0
