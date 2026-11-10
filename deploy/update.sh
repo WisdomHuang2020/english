@@ -10,7 +10,18 @@ cd "$SITE_DIR"
 echo "== 更新前版本 =="
 git log --oneline -1
 
-git fetch --prune origin
+# 服务器出口到 GitHub 时不时被掐（GnuTLS recv error / 443 连接超时），
+# 实测「失败 → 隔几秒重试」第二次通常就通，所以这里必须带重试，别一次失败就报错。
+ok=0
+for i in 1 2 3 4 5; do
+  if git fetch --prune origin; then ok=1; break; fi
+  echo "fetch failed (attempt $i), retrying in 5s..."
+  sleep 5
+done
+if [ "$ok" -ne 1 ]; then
+  echo "ERROR: git fetch 连续 5 次失败，站点保持当前版本未动。" >&2
+  exit 1
+fi
 git reset --hard origin/main
 
 echo "== 更新后版本 =="
