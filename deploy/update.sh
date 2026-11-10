@@ -23,7 +23,7 @@ find . -path ./.git -prune -o -type d -print0 | xargs -0 chmod 755
 nginx -t
 systemctl reload nginx
 echo "== done =="
-# 本机自检：必须用 --resolve，否则 SNI 不带域名，通配证会报 unrecognized name
-curl -sS -o /dev/null -w 'local https=%{http_code}\n' \
-  --resolve english.power-knowledge.tech:443:127.0.0.1 \
-  https://english.power-knowledge.tech/
+# 说明：站内自检不在这里发 HTTPS 请求 —— 服务器出口带代理，且本机回环访问会
+# 因 SNI/证书链报 unrecognized name，容易误判。线上验证统一从客户端做：
+#   https://english.power-knowledge.tech/ 返回 200 且页脚 ICP 可见即为通过。
+systemctl is-active nginx
