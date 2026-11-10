@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>模板库 · 邮件英语 · 外贸英语学习站</title>
+<meta name="description" content="16 封覆盖外贸全流程的英文邮件模板：开发信、询盘回复、报价、还盘、订单确认、催款、出货、延误、索赔、涨价。填变量即可复制。" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = { 'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5', 'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7' };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="../assets/css/theme-vars.css" />
+<link rel="stylesheet" href="../assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="../assets/css/header.css" />
+<link rel="stylesheet" href="../assets/css/footer.css" />
+<link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="../index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="index.html" data-topic="email">邮件英语</a>
+      <a href="templates.html">模板库</a>
+      <a href="phrases.html">句式库</a>
+      <a href="checklist.html">检查清单</a>
+      <a href="../practice.html">自测</a>
+    </nav>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:52px 0 26px">
+    <div class="shell">
+      <p class="eyebrow">模板库</p>
+      <h1 style="font-size:clamp(26px,3.4vw,38px)">16 封，覆盖外贸全流程</h1>
+      <p class="lead">
+        上面一排填一次，下面 16 封邮件里的占位符会同时替换。填完直接点「复制」——
+        没填的 <span class="var-hl" style="color:var(--color-brand-light);font-weight:700">{{占位符}}</span> 会高亮，提醒你别把占位符发出去。
+      </p>
+      <p style="font-size:13.5px;color:var(--color-text-muted);margin-top:10px">
+        填空内容只存在你本机浏览器（localStorage），不会上传。换设备或清缓存后需重填。
+      </p>
+    </div>
+  </section>
+
+  <div class="shell" style="padding-bottom:64px">
+    <div class="tpl-toolbar">
+      <div class="tf"><label for="v-customer">客户称呼</label><input id="v-customer" data-var="Customer" placeholder="Mr. Weber" /></div>
+      <div class="tf"><label for="v-company">客户公司</label><input id="v-company" data-var="Company" placeholder="Nordlicht GmbH" /></div>
+      <div class="tf"><label for="v-product">产品</label><input id="v-product" data-var="Product" placeholder="LED panel 36W" /></div>
+      <div class="tf"><label for="v-qty">数量</label><input id="v-qty" data-var="Qty" placeholder="1,000 pcs" /></div>
+      <div class="tf"><label for="v-price">单价</label><input id="v-price" data-var="Price" placeholder="USD 11.90" /></div>
+      <div class="tf"><label for="v-total">总额</label><input id="v-total" data-var="Total" placeholder="USD 11,900" /></div>
+      <div class="tf"><label for="v-incoterm">贸易术语</label><input id="v-incoterm" data-var="Incoterm" placeholder="FOB Ningbo" /></div>
+      <div class="tf"><label for="v-lead">交期</label><input id="v-lead" data-var="LeadTime" placeholder="25 days" /></div>
+      <div class="tf"><label for="v-order">单号</label><input id="v-order" data-var="OrderNo" placeholder="PO-8821" /></div>
+      <div class="tf"><label for="v-valid">有效期</label><input id="v-valid" data-var="ValidDate" placeholder="25 March" /></div>
+      <div class="tf"><label for="v-name">你的名字</label><input id="v-name" data-var="MyName" placeholder="Lin Tao" /></div>
+      <button class="btn btn--ghost btn--sm" type="button" id="tpl-reset" style="align-self:flex-end">清空</button>
+    </div>
+
+    <!-- 01 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>01 首次开发信<span>冷启动 · 120 词内</span></h3>
+        <span class="tag tag--formal">中性偏正式</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: {{Product}} — direct from the manufacturer, {{Qty}} MOQ, samples in 7 days
+
+Dear {{Customer}},
+
+I'm writing from Ningbo, where we manufacture {{Product}}. We supply two importers in your segment in Germany, so I think there may be a straightforward overlap with {{Company}}.
+
+Three facts, no attachments:
+· {{Price}}/pc at {{Qty}}, {{Incoterm}}
+· {{LeadTime}} lead time; samples in 7 days
+· CE and RoHS on file, 3-year warranty
+
+If it's useful, reply with the specification you buy most and I'll send a matching quotation within one working day.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">不要在第一段写「we are a professional manufacturer with 20 years' experience」。客户判断你的方式是三条具体事实，不是三个形容词。</p>
+    </div>
+
+    <!-- 02 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>02 回复询盘 + 报价<span>四段式</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Quotation — {{Product}} / {{Qty}} (valid to {{ValidDate}})
+
+Dear {{Customer}},
+
+Thank you for your inquiry. We can supply {{Product}} as specified, and the quotation is attached.
+
+Key terms:
+· {{Price}}/pc at {{Qty}}, {{Incoterm}}
+· MOQ 300 pcs; {{LeadTime}} after receipt of deposit
+· 30% T/T deposit, balance against copy of B/L
+· Valid until {{ValidDate}}
+
+Two points to confirm before we book production: the colour temperature (4000K or 5000K), and whether the cartons should carry your own label.
+
+If you confirm by {{ValidDate}}, we can still hold the {{LeadTime}} schedule.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 03 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>03 报价跟进（客户未回）<span>D+5，用新信息代替催促</span></h3>
+        <span class="tag tag--friendly">委婉</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Following up — quotation for {{Product}} ({{OrderNo}})
+
+Dear {{Customer}},
+
+I'm following up on the quotation I sent on 12 March. I understand you may still be comparing offers, so let me add two points that usually matter at this stage.
+
+First, our price is fixed until {{ValidDate}}.
+
+Second, we hold stock that would let us ship within 10 days instead of {{LeadTime}}.
+
+If either point helps, tell me which version you'd like and I'll send the revised PI today. If the timing isn't right, just let me know when to check back.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">这封的作用是把「催」换成「补充信息」。结尾两个出口，任何一个都能换来一句回复。</p>
+    </div>
+
+    <!-- 04 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>04 还盘回应<span>两个方案，不直接降价</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: RE: Quotation — {{Product}} (two options at your target)
+
+Dear {{Customer}},
+
+Thanks for being direct about the target. At {{Qty}}, your figure is below our material cost on this specification, so I can't get there without changing something. Two ways forward:
+
+Option A — larger quantity at a lower unit price. The volume lets us buy components at a better tier.
+Option B — same quantity at a lower price, with a shorter warranty and our standard component instead of the premium brand.
+
+Both are {{Incoterm}}, {{LeadTime}} after deposit. If neither fits, tell me your annual volume and I'll quote a frame agreement — that's usually where the real gap closes.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">把自己能接受的两条路先摆出来，客户只需选 A 或 B，比让他继续压价容易得多。</p>
+    </div>
+
+    <!-- 05 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>05 拒绝降价<span>认可 → 依据 → 替代</span></h3>
+        <span class="tag tag--hard">偏硬</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: RE: Price for {{Product}} — where the cost sits
+
+Dear {{Customer}},
+
+I understand the target — most of our European buyers start there, and I'd rather explain the gap than simply repeat our price.
+
+Of the {{Price}}/pc, about 62% is the LED chip and driver, and both have risen three months running. We absorbed that in the last two orders; at your target we would be selling below cost.
+
+What I can do: at {{Qty}} we hold {{Price}}, and I can waive the setup charge for your own packaging (normally USD 350). That's a real cost to us, but it doesn't touch the unit price.
+
+If the budget is fixed, tell me the ceiling and I'll propose a specification that fits it.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">只讲一条最有说服力的依据（成本构成），然后给一个「不动单价」的让步。列出五条理由等于在找借口。</p>
+    </div>
+
+    <!-- 06 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>06 订单确认（PI 复述）<span>把口语变成清单</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Order confirmation — {{OrderNo}} / {{Qty}} {{Product}} (please confirm 3 items)
+
+Dear {{Customer}},
+
+Thank you for the order. This is to confirm it as follows; please check items 2, 4 and 5 and reply "confirmed" so we can start.
+
+1. Product: {{Product}} — {{Qty}}
+2. Price: {{Price}}/pc, total {{Total}}, {{Incoterm}}
+3. Payment: 30% deposit, balance against copy of B/L
+4. Delivery: {{LeadTime}} after deposit and artwork approval
+5. Packing: your own colour box, 6 pcs per carton
+
+The PI is attached. If anything here differs from your understanding, tell me before Friday — after production starts, changes cost both of us time.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 07 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>07 催预付款<span>到期前 3 天的提醒</span></h3>
+        <span class="tag tag--friendly">委婉</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Deposit reminder — {{OrderNo}}, {{Total}} (due {{ValidDate}})
+
+Dear {{Customer}},
+
+Just a reminder that the 30% deposit for {{OrderNo}} ({{Total}}) falls due on {{ValidDate}}. The PI and our bank details are attached again for convenience.
+
+Once the deposit arrives we can book the production slot, which keeps us on track for {{LeadTime}}.
+
+If your finance team needs anything else — a stamped PI, a different invoice format, or a bank confirmation letter — tell me and I'll send it today.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">最后一句是这封信的关键：把「你该付钱了」变成「我帮你把付款障碍清掉」。</p>
+    </div>
+
+    <!-- 08 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>08 催尾款（升级）<span>逾期 15 天以上</span></h3>
+        <span class="tag tag--hard">偏硬</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Payment overdue — {{OrderNo}}, {{Total}} (15 days past due)
+
+Dear {{Customer}},
+
+Invoice {{OrderNo}} for {{Total}} fell due on {{ValidDate}} and remains unpaid. We have sent two reminders, on 13 and 18 March, without a confirmed payment date.
+
+Unless payment is received by 30 March, we will have to hold the next shipment and apply the late-payment clause in our contract. I would rather not do either.
+
+Could you confirm today one of the following: (a) the payment date, or (b) the person in your finance team I should contact directly?
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">硬话必须有依据：日期、金额、已催次数、合同条款。三项齐了才叫立场，缺一项都像情绪。</p>
+    </div>
+
+    <!-- 09 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>09 出货通知<span>让客户能立刻清关提货</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Shipped — {{OrderNo}}, {{Qty}} {{Product}} (ETD 8 Apr / ETA 12 May)
+
+Dear {{Customer}},
+
+Your order left Ningbo today. Details:
+
+Vessel: CSCL ATLANTIC 026E · Container: CSLU 214 883 7 · Seal: 0091742
+ETD Ningbo 8 April · ETA Hamburg 12 May
+Shipped: {{Qty}}, 167 cartons, 4.2 cbm, 1,180 kg
+
+Attached: commercial invoice, packing list and the B/L copy. Originals will be couriered tomorrow — I'll send the tracking number.
+
+No difference from the confirmed order. I'll check with the carrier on 5 May and update you if the ETA moves.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 10 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>10 交期延误致歉<span>先给新日期</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Shipment delay — {{OrderNo}} now ETD 18 Apr (was 8 Apr)
+
+Dear {{Customer}},
+
+I'm sorry to tell you that the ETD has moved from 8 April to 18 April. The new date is confirmed with the carrier.
+
+The driver batch failed our incoming inspection on 26 March and had to be replaced. We chose to replace it rather than ship a batch we weren't confident in.
+
+What we've done: re-ordered drivers with a 7-day expedite, and booked the 18 April vessel with a 10-day buffer before your installation window.
+
+I know this affects your schedule. If it helps, we can air-freight part of the order to arrive around 12 April at our cost, so your team can start.
+
+I'll update you every Friday until the goods are on board.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 11 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>11 质量投诉受理<span>先给时限，再要证据</span></h3>
+        <span class="tag tag--friendly">委婉</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: RE: Quality issue — {{OrderNo}} (we're on it, reply by Thursday)
+
+Dear {{Customer}},
+
+Thank you for flagging this, and I'm sorry the batch didn't arrive as expected. I've opened a case with our QC team and will come back to you with a proposal by Thursday.
+
+To make that proposal specific rather than generic, could you send four things:
+1. The batch code printed on the carton
+2. The number of units affected, out of how many received
+3. Two or three photos in daylight, plus one of the carton label
+4. Whether any units have already been installed
+
+If it's urgent for your line, tell me how many units you need to keep running this week and I'll look at an emergency shipment separately.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">「by Thursday」是你给自己设的时限，也是这封信最能让客户冷静下来的部分。</p>
+    </div>
+
+    <!-- 12 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>12 拒绝索赔<span>给依据 + 给协助</span></h3>
+        <span class="tag tag--hard">偏硬</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: RE: Claim for {{OrderNo}} — our findings
+
+Dear {{Customer}},
+
+We've checked your photos against our pre-shipment inspection report, and the cartons left the factory intact. This points to transit damage rather than a production fault, which under {{Incoterm}} falls to the carrier rather than to us.
+
+I don't want to leave you stuck, though. Two things we can do:
+
+1. Send replacement units with your next order at our cost, so your line keeps running.
+2. Prepare the carrier claim documents with you — we have the loading photos and the seal record, which usually speeds it up.
+
+Tell me which you prefer and I'll start today. For the claim I'll need the delivery receipt and two photos of the pallet before unloading.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 13 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>13 涨价通知<span>结论在前三行</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Price update — {{Product}} from 1 April (+3.2%)
+
+Dear {{Customer}},
+
+From 1 April 2026, prices on {{Product}} will increase by 3.2%. Copper and driver costs have risen for three consecutive months, and we've absorbed them so far.
+
+Two things to note:
+
+1. Orders confirmed before 31 March will be invoiced at current prices, even if production runs in April.
+2. If you can commit to a quarterly volume, we can fix prices for the next two quarters.
+
+The new price list is attached. Happy to go through it on a call if that's easier.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 14 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>14 约会议 / 展会邀约<span>给两个具体时段</span></h3>
+        <span class="tag tag--friendly">友好</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: 30 min call — {{Product}} and your Q3 volumes?
+
+Dear {{Customer}},
+
+We've exchanged enough emails on {{Product}} that a 30-minute call would probably save us both a week.
+
+Would either of these work?
+· Thursday 21 March, 15:00–15:30 CET
+· Friday 22 March, 09:00–09:30 CET
+
+I'll send an agenda 24 hours ahead: your Q3 volumes, the two specification points still open, and pricing at 3,000 pcs. If neither slot works, send me two that do and I'll fit in.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">给两个具体时段 + 一份议程，回复率远高于「when are you available」。议程本身也是专业度的证明。</p>
+    </div>
+
+    <!-- 15 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>15 催确认（打样 / 包装稿）<span>说明卡在谁那里</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Artwork approval needed — {{OrderNo}} (holding production)
+
+Dear {{Customer}},
+
+We're ready to start {{OrderNo}}, but production is waiting on the packaging artwork. Your {{LeadTime}} lead time starts from approval, so each day here moves the ETD by a day.
+
+If it helps, I can send a low-resolution proof with our printer's dieline so your designer can check the layout before final files.
+
+Could you confirm by Friday 22 March? If the artwork needs more time, tell me and we'll re-plan the shipment date instead of holding the slot.
+
+Best regards,
+{{MyName}}</pre>
+    </div>
+
+    <!-- 16 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>16 复购与关系维护<span>订单完成后 3 周</span></h3>
+        <span class="tag tag--friendly">友好</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Quick check — how did the {{Product}} perform?
+
+Dear {{Customer}},
+
+Your last shipment ({{OrderNo}}) has been in use for about three weeks, so I wanted to ask one question: did the units perform as expected on site?
+
+If yes, I'll keep your specification on file and let you know when the next production run is scheduled — that's usually the cheapest window for a repeat order.
+
+If not, tell me what you're seeing and I'll get our engineer involved before it becomes a claim.
+
+Either way, thanks for the order.
+
+Best regards,
+{{MyName}}</pre>
+      <p class="mail-note">这封邮件的真实目的是拿反馈，不是推销。但「下一批排产窗口」这句，往往就是复购的起点。</p>
+    </div>
+
+    <div class="callout callout--tip" style="margin-top:24px">
+      <span class="co-title">怎么改这些模板</span>
+      只改事实（价格、交期、条款、产品），不要改结构。<b>结构是模板真正值钱的部分</b>：
+      结论在前、条款成行、结尾给具体动作与日期。改完用
+      <a href="checklist.html">发送前检查清单</a>过一遍，再发。
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="../index.html">首页</a>
+          <a href="index.html">邮件英语</a>
+          <a href="structure.html">结构与语气</a>
+          <a href="negotiation.html">询盘报价</a>
+          <a href="operations.html">订单货款</a>
+          <a href="templates.html">模板库</a>
+          <a href="phrases.html">句式库</a>
+          <a href="checklist.html">检查清单</a>
+          <a href="../practice.html">自测</a>
+          <a href="index.html#faq">常见问题</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：外贸业务往来邮件实例与商务英语写作惯例（BEC / 商务写作教材通用表述）。例句中的公司、人名、单价、单号均为虚构，仅作写法演示。
+        </p>
+        <p class="foot-note">
+          贸易术语表述以 Incoterms 2020 为准；付款方式、检验与索赔条款在具体合同下可能另有约定，实际以合同正文为准。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right"><span class="app-version">v1.0.0</span></div>
+    </div>
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，所有句式、模板与讲解仅供学习与写作参考，不构成任何商业、法律或合规承诺。因直接套用站内文本导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与模板为作者整理撰写，著作权归作者所有；转载请注明出处，且不得用于商业用途。如涉及第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

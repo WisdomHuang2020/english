@@ -1,0 +1,183 @@
+/* ==========================================================================
+   power-knowledge.tech 站群 · 8 套可切换主题变量
+   --------------------------------------------------------------------------
+   本文件是「颜色底座」，不含任何布局规则。粘贴位置：
+     · 构建站（Tailwind 4）：src/index.css 里 @import "tailwindcss"; 之后、
+       自己的 @theme / 布局规则之前，整段粘进去。
+     · 零构建站：<link> 引用，或直接内联进 <style>。
+
+   两种命名变体，**二选一**，不要同时用：
+     A. --color-brand / --color-brand-light / --color-brand-dark   ← 站群多数派
+        （llc-design-tool / ahb / motor-lighting / main-website-entrance）
+     B. --color-primary / --color-primary-light / --color-primary-dark ← control-mode 历史命名
+
+   选错的表现：切主题时只有背景和文字变，主色按钮/高亮条不变 —— 因为变量名对不上。
+
+   逐值来源（2026-11-09 双源核对，两站 8 套 × 11 变量完全一致，仅主色三兄弟命名不同）：
+     D:\...\motorcycles-illumination\src\index.css        @theme + html[data-theme]
+     C:\...\cm-repo\src\index.css                          @theme + html[data-theme]
+
+   契约（与 assets/theme.ts、assets/theme-vanilla.js、assets/theme-boot.html 三处必须一致）：
+     ?theme=<id>  优先
+     → localStorage['pk-theme']
+     → 默认 'dark-teal'
+     落到 document.documentElement.dataset.theme，驱动下面的 html[data-theme='…']
+
+   --color-accent（amber #f59e0b）是工程强调色，不随主题变化，不要写进 data-theme 块。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   默认值 = dark-teal —— **两份，缺一不可**
+
+   ① @theme      Tailwind 4 构建站用：它从变量名生成 text-brand / bg-surface 这类工具类。
+                 但 @theme 是 Tailwind 专有 at-rule，**浏览器不认**——零构建站里它
+                 等于一段注释，变量一个都不会定义。
+   ② :root       所有环境都认。零构建站的默认主题全靠这一段。
+
+   为什么这次的 :root 不是冗余（★2026-11-09 实测踩过的坑）：
+   只写 @theme 时，首次访问（localStorage 空、URL 无 ?theme）的时序是
+     解析 HTML → 首帧绘制（此时 data-theme 未设、@theme 被忽略）→ 变量全部未定义
+     → body 背景透明（白）、文字纯黑 → defer 脚本执行才补上 dark-teal → 深色。
+   结果：深色站首访白闪一帧；JS 被禁用或加载失败时整站无色。
+   加 :root 后首帧就是 #0a0a0a，不依赖任何脚本。
+   -------------------------------------------------------------------------- */
+
+/* 变体 A：站群多数派（brand 三兄弟） */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-elevated: #262626;
+  --color-border: #404040;
+  --color-border-light: #525252;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #737373;
+  --color-brand: #0f766e;
+  --color-brand-light: #14b8a6;
+  --color-brand-dark: #134e4a;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+}
+
+/* 首帧默认值。与上面的 @theme 逐值相同；html[data-theme='…'] 选择器优先级更高，
+   所以用户选了别的主题后这里会被覆盖，不会打架。 */
+:root {
+  --color-bg: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-elevated: #262626;
+  --color-border: #404040;
+  --color-border-light: #525252;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #737373;
+  --color-brand: #0f766e;
+  --color-brand-light: #14b8a6;
+  --color-brand-dark: #134e4a;
+}
+
+/* 变体 B：control-mode 命名（primary 三兄弟）。
+   用这套时把上面 **@theme 与 :root 两处都换成它** —— 只换 @theme 会让零构建站
+   首帧没有变量（原因见上）。:root 版就是把下面三行 brand 换成 primary，其余 8 项照抄：
+:root {
+  --color-primary: #0f766e; --color-primary-light: #14b8a6; --color-primary-dark: #134e4a;
+  --color-bg: #0a0a0a; --color-surface: #171717; --color-surface-elevated: #262626;
+  --color-border: #404040; --color-border-light: #525252;
+  --color-text-primary: #f5f5f5; --color-text-secondary: #a3a3a3; --color-text-muted: #737373;
+}
+
+@theme {
+  --color-primary: #0f766e;
+  --color-primary-light: #14b8a6;
+  --color-primary-dark: #134e4a;
+  --color-accent: #f59e0b;
+  --color-accent-light: #fbbf24;
+  --color-bg: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-elevated: #262626;
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #a3a3a3;
+  --color-text-muted: #737373;
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --color-border: #404040;
+  --color-border-light: #525252;
+}
+*/
+
+/* --------------------------------------------------------------------------
+   8 套主题覆盖
+   顺序与 THEMES 常量一致：dark-teal / blue / navy-tech / graphite /
+   warm-paper / forest / indigo / sea-salt。
+   每套 11 个变量，一个不缺 —— 缺一个就会从默认主题「漏」出深色值，
+   在浅色主题上表现为某处文字发黑或发白。
+   -------------------------------------------------------------------------- */
+
+html[data-theme='dark-teal'] {
+  --color-bg: #0a0a0a; --color-surface: #171717; --color-surface-elevated: #262626;
+  --color-border: #404040; --color-border-light: #525252;
+  --color-text-primary: #f5f5f5; --color-text-secondary: #a3a3a3; --color-text-muted: #737373;
+  --color-brand: #0f766e; --color-brand-light: #14b8a6; --color-brand-dark: #134e4a;
+  /* 变体 B 用这三行替换上面一行：
+  --color-primary: #0f766e; --color-primary-light: #14b8a6; --color-primary-dark: #134e4a; */
+}
+
+html[data-theme='blue'] {
+  --color-bg: #f6f7f9; --color-surface: #fff; --color-surface-elevated: #fcfcfd;
+  --color-border: #d3d9e0; --color-border-light: #e4e7eb;
+  --color-text-primary: #14171c; --color-text-secondary: #4b535e; --color-text-muted: #6b7480;
+  --color-brand: #0070c0; --color-brand-light: #0060b0; --color-brand-dark: #0050a0;
+}
+
+html[data-theme='navy-tech'] {
+  --color-bg: #0b1a2b; --color-surface: #12253c; --color-surface-elevated: #1b3350;
+  --color-border: #2b4a6b; --color-border-light: #3a5c80;
+  --color-text-primary: #eaf4ff; --color-text-secondary: #a8c2dc; --color-text-muted: #7e9bb8;
+  --color-brand: #3aa0e8; --color-brand-light: #6bc4ff; --color-brand-dark: #2277b8;
+}
+
+html[data-theme='graphite'] {
+  --color-bg: #f2f3f5; --color-surface: #fff; --color-surface-elevated: #fafbfc;
+  --color-border: #c9ced5; --color-border-light: #e0e3e8;
+  --color-text-primary: #1b2027; --color-text-secondary: #4d5661; --color-text-muted: #78818c;
+  --color-brand: #3f4855; --color-brand-light: #5b6675; --color-brand-dark: #2c333d;
+}
+
+html[data-theme='warm-paper'] {
+  --color-bg: #faf6ed; --color-surface: #fffdf7; --color-surface-elevated: #fbf6e9;
+  --color-border: #dcd0b6; --color-border-light: #eae0c9;
+  --color-text-primary: #2e2519; --color-text-secondary: #5e5140; --color-text-muted: #8a7a63;
+  --color-brand: #9a5b13; --color-brand-light: #b8761f; --color-brand-dark: #7a4710;
+}
+
+html[data-theme='forest'] {
+  --color-bg: #0c1712; --color-surface: #14241b; --color-surface-elevated: #1d3226;
+  --color-border: #2f4a38; --color-border-light: #3d5c47;
+  --color-text-primary: #e8f5ec; --color-text-secondary: #a7c4b1; --color-text-muted: #7d9c88;
+  --color-brand: #3fbf7f; --color-brand-light: #6ed8a2; --color-brand-dark: #2b9461;
+}
+
+html[data-theme='indigo'] {
+  --color-bg: #f6f5fc; --color-surface: #fff; --color-surface-elevated: #fbfaff;
+  --color-border: #d6d1e8; --color-border-light: #e7e3f2;
+  --color-text-primary: #211d33; --color-text-secondary: #524c6b; --color-text-muted: #7e7899;
+  --color-brand: #5b4bd6; --color-brand-light: #7869e8; --color-brand-dark: #4538ad;
+}
+
+html[data-theme='sea-salt'] {
+  --color-bg: #eef7f7; --color-surface: #fff; --color-surface-elevated: #f8fdfd;
+  --color-border: #c4dcda; --color-border-light: #dceae9;
+  --color-text-primary: #123033; --color-text-secondary: #416064; --color-text-muted: #6e8b8d;
+  --color-brand: #0e7490; --color-brand-light: #1294b0; --color-brand-dark: #0a566c;
+}
+
+/* --------------------------------------------------------------------------
+   浅色三套的即时校验（改完一定要肉眼确认，别只信代码）
+     浅色：blue / graphite / warm-paper / indigo / sea-salt  （5 套）
+     深色：dark-teal / navy-tech / forest                     （3 套）
+
+   浅色主题最容易出问题的三处，改完逐套点一遍：
+     1. 图表 —— canvas 不认 CSS 变量，必须 readThemeColors() 重绘（见 references 与 theme.ts）
+     2. 页脚 —— 若 background 写死深色，浅色主题下会变成一块黑砖
+     3. 备案徽标 beian.png —— 深色图在深色底上会糊，页脚要留一个浅色容器承托它
+   -------------------------------------------------------------------------- */

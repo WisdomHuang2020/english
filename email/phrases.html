@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>句式库 · 邮件英语 · 外贸英语学习站</title>
+<meta name="description" content="97 条外贸邮件高频句式，按开场、请求、催促、致歉、拒绝、议价、确认、附件、结尾、澄清、关系维护分类，附中英对照与语气标注。" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = { 'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5', 'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7' };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="../assets/css/theme-vars.css" />
+<link rel="stylesheet" href="../assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="../assets/css/header.css" />
+<link rel="stylesheet" href="../assets/css/footer.css" />
+<link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="../index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="index.html" data-topic="email">邮件英语</a>
+      <a href="templates.html">模板库</a>
+      <a href="phrases.html">句式库</a>
+      <a href="checklist.html">检查清单</a>
+      <a href="../practice.html">自测</a>
+    </nav>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="padding:52px 0 24px">
+    <div class="shell">
+      <p class="eyebrow">句式库</p>
+      <h1 style="font-size:clamp(26px,3.4vw,38px)">97 条，按「你要干什么」分类</h1>
+      <p class="lead">
+        不按语法分，按意图分——要催、要拒、要解释、要留门。每条标了语气档位：
+        <span class="tag tag--formal">偏正式</span>
+        <span class="tag">中性</span>
+        <span class="tag tag--friendly">委婉 / 友好</span>
+        <span class="tag tag--hard">偏硬</span>
+        点 ★ 收藏，下次直接从这里取。
+      </p>
+    </div>
+  </section>
+
+  <div class="shell" style="padding-bottom:64px">
+    <input class="search-input" id="phrase-search" type="search" placeholder="搜索英文或中文，例如：confirm、催、退款…" autocomplete="off" />
+    <div class="filters">
+      <button class="chip on" type="button" data-cat="all">全部</button>
+      <button class="chip" type="button" data-cat="opening">开场</button>
+      <button class="chip" type="button" data-cat="purpose">说明目的</button>
+      <button class="chip" type="button" data-cat="request">请求</button>
+      <button class="chip" type="button" data-cat="chase">催促</button>
+      <button class="chip" type="button" data-cat="apology">致歉</button>
+      <button class="chip" type="button" data-cat="refusal">拒绝</button>
+      <button class="chip" type="button" data-cat="negotiate">议价</button>
+      <button class="chip" type="button" data-cat="confirm">确认</button>
+      <button class="chip" type="button" data-cat="attach">附件</button>
+      <button class="chip" type="button" data-cat="closing">结尾</button>
+      <button class="chip" type="button" data-cat="clarify">澄清</button>
+      <button class="chip" type="button" data-cat="relation">关系维护</button>
+      <button class="chip" type="button" id="only-fav" aria-pressed="false">只看收藏 ★</button>
+      <span class="hint" id="phrase-count" style="align-self:center;font-size:12.5px;color:var(--color-text-muted)"></span>
+    </div>
+
+    <div id="phrase-list">
+
+      <div class="phrase-group" data-cat="opening">
+        <h3>开场 · Opening</h3>
+        <div class="phrase" data-id="op1">
+          <div><div class="ph-en">Thank you for your email of 12 March.</div><div class="ph-cn">谢谢您 3 月 12 日的邮件。—— 最通用、最不会出错的开场</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op2">
+          <div><div class="ph-en">Thank you for your inquiry about our LED panels.</div><div class="ph-cn">感谢您对我们 LED 面板的询价。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op3">
+          <div><div class="ph-en">I'm writing to follow up on my quotation of 6 March.</div><div class="ph-cn">我写信是想跟进 3 月 6 日发出的报价。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op4">
+          <div><div class="ph-en">I'm writing from Ningbo … Lighting, following your post on LinkedIn.</div><div class="ph-cn">我是宁波……照明的，看到您在领英上的帖子后写信给您。—— 开发信开场</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op5">
+          <div><div class="ph-en">Further to our call this morning, here is a summary of what we agreed.</div><div class="ph-cn">承接今天上午的通话，以下是我们的确认要点。—— 会后复述，防扯皮</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op6">
+          <div><div class="ph-en">We refer to your order PO-8821 dated 2 March.</div><div class="ph-cn">兹提及贵方 3 月 2 日的订单 PO-8821。—— 正式函件写法</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op7">
+          <div><div class="ph-en">It was a pleasure meeting you at the Canton Fair last week.</div><div class="ph-cn">很高兴上周在广交会上见到您。—— 展会后第一封</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="op8">
+          <div><div class="ph-en">I hope this email finds you well.</div><div class="ph-cn">希望您一切顺利。—— 可用但已被用滥，一个月最多用一次</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="purpose">
+        <h3>说明目的 · Purpose</h3>
+        <div class="phrase" data-id="pu1">
+          <div><div class="ph-en">I'm writing to confirm the delivery date.</div><div class="ph-cn">我写信是想确认交期。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="pu2">
+          <div><div class="ph-en">The purpose of this email is to update you on the production schedule.</div><div class="ph-cn">本邮件旨在向您同步生产排期。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="pu3">
+          <div><div class="ph-en">This is to confirm your order as discussed.</div><div class="ph-cn">此函确认我们商定的订单。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="pu4">
+          <div><div class="ph-en">I'd like to clarify one point in your last email.</div><div class="ph-cn">您上一封邮件里有一点我想确认一下。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="pu5">
+          <div><div class="ph-en">Please note that the price list has been revised.</div><div class="ph-cn">请注意，价目表已更新。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="pu6">
+          <div><div class="ph-en">I'm writing on behalf of our QC team regarding the inspection results.</div><div class="ph-cn">我代表我们质检部门就检验结果致函。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="request">
+        <h3>请求 · Request</h3>
+        <div class="phrase" data-id="rq1">
+          <div><div class="ph-en">Could you send the artwork in PDF?</div><div class="ph-cn">能否把包装稿发 PDF 给我？</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq2">
+          <div><div class="ph-en">Would you be able to confirm by Friday?</div><div class="ph-cn">能否在周五前确认？—— 比 Could you 更软一档</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq3">
+          <div><div class="ph-en">Please confirm by 20 March so we can book the vessel.</div><div class="ph-cn">请在 3 月 20 日前确认，以便我们订舱。—— 最有效的请求句式：动作 + 日期 + 理由</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq4">
+          <div><div class="ph-en">I'd be grateful if you could check this with your finance team.</div><div class="ph-cn">如您能向财务确认此事，我将不胜感激。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq5">
+          <div><div class="ph-en">Could you let me know which specification you need?</div><div class="ph-cn">能否告知您需要哪种规格？</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq6">
+          <div><div class="ph-en">We'd appreciate your comments on the draft contract by 30 March.</div><div class="ph-cn">希望您在 3 月 30 日前对合同草稿提出意见。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq7">
+          <div><div class="ph-en">Could you clarify what you mean by "standard export packing"?</div><div class="ph-cn">能否说明「标准出口包装」具体指什么？</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq8">
+          <div><div class="ph-en">Would you mind resending the file? It didn't come through.</div><div class="ph-cn">能否麻烦重发一下文件？我这边没收到。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq9">
+          <div><div class="ph-en">Please let us know your decision by the end of the week.</div><div class="ph-cn">请在本周末前告知决定。</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rq10">
+          <div><div class="ph-en">If you can share your annual volume, I'll quote a frame price.</div><div class="ph-cn">如果您能提供年采购量，我可以报框架价。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="chase">
+        <h3>催促 · Chasing</h3>
+        <div class="phrase" data-id="ch1">
+          <div><div class="ph-en">I'm following up on my email of 6 March.</div><div class="ph-cn">跟进我 3 月 6 日的邮件。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch2">
+          <div><div class="ph-en">Just a gentle reminder that the deposit is due on 12 March.</div><div class="ph-cn">温馨提示：定金到期日为 3 月 12 日。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch3">
+          <div><div class="ph-en">Have you had a chance to look at the quotation I sent last week?</div><div class="ph-cn">上周发的报价您看了吗？—— 第一次跟进用这句</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch4">
+          <div><div class="ph-en">I haven't heard back — is there anything you need from my side?</div><div class="ph-cn">还没收到回复——是否有什么需要我这边提供的？—— 把催促变成提供帮助</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch5">
+          <div><div class="ph-en">Could you confirm the payment date?</div><div class="ph-cn">能否确认付款日期？—— 要日期，不要「尽快」</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch6">
+          <div><div class="ph-en">We're holding the production slot until Friday; after that we'll need to re-plan.</div><div class="ph-cn">生产排期为您保留到周五，之后需要重新安排。—— 有真实后果，但不威胁</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch7">
+          <div><div class="ph-en">I'd appreciate an update by the end of the week.</div><div class="ph-cn">希望本周内能得到进展反馈。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch8">
+          <div><div class="ph-en">Should I close this file for now, or would you like me to follow up next quarter?</div><div class="ph-cn">我是先把这件事放着，还是下季度再来跟进？—— 回复率意外地高</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ch9">
+          <div><div class="ph-en">This is my third message on this — could you point me to the right person?</div><div class="ph-cn">这已是我第三次就此致函——能否告知我该联系谁？—— 换人比继续追同一个人有效</div></div>
+          <div class="ph-side"><span class="tag tag--hard">偏硬</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="apology">
+        <h3>致歉 · Apology</h3>
+        <div class="phrase" data-id="ap1">
+          <div><div class="ph-en">I'm sorry to let you know that the ETD has moved to 18 April.</div><div class="ph-cn">很抱歉通知您，预计开船日推迟到 4 月 18 日。—— 道歉句里要带事实</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap2">
+          <div><div class="ph-en">I apologise for the delay in replying — I was travelling last week.</div><div class="ph-cn">抱歉回复迟了，上周在外出差。—— 理由一句，别写三句</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap3">
+          <div><div class="ph-en">Unfortunately, we have to postpone the shipment.</div><div class="ph-cn">很遗憾，我们必须推迟出货。—— Unfortunately 放句首，别放句尾</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap4">
+          <div><div class="ph-en">Thank you for your patience while we looked into this.</div><div class="ph-cn">感谢您在我们核查期间的耐心。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap5">
+          <div><div class="ph-en">I understand this is frustrating, and I don't want to leave you stuck.</div><div class="ph-cn">我知道这让您为难，我也不想让您卡在这里。—— 比「抱歉」更有用的一句</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap6">
+          <div><div class="ph-en">Please accept our apologies for the inconvenience caused.</div><div class="ph-cn">给您带来不便，敬请谅解。—— 正式函件用，日常邮件略显生硬</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ap7">
+          <div><div class="ph-en">We've taken steps to make sure this doesn't happen again.</div><div class="ph-cn">我们已采取措施，避免再次发生。—— 道歉之后必须跟一句「改了什么」</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="refusal">
+        <h3>拒绝 · Refusal</h3>
+        <div class="phrase" data-id="rf1">
+          <div><div class="ph-en">I'm afraid we can't accept that price at this quantity.</div><div class="ph-cn">恐怕这个数量下我们无法接受这个价格。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf2">
+          <div><div class="ph-en">Unfortunately, we're not able to extend the payment terms beyond 30 days.</div><div class="ph-cn">很遗憾，付款账期不能超过 30 天。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf3">
+          <div><div class="ph-en">That falls outside our current capacity, I'm afraid.</div><div class="ph-cn">这超出了我们目前的产能。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf4">
+          <div><div class="ph-en">We're unable to cover the freight cost on this order.</div><div class="ph-cn">这单的运费我们无法承担。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf5">
+          <div><div class="ph-en">I'd like to help, but we can't take responsibility for transit damage.</div><div class="ph-cn">我很想帮忙，但运输途中的损坏不在我们责任范围内。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf6">
+          <div><div class="ph-en">We can't meet the 15 April date, but we can do 22 April.</div><div class="ph-cn">4 月 15 日赶不上，但 4 月 22 日可以。—— 拒绝时同时给替代方案</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf7">
+          <div><div class="ph-en">I'm sorry, that specification isn't available in this size.</div><div class="ph-cn">抱歉，这个尺寸没有该规格。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="rf8">
+          <div><div class="ph-en">We'd rather not commit to exclusivity for a single market at this volume.</div><div class="ph-cn">这个量级下，我们暂不承诺单一市场独家代理。—— 谈判里的「暂不」，留了余地</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="negotiate">
+        <h3>议价 · Negotiation</h3>
+        <div class="phrase" data-id="ng1">
+          <div><div class="ph-en">If you can take 1,000 pcs, we can move to USD 11.90.</div><div class="ph-cn">如果能订到 1000 只，我们可以降到 11.90 美元。—— If you can… we can… 条件交换的骨架</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng2">
+          <div><div class="ph-en">We can meet your target if payment is 100% in advance.</div><div class="ph-cn">如果全额预付，我们可以做到您的目标价。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng3">
+          <div><div class="ph-en">There's a 3% gap we can close by extending the lead time to 35 days.</div><div class="ph-cn">还有 3% 的差距，把交期放到 35 天就能补上。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng4">
+          <div><div class="ph-en">Could you tell me which part of the price is above your budget?</div><div class="ph-cn">能否告诉我，价格里哪一部分超出了您的预算？—— 把「太贵了」拆成可谈的结构</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng5">
+          <div><div class="ph-en">Our best price for this quantity is USD 12.20.</div><div class="ph-cn">这个数量下我们的最优价是 12.20 美元。</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng6">
+          <div><div class="ph-en">We can offer a 2% discount for orders above 5,000 pcs.</div><div class="ph-cn">5000 只以上可以给 2% 折扣。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng7">
+          <div><div class="ph-en">Would a mixed container work? That would spread the freight.</div><div class="ph-cn">拼柜可以吗？这样可以摊薄运费。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng8">
+          <div><div class="ph-en">Let's split the difference — USD 12.05, and we cover the setup cost.</div><div class="ph-cn">我们各让一步——12.05 美元，模具费我们承担。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng9">
+          <div><div class="ph-en">If we shorten the warranty to two years, we can reach USD 11.80.</div><div class="ph-cn">如果质保缩短到两年，可以做到 11.80 美元。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="ng10">
+          <div><div class="ph-en">I'd rather not cut the price; I'd rather take cost out of the specification.</div><div class="ph-cn">与其降价，我更愿意从配置里减成本。—— 拒绝降价的立场句</div></div>
+          <div class="ph-side"><span class="tag tag--hard">偏硬</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="confirm">
+        <h3>确认与承诺 · Confirm</h3>
+        <div class="phrase" data-id="cf1">
+          <div><div class="ph-en">We confirm receipt of your deposit.</div><div class="ph-cn">已收到您的定金。—— 比 We have received 更干脆</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf2">
+          <div><div class="ph-en">This is to confirm that production started on 12 March.</div><div class="ph-cn">此确认生产已于 3 月 12 日开始。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf3">
+          <div><div class="ph-en">Everything is on schedule; ETD remains 8 April.</div><div class="ph-cn">一切按计划进行，预计开船日仍为 4 月 8 日。—— 主动报进度，客户就不来问</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf4">
+          <div><div class="ph-en">We'll send the shipping documents within 48 hours of departure.</div><div class="ph-cn">开船后 48 小时内我们会寄出单据。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf5">
+          <div><div class="ph-en">Confirmed — 1,000 pcs at USD 11.90, FOB Ningbo.</div><div class="ph-cn">确认：1000 只，11.90 美元，宁波离岸价。—— 复述式确认，防误解</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf6">
+          <div><div class="ph-en">Please treat this email as our written confirmation.</div><div class="ph-cn">请将本邮件视为我们的书面确认。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf7">
+          <div><div class="ph-en">I've noted your change and updated the PI accordingly.</div><div class="ph-cn">已记录您的变更，并相应更新了 PI。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cf8">
+          <div><div class="ph-en">We'll hold the price until 25 March as agreed.</div><div class="ph-cn">按约定，价格保留至 3 月 25 日。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="attach">
+        <h3>附件与文件 · Attachments</h3>
+        <div class="phrase" data-id="at1">
+          <div><div class="ph-en">Please find attached our quotation for the 1,000 pcs.</div><div class="ph-cn">附上 1000 只的报价单。—— 现代写法，比 Enclosed please find 自然</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at2">
+          <div><div class="ph-en">I've attached the PI and the packing list.</div><div class="ph-cn">附上 PI 和装箱单。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at3">
+          <div><div class="ph-en">Attached are the inspection photos taken this morning.</div><div class="ph-cn">附上今早拍摄的验货照片。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at4">
+          <div><div class="ph-en">The file is 4 MB — let me know if it doesn't arrive.</div><div class="ph-cn">文件 4MB，如未收到请告知。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at5">
+          <div><div class="ph-en">I'm resending the invoice; the previous email may have gone to spam.</div><div class="ph-cn">重新发送发票，上一封可能进了垃圾邮件。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at6">
+          <div><div class="ph-en">You'll find the bank details on page 2 of the PI.</div><div class="ph-cn">银行信息在 PI 第 2 页。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="at7">
+          <div><div class="ph-en">I'll send the originals by courier tomorrow and share the tracking number.</div><div class="ph-cn">明天快递寄出正本，并把快递单号发给您。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="closing">
+        <h3>结尾 · Closing</h3>
+        <div class="phrase" data-id="cl1">
+          <div><div class="ph-en">Please confirm by 20 March so we can book the vessel.</div><div class="ph-cn">请在 3 月 20 日前确认，以便我们订舱。</div></div>
+          <div class="ph-side"><span class="tag tag--hard">直接</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl2">
+          <div><div class="ph-en">I look forward to your comments on the draft.</div><div class="ph-cn">期待您对草稿的意见。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl3">
+          <div><div class="ph-en">Let me know which option works and I'll action it today.</div><div class="ph-cn">告诉我哪个方案可行，我今天就办。—— 承诺一个即时动作</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl4">
+          <div><div class="ph-en">If the timing isn't right, just tell me when to check back.</div><div class="ph-cn">如果时机不合适，告诉我什么时候再来问就好。—— 给沉默留出口</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl5">
+          <div><div class="ph-en">No action needed from your side — I'll update you once the goods are on board.</div><div class="ph-cn">您这边无需操作，货上船后我会同步。—— 让客户放心的结尾</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl6">
+          <div><div class="ph-en">I'm happy to go through this on a short call if that's easier.</div><div class="ph-cn">如果更方便，我可以电话里简单过一遍。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl7">
+          <div><div class="ph-en">Thanks for your continued support.</div><div class="ph-cn">感谢您一直以来的支持。—— 老客户专用</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl8">
+          <div><div class="ph-en">Looking forward to hearing from you.</div><div class="ph-cn">期待您的回复。—— 注意是 hearing，不是 hear</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cl9">
+          <div><div class="ph-en">Any questions, just let me know.</div><div class="ph-cn">有任何问题告诉我。—— 比 please feel free to contact me 简洁</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="clarify">
+        <h3>澄清与纠错 · Clarify</h3>
+        <div class="phrase" data-id="cy1">
+          <div><div class="ph-en">Just to make sure I've understood: you need 500 pcs in black and 500 in white — is that right?</div><div class="ph-cn">确认一下我的理解：500 只黑色、500 只白色，对吗？—— 复述 + 提问，最稳</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy2">
+          <div><div class="ph-en">Do you mean the 4000K version or the 5000K?</div><div class="ph-cn">您是指 4000K 还是 5000K 版本？</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy3">
+          <div><div class="ph-en">I may have misunderstood — are you asking for a price for 3,000 pcs or for the full year?</div><div class="ph-cn">我可能理解有误——您是要 3000 只的价格，还是全年的？</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy4">
+          <div><div class="ph-en">To avoid any mix-up, could you confirm the delivery address?</div><div class="ph-cn">为避免弄错，能否确认收货地址？</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy5">
+          <div><div class="ph-en">Let me rephrase that — what I meant was a 25-day lead time from deposit, not from order.</div><div class="ph-cn">我重新表述一下：25 天是从收到定金起算，不是从下单起算。</div></div>
+          <div class="ph-side"><span class="tag">中性</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy6">
+          <div><div class="ph-en">If I've got this wrong, please correct me.</div><div class="ph-cn">如果我理解错了，请纠正我。—— 主动认错，比装懂安全</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">委婉</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="cy7">
+          <div><div class="ph-en">For clarity, the price quoted does not include the remote-area surcharge.</div><div class="ph-cn">为清楚起见，所报价格不含偏远地区附加费。</div></div>
+          <div class="ph-side"><span class="tag tag--formal">偏正式</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+      <div class="phrase-group" data-cat="relation">
+        <h3>关系维护 · Relationship</h3>
+        <div class="phrase" data-id="re1">
+          <div><div class="ph-en">I hope you had a good holiday.</div><div class="ph-cn">希望您假期过得愉快。—— 节后第一封的开场</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re2">
+          <div><div class="ph-en">Congratulations on the new facility — I saw the announcement last week.</div><div class="ph-cn">恭喜新工厂落成，上周看到公告了。—— 有具体由头的祝贺才算真诚</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re3">
+          <div><div class="ph-en">Thank you for the hospitality during our visit; the team really appreciated it.</div><div class="ph-cn">感谢您在我们拜访期间的招待，同事们都很感激。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re4">
+          <div><div class="ph-en">How is the new line performing?</div><div class="ph-cn">新产线运行得怎么样？—— 复购前最自然的开场</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re5">
+          <div><div class="ph-en">Wishing you and your team a happy New Year.</div><div class="ph-cn">祝您和团队新年快乐。—— 注意对方节日，别发错</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re6">
+          <div><div class="ph-en">It was good to see you again at the fair.</div><div class="ph-cn">展会上再次见到您很高兴。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+        <div class="phrase" data-id="re7">
+          <div><div class="ph-en">Thanks for the quick turnaround on the samples — much appreciated.</div><div class="ph-cn">样品处理得这么快，非常感谢。</div></div>
+          <div class="ph-side"><span class="tag tag--friendly">友好</span><button class="icon-btn fav-btn" type="button" aria-pressed="false" title="收藏这句">★</button></div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="empty-state" id="phrase-empty" hidden>没有匹配的句式，换个关键词或分类试试。</p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="../index.html">首页</a>
+          <a href="index.html">邮件英语</a>
+          <a href="structure.html">结构与语气</a>
+          <a href="negotiation.html">询盘报价</a>
+          <a href="operations.html">订单货款</a>
+          <a href="templates.html">模板库</a>
+          <a href="phrases.html">句式库</a>
+          <a href="checklist.html">检查清单</a>
+          <a href="../practice.html">自测</a>
+          <a href="index.html#faq">常见问题</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：外贸业务往来邮件实例与商务英语写作惯例（BEC / 商务写作教材通用表述）。例句中的公司、人名、单价、单号均为虚构，仅作写法演示。
+        </p>
+        <p class="foot-note">
+          贸易术语表述以 Incoterms 2020 为准；付款方式、检验与索赔条款在具体合同下可能另有约定，实际以合同正文为准。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right"><span class="app-version">v1.0.0</span></div>
+    </div>
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，所有句式、模板与讲解仅供学习与写作参考，不构成任何商业、法律或合规承诺。因直接套用站内文本导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与模板为作者整理撰写，著作权归作者所有；转载请注明出处，且不得用于商业用途。如涉及第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

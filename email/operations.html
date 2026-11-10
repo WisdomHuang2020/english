@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>订单 · 货款 · 出货 · 索赔 · 邮件英语 · 外贸英语学习站</title>
+<meta name="description" content="订单确认逐条复述、PI 六要素、预付款与尾款的三段式催收、涨价通知、出货通知、延误致歉与索赔处理的标准写法。" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = { 'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5', 'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7' };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="../assets/css/theme-vars.css" />
+<link rel="stylesheet" href="../assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="../assets/css/header.css" />
+<link rel="stylesheet" href="../assets/css/footer.css" />
+<link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="../index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="index.html" data-topic="email">邮件英语</a>
+      <a href="templates.html">模板库</a>
+      <a href="phrases.html">句式库</a>
+      <a href="checklist.html">检查清单</a>
+      <a href="../practice.html">自测</a>
+    </nav>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="shell">
+    <div class="content-grid">
+      <aside class="toc" aria-label="本页目录">
+        <h4>本页目录</h4>
+        <a href="#order">订单确认：逐条复述</a>
+        <a href="#payment">催款三段式</a>
+        <a href="#increase">涨价通知</a>
+        <a href="#shipping">出货通知</a>
+        <a href="#delay">延误致歉</a>
+        <a href="#claim">索赔处理</a>
+        <a href="#close">结案信</a>
+        <a class="toc-back" href="index.html">← 主题首页</a>
+      </aside>
+
+      <article class="prose">
+        <p class="eyebrow">模块 05 · 06</p>
+        <h1 style="font-size:clamp(26px,3.2vw,34px);margin-bottom:12px">订单 · 货款 · 出货 · 索赔</h1>
+        <p style="font-size:16.5px">
+          这一段是外贸邮件里最容易出事的部分：金额、批次、日期、责任。
+          写这类邮件有一条总原则——<strong>先给事实和结论，再给原因和态度</strong>。
+          客户要的是「所以我现在该做什么」，不是「我们非常抱歉」。
+        </p>
+
+        <h2 id="order"><span class="num">01</span>订单确认：把客户的话变成可核对的清单</h2>
+        <p>
+          客户下单时写的往往是一段口语：<span class="en">"Please proceed with the 1000 pcs as discussed, ship asap."</span>
+          这句话里至少有五个地方将来会吵架：规格、包装、价格、交期、谁付运费。
+          所以确认邮件要把它们<strong>逐条复述</strong>，并请对方回一句 <span class="en">"Confirmed"</span>。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>必须复述</th><th>写清到什么程度</th></tr></thead>
+            <tbody>
+              <tr><td>规格</td><td>型号 + 功率 + 色温 + 显指 + 关键参数（如 36W / 4000K / CRI&gt;80 / 1200×300mm）</td></tr>
+              <tr><td>数量与金额</td><td>数量、单价、总额、币种；有折扣就写折扣前与折扣后</td></tr>
+              <tr><td>贸易术语</td><td>术语 + 地点 + 版本，如 FOB Ningbo (Incoterms 2020)</td></tr>
+              <tr><td>付款方式</td><td>比例与时点：30% T/T deposit, balance against copy of B/L</td></tr>
+              <tr><td>交期起算点</td><td>25 days after receipt of deposit and approval of artwork</td></tr>
+              <tr><td>包装与唛头</td><td>中性包装或客户彩盒；唛头文字与位置；每箱数量</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Order confirmation — PO-8821 / 1,000 pcs LED Panel (please confirm 3 highlighted items)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>Thank you for the order. This is to confirm it as follows; please check items 2, 4 and 5 and reply "confirmed" so we can start.</p>
+            <p>1. Product: LED panel 36W, 4000K, CRI&gt;80, 1200×300mm — 1,000 pcs<br />
+               2. Price: <b>USD 11.90/pc, total USD 11,900</b>, FOB Ningbo (Incoterms 2020)<br />
+               3. Payment: 30% deposit (USD 3,570), balance against copy of B/L<br />
+               4. Delivery: <b>25 days after deposit and artwork approval</b> — ETD around 8 April<br />
+               5. Packing: <b>your own colour box, 6 pcs/carton</b>, artwork to be supplied by you</p>
+            <p>The PI is attached. If anything here differs from your understanding, tell me before Friday and we will correct it — after production starts, changes cost both of us time.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">「highlighted items」把注意力引到最容易出错的三项：价格、交期起算点、包装。比笼统写「please check」有效。</p>
+        </div>
+        <div class="callout callout--tip">
+          <span class="co-title">一并处理追加请求</span>
+          客户常在确认时加一句「先发 200 pcs」。回复要同时给三件事：<b>能不能</b>、<b>多多少钱</b>、<b>对原交期的影响</b>。
+          只回 <span class="en">No problem</span>，后面两边都会难受。
+        </div>
+
+        <h2 id="payment"><span class="num">02</span>催款：三段式，一段比一段硬</h2>
+        <p>催款不是一次性的，是一个有节奏的过程。每封都要带齐：<strong>发票号、金额、到期日、账户信息</strong>，让对方财务能直接付款。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>阶段</th><th>时间</th><th>主句</th><th>不要写</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>第一段 · 提醒</td>
+                <td>到期前 3 天</td>
+                <td><span class="en">Just a reminder that the balance of USD 8,400 falls due on 12 March. The invoice and bank details are attached again for convenience.</span></td>
+                <td>「请尽快付款」这类没有日期的催促</td>
+              </tr>
+              <tr>
+                <td>第二段 · 逾期</td>
+                <td>逾期 3–5 天</td>
+                <td><span class="en">Our records show the payment has not yet arrived. Could you check with your finance team and confirm a payment date?</span></td>
+                <td>指责对方「不守信用」</td>
+              </tr>
+              <tr>
+                <td>第三段 · 升级</td>
+                <td>逾期 15 天以上</td>
+                <td><span class="en">Unless payment is received by 30 March, we will have to hold the next shipment and apply the 0.05% daily late fee provided for in the contract.</span></td>
+                <td>没有合同依据的威胁（如「起诉你」）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Payment overdue — INV-2026-0315, USD 8,400 (due 12 March)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>Our records show invoice INV-2026-0315 for USD 8,400, due on 12 March, is still open. It may simply have crossed with your payment run — could you check with your finance team and confirm the date?</p>
+            <p>For reference: PO-8821, balance against copy of B/L, bank details in the attached invoice PDF.</p>
+            <p>One practical point: the next production slot is on 26 March. If payment arrives before then, we can still hold your original schedule.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">把「催」包装成「提醒 + 影响说明」。最后一段给了一个真实后果，比任何形容词都有用。</p>
+        </div>
+        <div class="callout callout--warn">
+          <span class="co-title">三个高频错误</span>
+          <b>①</b> 只写「payment is overdue」不写发票号和金额 —— 对方财务要翻半天；
+          <b>②</b> 每封都抄送老板 —— 抄送应该是升级手段，不是默认动作；
+          <b>③</b> 用 <span class="en">kindly remit</span> 这类老式表达 —— 现代写法是 <span class="en">please arrange payment</span>。
+        </div>
+
+        <h2 id="increase"><span class="num">03</span>涨价通知：结论 → 原因 → 生效日 → 老订单</h2>
+        <p>涨价邮件最忌讳铺垫。客户扫到第三行还不知道你要涨多少，就会先烦。</p>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Price update — copper surcharge from 1 April (+3.2%)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>From 1 April 2026, our panel prices will increase by 3.2%. Copper and driver costs have risen for three consecutive months, and we've absorbed them so far.</p>
+            <p>Two things to note:</p>
+            <p>1. Orders confirmed before 31 March will be invoiced at current prices, even if production runs in April.<br />
+               2. If you can commit to a quarterly volume, we can fix prices for the next two quarters.</p>
+            <p>The new price list is attached. I'm happy to go through it on a call if that's easier.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">3.2% 这个数字必须出现，而且要在前三行。老订单怎么算、有没有锁价窗口，比原因更影响客户决策。</p>
+        </div>
+
+        <h2 id="shipping"><span class="num">04</span>出货通知：客户要的是「能不能提货」</h2>
+        <p>出货通知不是告知「我发货了」，而是让客户能立刻安排清关和提货。缺一个号，他就得多发一封邮件问你。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>必附</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>船名 / 航次、ETD / ETA</td><td>写具体日期，不写「soon」或「next week」</td></tr>
+              <tr><td>柜号 / 封号</td><td>客户查柜、码头提货都要用</td></tr>
+              <tr><td>单据清单</td><td>Commercial Invoice、Packing List、B/L（或提单副本）、CO / Form A（如需要）、保险单（CIF 时）</td></tr>
+              <tr><td>与订单的差异</td><td>少装、多装、分批发货、换包装 —— 主动说明，别等客户发现</td></tr>
+              <tr><td>下一步</td><td>正本单据什么时候寄、走快递单号、或电放安排</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Shipped — PO-8821, 1,000 pcs, vessel CSCL ATLANTIC 026E (ETD 8 Apr / ETA 12 May)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>Your order left Ningbo today. Details:</p>
+            <p>Vessel: CSCL ATLANTIC 026E · Container: CSLU 214 883 7 · Seal: 0091742<br />
+               ETD Ningbo 8 April · ETA Hamburg 12 May<br />
+               Shipped: 1,000 pcs, 167 cartons, 4.2 cbm, 1,180 kg</p>
+            <p>Attached: commercial invoice, packing list, and the B/L copy. Originals will be couriered tomorrow — I'll send you the tracking number.</p>
+            <p>No difference from the confirmed order. I'll check with the carrier on 5 May and update you if the ETA moves.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">最后一句「我会在 5 月 5 日查船期并主动更新」是低成本高回报的一句——它把「客户来问」变成「你主动说」。</p>
+        </div>
+
+        <h2 id="delay"><span class="num">05</span>延误致歉：先给新日期，再解释</h2>
+        <p>顺序错了，整封邮件就废了：<strong>事实与新日期 → 原因一句 → 已做的动作 → 对客户的影响与补偿 → 后续更新节奏</strong>。</p>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Shipment delay — PO-8821 now ETD 18 Apr (was 8 Apr)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>I'm sorry to tell you that the ETD has moved from 8 April to <b>18 April</b>. The new date is confirmed with the carrier.</p>
+            <p>The driver batch failed our incoming inspection on 26 March and had to be replaced. We chose to replace it rather than ship a batch we weren't confident in.</p>
+            <p>What we've done: re-ordered drivers with a 7-day expedite, and booked the 18 April vessel with a 10-day buffer before your installation window.</p>
+            <p>I know this affects your schedule. If it helps, we can air-freight 200 pcs to arrive around 12 April at our cost, so your team can start with part of the order.</p>
+            <p>I'll update you every Friday until the goods are on board.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">不要在开头写三行「We are very sorry / We sincerely apologize」。客户第一眼要找的是新日期。</p>
+        </div>
+
+        <h2 id="claim"><span class="num">06</span>索赔：先确认事实，再谈责任</h2>
+        <p>客户投诉时情绪已经在了，你要做的不是安抚，而是<strong>把它变成一份可以判断的事实清单</strong>。</p>
+        <ol>
+          <li><strong>确认收到，给出处理时限。</strong><span class="en">I've received the photos. I'll come back to you with a proposal by Thursday.</span></li>
+          <li><strong>要证据，一次要全。</strong>批次号 / 生产日期、不良数量与比例、照片或视频、是否已安装使用、当地检验报告（如有）。</li>
+          <li><strong>判断归属，给依据。</strong>生产不良、运输损坏、规格误解、使用不当——四类处理方式完全不同。</li>
+          <li><strong>给方案，三选一。</strong>补货、按比例折扣、退款或下批抵扣。让客户选，比替他决定更容易谈成。</li>
+          <li><strong>闭环。</strong>说明原因与改进措施，这一封才是留住客户的。</li>
+        </ol>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>责任归属</th><th>判断依据</th><th>通常方案</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>生产不良</td><td>批次号 + 出厂检验记录 + 不良现象集中在同批</td><td>补货优先；或按不良比例折扣</td>
+              </tr>
+              <tr>
+                <td>运输损坏</td><td>外箱完好但内件破损 / 外箱有明显挤压；签收记录</td><td>协助向承运人或保险人索赔；可先补货保客户产线</td>
+              </tr>
+              <tr>
+                <td>规格不符</td><td>对照 PI、图纸、确认邮件</td><td>我方错：重做或退款；客户改需求：按新单处理</td>
+              </tr>
+              <tr>
+                <td>使用不当</td><td>安装方式、电压、环境温度超出说明书范围</td><td>不承担赔偿，但提供技术方案与付费维修</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Claim for PO-8821 — our proposal (reply by 30 Apr)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>Thank you for the photos and the count. We've checked them against our pre-shipment inspection report for batch 2603-B, and the cartons left the factory intact, so this looks like transit damage rather than a production issue.</p>
+            <p>That said, your line can't wait for a carrier claim. So here's what I propose:</p>
+            <p>Option 1 — we ship 40 replacement units with your next order, free of charge, and you claim the freight damage from the carrier with our support.<br />
+               Option 2 — we credit USD 480 against your next invoice and you repair locally.<br />
+               Option 3 — we open the carrier claim jointly; it usually takes 6–8 weeks.</p>
+            <p>Tell me which works and I'll action it today. For the claim itself I'll need the delivery receipt and two photos of the pallet before unloading.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">先给方案再要材料 —— 客户在等解决方案，不是在等你索要证据。</p>
+        </div>
+
+        <h2 id="close"><span class="num">07</span>结案信：把一次索赔变成一次信任</h2>
+        <p>方案执行完，再发一封 80 词的结案信。它不影响这一单，影响下一单。</p>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Closed — PO-8821 damage claim (cause and what we changed)</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Peter,</p>
+            <p>The 40 replacement units shipped today (tracking sent separately), which closes the claim.</p>
+            <p>For your file: the damage came from double-stacking in the feeder vessel, not from the goods. From this shipment on we're using 5-layer cartons with corner boards on all palletised orders at no extra cost.</p>
+            <p>Thanks for sending the photos quickly — it made the carrier claim straightforward.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">「原因 + 我们改了什么 + 感谢」三句话，比「we apologize again for the inconvenience」有用得多。</p>
+        </div>
+
+        <div class="pager">
+          <a href="negotiation.html"><small>上一模块</small><strong>← 询盘 · 报价 · 议价</strong></a>
+          <a class="next" href="templates.html"><small>下一步</small><strong>模板库 · 16 封 →</strong></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="../index.html">首页</a>
+          <a href="index.html">邮件英语</a>
+          <a href="structure.html">结构与语气</a>
+          <a href="negotiation.html">询盘报价</a>
+          <a href="operations.html">订单货款</a>
+          <a href="templates.html">模板库</a>
+          <a href="phrases.html">句式库</a>
+          <a href="checklist.html">检查清单</a>
+          <a href="../practice.html">自测</a>
+          <a href="index.html#faq">常见问题</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：外贸业务往来邮件实例与商务英语写作惯例（BEC / 商务写作教材通用表述）。例句中的公司、人名、单价、单号均为虚构，仅作写法演示。
+        </p>
+        <p class="foot-note">
+          贸易术语表述以 Incoterms 2020 为准；付款方式、检验与索赔条款在具体合同下可能另有约定，实际以合同正文为准。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right"><span class="app-version">v1.0.0</span></div>
+    </div>
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，所有句式、模板与讲解仅供学习与写作参考，不构成任何商业、法律或合规承诺。因直接套用站内文本导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与模板为作者整理撰写，著作权归作者所有；转载请注明出处，且不得用于商业用途。如涉及第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
