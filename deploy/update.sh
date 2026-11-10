@@ -36,5 +36,5 @@ systemctl reload nginx
 echo "== done =="
 # 说明：站内自检不在这里发 HTTPS 请求 —— 服务器出口带代理，且本机回环访问会
 # 因 SNI/证书链报 unrecognized name，容易误判。线上验证统一从客户端做：
-#   https://english.power-knowledge.tech/ 返回 200 且页脚 ICP 可见即为通过。
+#   https://www.english.power-knowledge.tech/ 返回 200 且页脚 ICP 可见即为通过。
 systemctl is-active nginx
