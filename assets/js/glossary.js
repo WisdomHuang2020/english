@@ -292,9 +292,14 @@
   function renderErrata() {
     var host = $('#errata-body');
     if (!host) return;
-    host.innerHTML = (NOTES.errata || []).map(function (e) {
+    var list = NOTES.errata || [];
+    host.innerHTML = list.map(function (e) {
       return '<tr><td><code>' + esc(e.term) + '</code></td><td>' + esc(e.issue) + '</td><td>' + esc(e.fix) + '</td></tr>';
     }).join('');
+    /* 首屏统计里的「处原表勘误」运行时取值：写死会在下次补勘误时忘改
+       （HTML 里留了同样的静态值，供禁用 JS 时兜底）。 */
+    var stat = $('#stat-errata');
+    if (stat) stat.textContent = String(list.length);
   }
 
   /* ── 绑定搜索与筛选 ───────────────────────────────────────────── */

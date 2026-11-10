@@ -78,7 +78,7 @@ window.PK_GLOSSARY_NOTES = {
     /* 认证类 */
     { cat: 'Certification', match: 'ANSI', tag: '标准', note: '美国国家标准学会。照明领域常见 ANSI C78 系列（灯头灯座尺寸）、ANSI/IES 系列（光度与能效测试方法）。' },
     { cat: 'Certification', match: 'CB', tag: '安规', note: 'IECEE CB 体系证书，一份测试报告可在几十个国家转证（转 UL/ETL/CQC 等）。CB 不是「可以直接卖」的认证，只是转证的基础。' },
-    { cat: 'Certification', match: 'CEC', tag: '能效', err: true, note: 'California Energy Commission，加州能效。原表把 Title 20 标为强制、Title 24 标为非强制，这一点**建议核对**：Title 20 是电器能效法规，Title 24 是建筑能效规范，通常都具强制性，差别在管的对象（产品 vs 建筑）。' },
+    { cat: 'Certification', match: 'CEC', tag: '能效', err: true, note: 'California Energy Commission，加州能效。原表把 Title 20 标为强制、Title 24 标为非强制 —— **已核实：两者都强制**，差别在管的对象。Title 20 管电器产品能效（Appliance Efficiency Regulations），Title 24 Part 6 管建筑能效（Building Energy Efficiency Standards），由地方建筑主管部门通过施工许可强制执行，还要做 acceptance testing（验收测试）。' },
     { cat: 'Certification', match: 'CQC', tag: '安规', note: '中国质量认证中心认证，国内销售的基本准入。出口件一般不做 CQC，但国内工程标常要求。' },
     { cat: 'Certification', match: 'DLC', tag: '能效', note: 'DesignLights Consortium，美国能效补贴目录（不是强制认证）。进 DLC 才能拿当地电力公司补贴，技术要求（QPL）按产品和类别分版本，更新很频繁。' },
     { cat: 'Certification', match: 'Dry', tag: '环境', note: '使用环境分类：Dry（干燥，室内普通）、Damp（潮湿，有顶棚的室外/浴室）、Wet（淋水，露天）。同一盏灯标错环境等级，安规直接不过。' },
@@ -264,7 +264,7 @@ window.PK_GLOSSARY_NOTES = {
 
   /* ── 精句点评（按顺序对应数据里的 4 条）────────────────────────── */
   quotes: [
-    { note: '阿甘这句用的是 "You got to"（口语的 you\'ve got to），比 "You have to" 更随意。写作时改成 "You have to put the past behind you" 才合规范语法——原句省略了句尾的 you。' },
+    { note: '阿甘这句用的是 "You got to"（口语的 you\'ve got to），比 "You have to" 更随意。原表把这句的宾语 you 漏掉了，完整应为 put the past behind **you** before you can move on（已登记勘误）。书面写作时改写成 "You have to put the past behind you" 更规范。' },
     { note: '句子的语法有个小问题：两个独立句用逗号连接（comma splice），书面语应改成分号或加 and。中文译文把 "in front of our eyes" 译成「眼皮底下」很传神。' },
     { note: '祈使句连用（Change / Don\'t gamble / act）是英语演讲里制造节奏的常见手法。gamble on the future = 拿未来下注。' },
     { note: '狄更斯式的三项并列（heart / temper / touch），靠 never 重复形成韵律。注意 touch 在这里是「待人接物的态度/触感」，原表译文「一种用不受损的风格」应为「一种永不伤人的触感」——已登记勘误。' },
@@ -278,11 +278,13 @@ window.PK_GLOSSARY_NOTES = {
     { term: 'VAT (Value-added Tax)', issue: '中文释义不准确', fix: 'VAT 是增值税（税种），不是「含税价」。含税价应写 price incl. VAT。' },
     { term: 'OA', issue: '内部口径，不宜对外', fix: '表内标「月结」，属公司内部用法；对外合同应写 payment terms: 30 days net。OA 通用含义是办公自动化。' },
     { term: 'Oscillator', issue: '中文疑漏字', fix: '写成「Y振荡器/晶振」，应为「晶体振荡器」或「石英晶体振荡器」。' },
-    { term: 'CEC Title 24', issue: '强制性标注待核', fix: '表内标「非强制」。Title 24 为加州建筑能效规范，通常具强制性，与 Title 20（电器能效）管辖对象不同，建议向客户确认口径。' },
+    { term: 'CEC Title 24', issue: '强制性标错（已核实）', fix: '表内标「非强制」。已核实：Title 24 Part 6 是 California Code of Regulations 的组成部分，由地方建筑主管部门在施工许可环节强制执行，含强制条款（§110.9 / §130.1）与验收测试（§130.4），不是自愿性标准。2025 版自 2026-01-01 生效，办公室 LPD 由 0.75 降至 0.65 W/ft²。与 Title 20（电器能效）的区别在管的对象：产品 vs 建筑。' },
     { term: 'Harness（新单词第 230 条）', issue: '中文误译', fix: '标「串联」，应为「线束」；串联是 series connection。' },
     { term: 'Subject to（第 429 条）', issue: '中文误译', fix: '标「收到」，应为「受…约束 / 以…为准」，合同高频短语。' },
     { term: 'Noncombustible（第 405 条）', issue: '中文错字', fix: '标「不然」，应为「不燃的」。' },
     { term: '拼写错误（8 处）', issue: '英文拼写', fix: 'sustainalbe→sustainable、nometallic→nonmetallic、strain rlief→strain relief、adhension→adhesion、ameteur→amateur、dewlling→dwelling、noched→notched、conhensive→cohesive。' },
     { term: '精句第 3、4 条', issue: '原表排版错位', fix: '英文原句单独占一行、序号行内是译文，与第 1、2 条格式相反；本站已按语义重新配对。' },
+    { term: '精句第 1 条（Forrest Gump）', issue: '英文漏词', fix: '原表作 "put the past behind before you can move on"，behind 后漏了宾语 you。原句应为 "You got to put the past behind you before you can move on."，词条仍按原表保留，此处登记。' },
+    { term: '精句第 4 条（Dickens）', issue: '中文译文残缺', fix: '原表译作「以及一种用不受损的风格」，语义不通。a touch that never hurts 应译「一种永不伤人的触感」（touch 此处指待人接物的态度）。' },
   ],
 };

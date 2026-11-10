@@ -75,11 +75,16 @@
 
   var currentId = readInitialTheme();
 
-  function applyTheme(id) {
+  /* persist 传 false 表示「只应用、不写盘」。初始化必须传 false ——
+     否则打开别人发来的 ?theme= 评审链接，会把收件人自己存的主题永久顶掉。
+     切换器点选与外部 PKTheme.applyTheme(id) 仍默认持久化，行为不变。 */
+  function applyTheme(id, persist) {
     if (!isThemeId(id)) return;
     currentId = id;
     document.documentElement.dataset.theme = id;
-    try { localStorage.setItem(KEY, id); } catch (e) {}
+    if (persist !== false) {
+      try { localStorage.setItem(KEY, id); } catch (e) {}
+    }
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta && BG[id]) meta.setAttribute('content', BG[id]);
     /* 给 canvas / SVG 图用：它们不认 CSS 变量，必须靠事件触发重绘。
@@ -235,8 +240,9 @@
   };
 
   /* 首屏：内联 boot 脚本已经把 data-theme 定好了，这里只同步 meta 与切换器状态，
-     重复设置一次 dataset 是幂等的，不用担心闪烁。 */
-  applyTheme(currentId);
+     重复设置一次 dataset 是幂等的，不用担心闪烁。
+     传 false：首屏只应用不写盘，避免 ?theme= 污染 localStorage。 */
+  applyTheme(currentId, false);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', mountAll);
