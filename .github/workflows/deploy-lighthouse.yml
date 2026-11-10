@@ -3,9 +3,14 @@ name: Deploy to Tencent Lighthouse
 # www.english.power-knowledge.tech → 43.142.148.37（lhins-6i7vay90）/var/www/english
 #
 # 形态：零构建多页静态站 —— 仓库根即发布产物，服务器上是该仓库的 git clone。
-# 因此 CI 不做 checkout 上传、不构建，只做两件事：
-#   ① SSH 到服务器执行 deploy/update.sh（git fetch/reset + nginx reload）
-#   ② 从客户端侧核验线上 200，作为体检（不设硬门禁）
+#
+# ── 同步方向（2026-11-10 定案）：CI 反向推送到服务器 ──────────────────
+# 服务器出口到 github.com 的 HTTPS 长期被掐（TCP 443 可连、TLS 握手挂死，
+# 实测 fetch 无限挂起 6 分钟），且服务器没有 deploy key、无法改走 SSH。
+# 因此不由服务器去拉，而由本工作流 `git push` 到服务器仓库
+# （服务器侧已设 receive.denyCurrentBranch=updateInstead，推送即更新工作区），
+# 再 SSH 调用 deploy/update.sh 做 chmod + nginx -t + reload。
+# 整条链路只依赖「runner → 服务器:22」，该方向实测已通。
 #
 # 所需 repository secrets（5 条，站群统一命名）：
 #   LH_HOST      43.142.148.37
@@ -17,9 +22,7 @@ name: Deploy to Tencent Lighthouse
 # ⚠️ 未配 secrets 时走「优雅跳过」——job 仍显示成功（假绿）。
 #    判断是否真部署过，必须下钻步骤级，确认 `Deploy over SSH` 是 success 而非 skipped。
 #
-# ⚠️ 服务器 /var/www/english 的 origin 是 HTTPS 匿名拉取（仓库为 public），
-#    服务器上不需要额外凭据；若仓库转 private，必须先给服务器配 deploy key，
-#    否则 update.sh 的 fetch 会 5 次重试后失败（站点保持旧版不动，属安全失败）。
+# ⚠️ 服务器工作区若有未提交改动，工作流会**拒绝推送并报错**（防止覆盖人工改动）。
 
 on:
   push:
@@ -38,6 +41,12 @@ jobs:
     name: Deploy → /var/www/english
     runs-on: ubuntu-latest
     steps:
+      # 需要完整历史：本工作流要把提交反向 push 到服务器仓库
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Check configuration
         id: cfg
         env:
@@ -92,7 +101,22 @@ jobs:
           BEFORE=$($SSH_CMD "git -C '$LH_ROOT' rev-parse HEAD")
           echo "部署前服务器 HEAD: $BEFORE"
 
-          # ── 部署：服务器自行 fetch/reload（脚本内含 5 次 fetch 重试）────
+          # ── 服务器工作区必须干净，否则 updateInstead 会拒绝推送 ────────
+          DIRTY=$($SSH_CMD "git -C '$LH_ROOT' status --porcelain")
+          if [ -n "$DIRTY" ]; then
+            echo "::error title=服务器工作区不干净，拒绝推送::"
+            printf '%s\n' "$DIRTY"
+            echo "推送会覆盖上述人工改动。请先在服务器上提交/还原，再重跑本工作流。"
+            exit 1
+          fi
+
+          # ── 反向推送：runner → 服务器（唯一依赖的链路方向）────────────
+          git remote remove lh 2>/dev/null || true
+          git remote add lh "ssh://$LH_USER@$LH_HOST$LH_ROOT"
+          git config core.sshCommand "ssh -p $PORT -i $HOME/.ssh/lh_key -o BatchMode=yes -o StrictHostKeyChecking=accept-new"
+          git push --porcelain lh "HEAD:refs/heads/main"
+
+          # ── 收尾：chmod 归一 + nginx -t + reload ─────────────────────
           $SSH_CMD "cd '$LH_ROOT' && bash deploy/update.sh"
 
           AFTER=$($SSH_CMD "git -C '$LH_ROOT' rev-parse HEAD")
@@ -101,7 +125,6 @@ jobs:
 
           if [ "$AFTER" != "$TARGET_SHA" ]; then
             echo "::error title=部署未到位::服务器 HEAD ($AFTER) ≠ 触发提交 ($TARGET_SHA)。"
-            echo "常见原因：服务器 fetch 到的是更新的提交，或 update.sh 未走到 reset。"
             exit 1
           fi
           echo "::notice title=部署完成::服务器已更新至 $AFTER"
