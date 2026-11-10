@@ -257,7 +257,7 @@ a.card:hover {
 .prose .en, .en { color: var(--color-text-primary); }
 .prose .en { font-size: 15.5px; }
 /* 次级注释（表格里参数名下方的小字） */
-.dim { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 12px; font-weight: 500; line-height: 1.5; }
+.dim { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 12px; font-weight: 500; line-height: 1.5; white-space: nowrap; }
 
 /* ---------- 邮件卡片（模拟收件箱条目） ---------- */
 .mail {
