@@ -162,9 +162,14 @@ jobs:
           else
             echo "::warning title=核验存疑::线上可达但内容指纹未命中，可能是缓存"
           fi
-          if printf '%s' "$html" | grep -q 'v1\.1\.0'; then
-            echo "版本串 v1.1.0：命中"
+
+          # 版本号从本次 checkout 里读，不写死 —— 写死会在每次改版本时假红。
+          LOCAL_VER=$(grep -o 'app-version">v[0-9.]*' index.html | head -1 | sed 's/.*>//')
+          LIVE_VER=$(printf '%s' "$html" | grep -o 'app-version">v[0-9.]*' | head -1 | sed 's/.*>//')
+          echo "版本串 本地=$LOCAL_VER 线上=$LIVE_VER"
+          if [ -n "$LOCAL_VER" ] && [ "$LOCAL_VER" = "$LIVE_VER" ]; then
+            echo "版本串一致：$LIVE_VER"
           else
-            echo "::warning title=版本串未命中::页脚未取到 v1.1.0，确认是否已发布该版本"
+            echo "::warning title=版本串不一致::本地=$LOCAL_VER 线上=$LIVE_VER（可能是缓存或发布未到位）"
           fi
           exit 0
