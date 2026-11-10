@@ -28,7 +28,10 @@ echo "== 更新后版本 =="
 git log --oneline -1
 
 # 站点只读交给 nginx：文件属主 root，644/755 足够
+# 但 .sh 必须保留可执行位 —— 否则本脚本会把自己刷成 644，
+# 每次部署后服务器 git status 都多一条 ` M deploy/update.sh`（纯 mode 变化）。
 find . -path ./.git -prune -o -type f -print0 | xargs -0 chmod 644
+find . -path ./.git -prune -o -type f -name '*.sh' -print0 | xargs -0 chmod 755
 find . -path ./.git -prune -o -type d -print0 | xargs -0 chmod 755
 
 nginx -t

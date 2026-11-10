@@ -1,0 +1,133 @@
+name: Deploy to Tencent Lighthouse
+
+# www.english.power-knowledge.tech → 43.142.148.37（lhins-6i7vay90）/var/www/english
+#
+# 形态：零构建多页静态站 —— 仓库根即发布产物，服务器上是该仓库的 git clone。
+# 因此 CI 不做 checkout 上传、不构建，只做两件事：
+#   ① SSH 到服务器执行 deploy/update.sh（git fetch/reset + nginx reload）
+#   ② 从客户端侧核验线上 200，作为体检（不设硬门禁）
+#
+# 所需 repository secrets（5 条，站群统一命名）：
+#   LH_HOST      43.142.148.37
+#   LH_USER      root
+#   LH_ROOT      /var/www/english
+#   LH_SSH_KEY   root 登录私钥全文（~/.ssh/pfc_ci，含 BEGIN/END 行）
+#   LH_PORT      22
+#
+# ⚠️ 未配 secrets 时走「优雅跳过」——job 仍显示成功（假绿）。
+#    判断是否真部署过，必须下钻步骤级，确认 `Deploy over SSH` 是 success 而非 skipped。
+#
+# ⚠️ 服务器 /var/www/english 的 origin 是 HTTPS 匿名拉取（仓库为 public），
+#    服务器上不需要额外凭据；若仓库转 private，必须先给服务器配 deploy key，
+#    否则 update.sh 的 fetch 会 5 次重试后失败（站点保持旧版不动，属安全失败）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: "lighthouse-english"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy → /var/www/english
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check configuration
+        id: cfg
+        env:
+          LH_HOST: ${{ secrets.LH_HOST }}
+          LH_USER: ${{ secrets.LH_USER }}
+          LH_ROOT: ${{ secrets.LH_ROOT }}
+          LH_SSH_KEY: ${{ secrets.LH_SSH_KEY }}
+        run: |
+          missing=""
+          [ -z "$LH_HOST" ]   && missing="$missing LH_HOST"
+          [ -z "$LH_USER" ]   && missing="$missing LH_USER"
+          [ -z "$LH_ROOT" ]   && missing="$missing LH_ROOT"
+          [ -z "$LH_SSH_KEY" ] && missing="$missing LH_SSH_KEY"
+          if [ -n "$missing" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=已跳过部署::缺少 secrets:$missing（本次不上传、不改动服务器）"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "配置齐备：$LH_USER@$LH_HOST:$LH_ROOT"
+          fi
+
+      - name: Deploy over SSH
+        if: steps.cfg.outputs.ready == 'true'
+        env:
+          LH_HOST: ${{ secrets.LH_HOST }}
+          LH_USER: ${{ secrets.LH_USER }}
+          LH_ROOT: ${{ secrets.LH_ROOT }}
+          LH_SSH_KEY: ${{ secrets.LH_SSH_KEY }}
+          LH_PORT: ${{ secrets.LH_PORT }}
+          TARGET_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          PORT="${LH_PORT:-22}"
+
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$LH_SSH_KEY" > ~/.ssh/lh_key
+          chmod 600 ~/.ssh/lh_key
+          ssh-keyscan -p "$PORT" -H "$LH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+          SSH_CMD="ssh -p $PORT -i $HOME/.ssh/lh_key -o BatchMode=yes -o ConnectTimeout=20 $LH_USER@$LH_HOST"
+
+          # ── 护栏：目标目录必须是 english 仓库的 git clone ──────────────
+          # LH_ROOT 写错会对着别的站点跑 update.sh，必须在上传前拦住。
+          echo "::group::目标目录核验"
+          $SSH_CMD "cd '$LH_ROOT' \
+            && test -d .git && echo 'git repo: OK' \
+            && test -f deploy/update.sh && echo 'update.sh: OK' \
+            && test -f index.html && echo 'index.html: OK' \
+            && git remote get-url origin"
+          echo "::endgroup::"
+
+          BEFORE=$($SSH_CMD "git -C '$LH_ROOT' rev-parse HEAD")
+          echo "部署前服务器 HEAD: $BEFORE"
+
+          # ── 部署：服务器自行 fetch/reload（脚本内含 5 次 fetch 重试）────
+          $SSH_CMD "cd '$LH_ROOT' && bash deploy/update.sh"
+
+          AFTER=$($SSH_CMD "git -C '$LH_ROOT' rev-parse HEAD")
+          echo "部署后服务器 HEAD: $AFTER"
+          echo "本次触发提交:      $TARGET_SHA"
+
+          if [ "$AFTER" != "$TARGET_SHA" ]; then
+            echo "::error title=部署未到位::服务器 HEAD ($AFTER) ≠ 触发提交 ($TARGET_SHA)。"
+            echo "常见原因：服务器 fetch 到的是更新的提交，或 update.sh 未走到 reset。"
+            exit 1
+          fi
+          echo "::notice title=部署完成::服务器已更新至 $AFTER"
+
+      # ⚠️ 只体检、不设门禁：部署已由上一步断言，此处失败只出 warning
+      - name: Verify live site (self-check, never blocks)
+        if: steps.cfg.outputs.ready == 'true'
+        continue-on-error: true
+        env:
+          LH_HOST: ${{ secrets.LH_HOST }}
+        run: |
+          set +e
+          URL="https://www.english.power-knowledge.tech/"
+          for i in 1 2 3; do
+            html=$(curl -sS -m 20 "$URL"); rc=$?
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -m 20 "$URL")
+            echo "第 ${i} 次：http=$code curl_exit=$rc"
+            if [ "$rc" = 0 ] && [ "$code" = "200" ]; then
+              if printf '%s' "$html" | grep -q '邮件英语学习站'; then
+                echo "::notice title=核验通过::线上 200 且页面标题命中"
+              else
+                echo "::warning title=核验存疑::线上 200 但内容指纹未命中，可能是缓存"
+              fi
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::warning title=自检未通过（不影响本次部署）::$URL 多次访问失败"
+          exit 0
