@@ -74,7 +74,10 @@
   min-width: 0;
 }
 .navlinks a {
-  font-size: 12px; padding: 6px 7px; border-radius: 7px;
+  /* 2026-11-10 由 12px 调到 14px：导航是本站主要入口，12px 在 1280 下偏小。
+     实测余量充足 —— 品牌 136 + 导航(14px) 432 + 切换器 79 = 647px，
+     内容区 1224px，即便 15px 仍单行零溢出（试算见当日日志）。 */
+  font-size: 14px; padding: 6px 8px; border-radius: 7px;
   font-weight: 600; white-space: nowrap;
   color: var(--color-text-secondary);
   transition: color .15s, background-color .15s;
@@ -114,7 +117,7 @@
 @media (max-width: 1240px) {
   .topbar .bar { gap: 10px; }
   .navlinks { gap: 1px; }
-  .navlinks a { font-size: 11.5px; padding: 5px 5px; }
+  .navlinks a { font-size: 13px; padding: 5px 6px; }
 }
 
 /* ② ≤1139：导航收进「目录 ▾」抽屉。
