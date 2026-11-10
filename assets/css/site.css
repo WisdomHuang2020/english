@@ -256,6 +256,8 @@ a.card:hover {
 }
 .prose .en, .en { color: var(--color-text-primary); }
 .prose .en { font-size: 15.5px; }
+/* 次级注释（表格里参数名下方的小字） */
+.dim { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 12px; font-weight: 500; line-height: 1.5; }
 
 /* ---------- 邮件卡片（模拟收件箱条目） ---------- */
 .mail {
@@ -494,7 +496,7 @@ td small { display: block; color: var(--color-text-muted); font-size: 12.5px; li
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1024px) {
-  .content-grid { grid-template-columns: 1fr; gap: 0; }
+  .content-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .toc { display: none; }
   .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

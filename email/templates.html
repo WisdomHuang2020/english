@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>模板库 · 邮件英语 · 外贸英语学习站</title>
-<meta name="description" content="16 封覆盖外贸全流程的英文邮件模板：开发信、询盘回复、报价、还盘、订单确认、催款、出货、延误、索赔、涨价。填变量即可复制。" />
+<meta name="description" content="26 封覆盖外贸全流程的英文邮件模板：开发信、询盘回复、报价、还盘、订单确认、催款、出货、延误、索赔、涨价。填变量即可复制。" />
 <link rel="canonical" href="https://www.english.power-knowledge.tech/email/templates.html" />
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
@@ -67,9 +67,9 @@
   <section class="hero" style="padding:52px 0 26px">
     <div class="shell">
       <p class="eyebrow">模板库</p>
-      <h1 style="font-size:clamp(26px,3.4vw,38px)">16 封，覆盖外贸全流程</h1>
+      <h1 style="font-size:clamp(26px,3.4vw,38px)">26 封，覆盖外贸全流程</h1>
       <p class="lead">
-        上面一排填一次，下面 16 封邮件里的占位符会同时替换。填完直接点「复制」——
+        上面一排填一次，下面 26 封邮件里的占位符会同时替换。填完直接点「复制」——
         没填的 <span class="var-hl" style="color:var(--color-brand-light);font-weight:700">{{占位符}}</span> 会高亮，提醒你别把占位符发出去。
       </p>
       <p style="font-size:13.5px;color:var(--color-text-muted);margin-top:10px">
@@ -91,6 +91,9 @@
       <div class="tf"><label for="v-order">单号</label><input id="v-order" data-var="OrderNo" placeholder="PO-8821" /></div>
       <div class="tf"><label for="v-valid">有效期</label><input id="v-valid" data-var="ValidDate" placeholder="25 March" /></div>
       <div class="tf"><label for="v-name">你的名字</label><input id="v-name" data-var="MyName" placeholder="Lin Tao" /></div>
+      <div class="tf"><label for="v-exhibition">展会名</label><input id="v-exhibition" data-var="Exhibition" placeholder="Canton Fair" /></div>
+      <div class="tf"><label for="v-boothno">展位号</label><input id="v-boothno" data-var="BoothNo" placeholder="12.2 C18" /></div>
+      <div class="tf"><label for="v-trackingno">快递单号</label><input id="v-trackingno" data-var="TrackingNo" placeholder="DHL 1234567890" /></div>
       <button class="btn btn--ghost btn--sm" type="button" id="tpl-reset" style="align-self:flex-end">清空</button>
     </div>
 
@@ -479,6 +482,230 @@ Best regards,
       <p class="mail-note">这封邮件的真实目的是拿反馈，不是推销。但「下一批排产窗口」这句，往往就是复购的起点。</p>
     </div>
 
+    <!-- 17 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>17 客户不认涨价<span>异议处理 · 不降价也不失客户</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Re: Price increase — three options for {{OrderNo}}
+
+Dear {{Customer}},
+
+Thank you for being direct about the gap. Let me be equally direct.
+
+The USD 0.60/pc increase is the copper and driver cost we absorbed for the last two runs. If we hold {{Price}}, we would be selling below cost on this specification, so I can't offer that.
+
+What I can offer is three ways to keep your landed cost flat:
+· Keep the current price and move to a 2-year warranty instead of 3
+· Keep the 3-year warranty and drop the dimmable function
+· Keep everything and take 2,000 pcs, which brings the unit cost to {{Price}} with no increase
+
+Which of the three gets closest to what you need? I can send the revised PI the same day.</pre>
+      <p class="mail-note">客户说「别家便宜 8%」时，最差的回应是「我们的质量更好」——那是观点。这里给的是三条能算账的路径：改配置、改数量、改服务。三条都不含降价，但每一条都让客户觉得自己有选择。</p>
+    </div>
+    <!-- 18 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>18 样品寄出通知<span>含单号 · 到货后跟进</span></h3>
+        <span class="tag tag--friendly">友好</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Sample sent — {{Product}}, DHL {{TrackingNo}}
+
+Dear {{Customer}},
+
+The sample left our factory this morning by DHL. Tracking number: {{TrackingNo}}; expected delivery in 4 to 5 working days.
+
+Two notes so you can evaluate it properly:
+· The unit is from our standard production run, not a hand-made sample — what you test is what you get.
+· The label is blank on purpose; your artwork will be printed from the confirmed file.
+
+When it arrives, the two things worth checking are the colour temperature at 4000K and the driver brand on the label. If either is not what you expected, tell me and I'll send a replacement before you spend more time on it.
+
+I'll follow up on {{ValidDate}} in case the parcel sits in customs.</pre>
+      <p class="mail-note">样品邮件最容易犯的错是只给单号、不说「收到后该看什么」。最后一句把跟进时间写死，也让客户知道你会来问——比「please feel free to contact me」有用。</p>
+    </div>
+    <!-- 19 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>19 展会邀约（展前）<span>展前 3-4 周 · 预约时段</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: {{Exhibition}} — booth {{BoothNo}}, and a 30-minute slot for you
+
+Dear {{Customer}},
+
+We will be at {{Exhibition}} from 15 to 19 April, booth {{BoothNo}}, hall 12.2.
+
+Rather than hope you walk past, may I book a slot? I can hold 30 minutes on 16 or 17 April, whichever suits you. On the table: the new {{Product}} range and the cost-down version of your current item — I think the second one is what you'll want to see.
+
+If you're not attending this year, tell me and I'll courier the samples to your office instead, so you're not out of the loop.
+
+Booth map attached.</pre>
+      <p class="mail-note">展前邀约的关键是「给对方一个好理由来」，不是「欢迎光临」。第二段点名「你可能想看的那个降本版本」，比罗列全系列有效。最后给不去的人一条替代路径，这一条常常带来真正的回信。</p>
+    </div>
+    <!-- 20 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>20 展后跟进<span>展会结束后 3 天内 · 名片变现</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Following up — our talk at {{Exhibition}} about {{Product}}
+
+Dear {{Customer}},
+
+We met at our booth on 16 April — you were looking at the 36W panel and asked about the price at 1,000 pcs.
+
+Here is the answer in one line: {{Price}}/pc, {{Incoterm}}, {{LeadTime}} after deposit. Quotation with the full specification is attached.
+
+You also mentioned that your current supplier's lead time has been unreliable. If that's still the issue, we can hold stock for you at our warehouse and ship within 10 days of your call-off — that's a different arrangement from a normal order, but it's one we use with two customers in your market.
+
+Shall I put together a stock-holding proposal, or would you rather start with a normal trial order first?</pre>
+      <p class="mail-note">展后跟进的价值全在「复述」：他说过什么、问过什么价、抱怨过什么。第三段把「抱怨」变成提案，是名片变订单的那一步。结尾两个选项，客户答哪个都能往下走。</p>
+    </div>
+    <!-- 21 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>21 验厂接待确认<span>客户来访 · 把行程钉死</span></h3>
+        <span class="tag tag--formal">偏正式</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Factory visit on {{ValidDate}} — schedule and what to bring
+
+Dear {{Customer}},
+
+Thank you for confirming the visit on {{ValidDate}}. Here is the plan so your day is not spent waiting for us.
+
+09:30 pick-up from your hotel
+10:00 factory tour: SMT line, assembly, aging room, QC station
+11:30 document review: certifications, incoming inspection records, last three shipment reports
+12:30 lunch, then a short session on your specification questions
+
+For the documents you asked about: we will have CE, RoHS and the last 12 months of incoming inspection records ready. If your auditor needs anything else, send the list by {{ValidDate}} and we will prepare it.
+
+One request: please confirm how many people are coming, so we can arrange the meeting room and transport.</pre>
+      <p class="mail-note">验厂邮件的作用是「降低对方的不确定性」：他到现场最怕的是乱、等、找不到人。把时间表、要看的东西、需要他确认的事写清，专业感不是靠形容词堆出来的。</p>
+    </div>
+    <!-- 22 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>22 付款方式协商<span>客户要 O/A，我方给替代</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Payment terms for {{OrderNo}} — a structure that works for both sides
+
+Dear {{Customer}},
+
+I understand you would prefer open account terms. For a first order we can't carry that risk, but I don't want to leave you with only one option.
+
+Three structures we can work with:
+· 30% T/T deposit, 70% against copy of B/L — our standard
+· L/C at sight — workable if the issuing bank is acceptable to us
+· 20% deposit and the balance in two instalments 30 and 60 days after B/L — this needs credit insurance, which we can arrange
+
+If the third one is close to what you need, I'll send the credit insurance requirements today. After two or three clean orders, moving to O/A is realistic.
+
+Which structure should I put in the PI?</pre>
+      <p class="mail-note">拒绝付款条件时，最有效的是「给一个更接近他的替代方案 + 说清升级路径」。最后那句「两三单干净记录之后 O/A 是现实的」，比任何担保话术都更能留住客户。</p>
+    </div>
+    <!-- 23 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>23 订单变更与取消<span>改数量 / 改规格 / 取消</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Change to {{OrderNo}} — what is still possible, and the cost
+
+Dear {{Customer}},
+
+I've checked your request against where the order stands today.
+
+Changing the quantity from {{Qty}} to 1,200 pcs: possible, unit price stays {{Price}}, but the ship date moves from {{ValidDate}} to 10 days later, because the driver batch is already allocated.
+
+Changing the housing colour: not possible for this run — the parts are anodised and 800 sets are already finished.
+
+Cancelling the order entirely: we would need to charge for the finished units and the customised packaging, which comes to {{Total}}.
+
+Tell me which of these you want and I'll confirm in writing today. If none of them fit, call me and we'll find a way to phase it.</pre>
+      <p class="mail-note">变更邮件的核心是「分清还能改和不能改」，并且给每个选项标上代价。最忌「let me check with the factory and get back to you」——这句话让客户失去对交期的信任。</p>
+    </div>
+    <!-- 24 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>24 年度返单与框架<span>年末谈下一年 · 用量换条件</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: 2027 planning — {{Product}}, annual volume and price protection
+
+Dear {{Customer}},
+
+We are closing our 2027 production plan this month, and I would like to put {{Company}} into it properly rather than quote you order by order.
+
+If you can indicate an annual volume, even roughly, here is what we can commit to:
+· A fixed price for the year, reviewed only if copper moves more than 8%
+· A reserved production slot each quarter, so your lead time drops from {{LeadTime}} to 15 days
+· Your specification and packaging files kept on file, so re-orders need only a PO number
+
+Last year you took four orders totalling about 3,000 pcs. If 2027 looks similar or larger, the fixed-price arrangement is worth 20 minutes of your time.
+
+Shall we do a short call in the first week of December?</pre>
+      <p class="mail-note">年度返单不是「再下一单」，是「把零散订单变成一个计划」。三个承诺都要具体到可执行（价格、排期、文件），最后用一个具体数字回顾去年——证明你一直在记他的量。</p>
+    </div>
+    <!-- 25 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>25 质量投诉首封回复<span>客户说有不良 · 还没提索赔</span></h3>
+        <span class="tag">中性</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Re: Quality issue — 12 units, batch 2603-A
+
+Dear {{Customer}},
+
+Thank you for the photos and the batch number — that was enough for us to trace the run.
+
+What we have found so far: batch 2603-A used a driver from a different supplier than the previous run, and 12 units showing the same symptom points to that batch rather than to handling.
+
+What we are doing:
+· Sending 20 replacement units by air this week, at our cost
+· Holding the remaining stock of that batch and re-testing it before any further shipment
+· Asking the driver supplier for their 8D report, which I will forward to you
+
+What I need from you: please keep the 12 defective units for now. If they can come back with your next shipment, we can complete the analysis instead of guessing.
+
+I'm sorry this reached you. I'll update you on Friday even if there is nothing new.</pre>
+      <p class="mail-note">首封回复的目的不是定责，是「让对方相信你在查」。三条「正在做的事」必须都是可验证的动作；最后一句「周五无论有没有进展都会同步」，是这类邮件里最值钱的一句。</p>
+    </div>
+    <!-- 26 -->
+    <div class="tpl" data-template>
+      <div class="tpl-top">
+        <h3>26 运费与汇率调整<span>不涨价，收附加费</span></h3>
+        <span class="tag tag--formal">偏正式</span>
+        <button class="btn btn--ghost btn--sm" type="button" data-copy="">复制</button>
+      </div>
+      <pre>Subject: Freight surcharge from 1 April — {{OrderNo}} not affected
+
+Dear {{Customer}},
+
+Two cost lines have moved and I want to tell you before they appear on an invoice.
+
+Freight: the carrier has applied a peak season surcharge of USD 300 per 40ft container from 1 April. On a 1,000 pcs order that is about USD 0.30/pc at current loading.
+
+Exchange rate: the USD has moved 2.1% against RMB since our last quotation. We are not repricing existing quotations.
+
+So: all orders confirmed before 31 March ship at the current all-in price. From 1 April, quotations will show freight as a separate line rather than built into the unit price — that way you can see exactly what changed, and you can also nominate your own forwarder if you prefer.
+
+Your current order {{OrderNo}} is confirmed at the old price.</pre>
+      <p class="mail-note">不涨价但收附加费时，「把运费单列」比「悄悄加进单价」好得多：客户能看懂、能比价、也能自己指定货代。最后一句先保住在手订单，避免客户以为你在追涨。</p>
+    </div>
+
     <div class="callout callout--tip" style="margin-top:24px">
       <span class="co-title">怎么改这些模板</span>
       只改事实（价格、交期、条款、产品），不要改结构。<b>结构是模板真正值钱的部分</b>：
@@ -519,6 +746,8 @@ Best regards,
           <a href="structure.html">结构与语气</a>
           <a href="negotiation.html">询盘报价</a>
           <a href="operations.html">订单货款</a>
+          <a href="culture.html">跨文化分寸</a>
+          <a href="craft.html">写作工艺</a>
           <a href="templates.html">模板库</a>
           <a href="phrases.html">句式库</a>
           <a href="../glossary/index.html">行业词汇</a>
@@ -552,7 +781,7 @@ Best regards,
           </a>
         </div>
       </div>
-      <div class="foot-legal-right"><span class="app-version">v1.1.5</span></div>
+      <div class="foot-legal-right"><span class="app-version">v1.1.6</span></div>
     </div>
     <div class="foot-disclaimer">
       <p>

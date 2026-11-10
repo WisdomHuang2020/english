@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>写作工艺 · 邮件英语 · 外贸英语学习站</title>
+<meta name="description" content="把外贸邮件写短、写清的具体工艺：写前三个决定、版面与段落、名词化与被动语态的手术、读者视角改写、30 组中式冗长替换表、坏消息的四种结构、三遍修改法。" />
+<link rel="canonical" href="https://www.english.power-knowledge.tech/email/craft.html" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = { 'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5', 'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7' };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="../assets/css/theme-vars.css" />
+<link rel="stylesheet" href="../assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="../assets/css/header.css" />
+<link rel="stylesheet" href="../assets/css/footer.css" />
+<link rel="stylesheet" href="../assets/css/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="../index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="index.html" data-topic="email">邮件英语</a>
+      <a href="templates.html">模板库</a>
+      <a href="phrases.html">句式库</a>
+      <a href="../glossary/index.html">行业词汇</a>
+      <a href="checklist.html">检查清单</a>
+      <a href="../practice.html">自测</a>
+    </nav>
+<a class="group-entry" href="https://power-knowledge.tech/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+        <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      </svg>
+      站群入口
+    </a>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="shell">
+    <div class="content-grid">
+      <aside class="toc" aria-label="本页目录">
+        <h4>本页目录</h4>
+        <a href="#plan">写前 30 秒</a>
+        <a href="#layout">版面</a>
+        <a href="#sentence">句子的三个手术</a>
+        <a href="#para">段落</a>
+        <a href="#youview">读者视角</a>
+        <a href="#plain">30 组替换表</a>
+        <a href="#badnews">坏消息的四种结构</a>
+        <a href="#revise">三遍修改法</a>
+        <a href="#rewrite">整篇改写</a>
+        <a class="toc-back" href="index.html">← 主题首页</a>
+      </aside>
+
+      <article class="prose">
+        <p class="eyebrow">模块 08</p>
+        <h1 style="font-size:clamp(26px,3.2vw,34px);margin-bottom:12px">写作工艺</h1>
+        <p style="font-size:16.5px">
+          前面几页讲「写什么」，这一页讲「怎么把它压短」。同一个意思，180 词和 110 词的版本，
+          回复率差别很明显——不是客户懒，是他每天要看六十封。
+        </p>
+
+        <h2 id="plan"><span class="num">01</span>写前 30 秒：三个决定</h2>
+        <p>动手写第一句之前，把这三件事在心里答完。答不完，写出来的大概率是「把我知道的都告诉你」。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>决定</th><th>问自己</th><th>答错的后果</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>目的</strong></td>
+                <td>这封信是<strong>要他做一个动作</strong>，还是<strong>只要他知道</strong>？</td>
+                <td>要动作的信写成通知，客户读完点个赞就没了</td>
+              </tr>
+              <tr>
+                <td><strong>读者</strong></td>
+                <td>读的人是谁？他手上有什么信息？他上级会看这封信吗？</td>
+                <td>写给采购的技术细节，其实该写给工程师；结果两边都没解决</td>
+              </tr>
+              <tr>
+                <td><strong>下一步</strong></td>
+                <td>我希望他下一秒做什么：确认、付款、发资料、还是转给别人？</td>
+                <td>结尾写成「如有问题请随时联系」，等于没提要求</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--tip">
+          <span class="co-title">一个立刻能用的小动作</span>
+          先写<strong>最后一段</strong>——那句「请你做什么、什么时候之前」。写完再回头写开头，
+          你会发现中间那些背景介绍有一半根本不必写：因为它们服务的是「我想说清楚」，不是「他要做决定」。
+        </div>
+
+        <h2 id="layout"><span class="num">02</span>版面：邮件也是一份文件</h2>
+        <p>
+          版面的作用被严重低估。同样一段话，排版不同，读起来的速度能差一倍。手机屏幕上，客户看到的第一个画面决定他会不会往下滑。
+        </p>
+        <ul>
+          <li><strong>一屏原则。</strong>第一屏（手机约 5 行）必须出现：结论、金额或数量、要他做的动作。</li>
+          <li><strong>段间空一行，不要缩进。</strong>邮件正文没有首行缩进的必要，空行是最省力的分隔符。</li>
+          <li><strong>三条以上并列，改成列表。</strong>列表让客户能回一句 <span class="en">Re: point 2</span>，省掉一轮「你指的是哪个」。</li>
+          <li><strong>加粗只加事实。</strong>金额、日期、单号、条款编号可以加粗；形容词加粗没有任何信息量，只会显得像广告。</li>
+          <li><strong>附件在正文里点名。</strong>写 <span class="en">the quotation (PDF, 2 pages)</span>，别只写 <span class="en">please find attached</span>——手机端附件常常被折叠。</li>
+        </ul>
+        <p>
+          一个反例：把价格写成一段话 <span class="bad">"Our price for 500 pcs is USD 12.40 per piece FOB Ningbo and for 1000 pcs it is USD 11.90, both valid until 25 March"</span>，
+          客户要读两遍才能对上数量。改成三行，一眼就能比。
+        </p>
+
+        <h2 id="sentence"><span class="num">03</span>句子的三个手术</h2>
+        <p>中文写作者在英文邮件里最常见的三个病灶，都能靠机械操作改掉。</p>
+
+        <h3>手术一：名词化 → 动词</h3>
+        <p>把动作变成名词（<span class="en">make a decision</span>、<span class="en">conduct an inspection</span>）是英文公文的老毛病，中文母语者尤其容易模仿。动作就用动词说。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>名词化写法</th><th>改成</th></tr></thead>
+            <tbody>
+              <tr><td><span class="bad">We will make a decision on the price by Friday.</span></td><td><span class="good">We will decide the price by Friday.</span></td></tr>
+              <tr><td><span class="bad">Please carry out an inspection of the goods.</span></td><td><span class="good">Please inspect the goods.</span></td></tr>
+              <tr><td><span class="bad">We have completed the replacement of the driver batch.</span></td><td><span class="good">We have replaced the driver batch.</span></td></tr>
+              <tr><td><span class="bad">The confirmation of the order was given on 2 March.</span></td><td><span class="good">We confirmed the order on 2 March.</span></td></tr>
+              <tr><td><span class="bad">There is a possibility of a delay in shipment.</span></td><td><span class="good">The shipment may be delayed.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>手术二：被动 → 主动（但要留一个例外）</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>被动</th><th>改成</th></tr></thead>
+            <tbody>
+              <tr><td><span class="bad">The goods will be shipped by us on 8 April.</span></td><td><span class="good">We will ship the goods on 8 April.</span></td></tr>
+              <tr><td><span class="bad">Your request has been noted by our team.</span></td><td><span class="good">Our team has noted your request.</span></td></tr>
+              <tr><td><span class="bad">Payment is required before production starts.</span></td><td><span class="good">We require payment before production starts.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <strong>例外：当施事者说出来会让对方难做时，被动是正当的。</strong>
+          客户那边有人漏了确认，你写 <span class="en">The artwork has not yet been approved</span> 比 <span class="en">You haven't approved the artwork</span> 好得多。
+          这不是逃避，是给对方留最后一次不出错的机会——如果他补上了，这件事就不必被记录成「他错了」。
+        </p>
+
+        <h3>手术三：一句不超过 25 词</h3>
+        <p>超过 25 词的句子，在手机上大约三行，读到第三行时前半句已经忘了。拆的办法是在连接词前面断句：</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>长句（34 词）</th><th>拆成两句</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="bad">We have received your payment and will arrange production as soon as possible, however please note that the Chinese New Year holiday will start on 9 February and production will resume on 26 February.</span></td>
+                <td><span class="good">We have received your payment and will start production immediately. Please note, however, that our factory closes for Chinese New Year from 9 to 25 February, so the earliest ship date is 5 March.</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="para"><span class="num">04</span>段落：主题句在前</h2>
+        <p>
+          英文商务写作默认<strong>演绎式</strong>：先给结论，再给理由。这和中文习惯的「先铺垫、后落点」相反，
+          也是中国业务员邮件被说「看不到重点」的主要原因。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>结构</th><th>写法</th><th>什么时候用</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>演绎式</strong>（结论在前）</td>
+                <td>结论 → 理由 → 行动</td>
+                <td>默认。报价、确认、通知、催促、大部分回复。</td>
+              </tr>
+              <tr>
+                <td><strong>归纳式</strong>（结论在后）</td>
+                <td>背景 → 分析 → 结论</td>
+                <td>只在两种情况下用：① 对方需要参与推导（联合排查问题）；② 高语境客户，结论太早会被读成施压。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          判断标准很实用：<strong>如果结论是坏消息，且对方没有心理准备，就先给一句缓冲，再给结论</strong>。
+          缓冲只能是一句，不能是两段——两段就成了「铺垫」，客户读到第三段才发现你要涨价，会记住这种被耍的感觉。
+        </p>
+
+        <h2 id="youview"><span class="num">05</span>读者视角：把 we 换成 you</h2>
+        <p>
+          一封邮件里「我们」出现五次以上，客户会觉得你在介绍自己，不是在解决他的问题。
+          改写的方法是：把「我们做了什么」换成「这对你意味着什么」。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>我方视角</th><th>读者视角</th></tr></thead>
+            <tbody>
+              <tr><td><span class="bad">We have 10 years of experience in LED lighting.</span></td><td><span class="good">You get a supplier who has already solved this specification problem for two importers in your market.</span></td></tr>
+              <tr><td><span class="bad">We are pleased to inform you that the goods are ready.</span></td><td><span class="good">Your goods are ready — you can book the vessel whenever you like.</span></td></tr>
+              <tr><td><span class="bad">Our lead time is 25 days.</span></td><td><span class="good">You'll have the goods in Hamburg around 12 April.</span></td></tr>
+              <tr><td><span class="bad">We require a 30% deposit.</span></td><td><span class="good">A 30% deposit lets us lock the driver supply at today's price for you.</span></td></tr>
+              <tr><td><span class="bad">We cannot offer a discount at this quantity.</span></td><td><span class="good">At 500 pcs the price you have is already our best; from 1,000 pcs there is room.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--warn">
+          <span class="co-title">别把 you-view 做成拍马屁</span>
+          「<span class="bad">You are a valued customer and we treasure your business</span>」不是读者视角，是空话。
+          真正的 you-view 一定带着<strong>具体信息</strong>：日期、金额、数量、下一步。没有信息量的 you 只是换了个主语。
+        </div>
+
+        <h2 id="plain"><span class="num">06</span>30 组替换表：把话说短</h2>
+        <p>
+          左边这些不是「错」，是「贵」——每个词组多花三到五个词，一封信多花三十个词，客户就少读一段。
+          挑你常用的记，一次记五组就够。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>冗长 / 公文腔</th><th>改成</th></tr></thead>
+            <tbody>
+              <tr><td><span class="bad">at this point in time</span></td><td><span class="good">now</span></td></tr>
+              <tr><td><span class="bad">in the event that</span></td><td><span class="good">if</span></td></tr>
+              <tr><td><span class="bad">due to the fact that</span></td><td><span class="good">because</span></td></tr>
+              <tr><td><span class="bad">in order to</span></td><td><span class="good">to</span></td></tr>
+              <tr><td><span class="bad">with regard to</span></td><td><span class="good">about / on</span></td></tr>
+              <tr><td><span class="bad">prior to</span></td><td><span class="good">before</span></td></tr>
+              <tr><td><span class="bad">subsequent to</span></td><td><span class="good">after</span></td></tr>
+              <tr><td><span class="bad">in the near future</span></td><td><span class="good">by 25 March / next week</span></td></tr>
+              <tr><td><span class="bad">as soon as possible</span></td><td><span class="good">by Friday</span></td></tr>
+              <tr><td><span class="bad">at your earliest convenience</span></td><td><span class="good">by 20 March</span></td></tr>
+              <tr><td><span class="bad">please be advised that</span></td><td><span class="good">（删掉）</span></td></tr>
+              <tr><td><span class="bad">please be kindly noted that</span></td><td><span class="good">（删掉）</span></td></tr>
+              <tr><td><span class="bad">we would like to inform you that</span></td><td><span class="good">（删掉，直接说事）</span></td></tr>
+              <tr><td><span class="bad">we are writing to</span></td><td><span class="good">（删掉）</span></td></tr>
+              <tr><td><span class="bad">kindly</span></td><td><span class="good">please</span></td></tr>
+              <tr><td><span class="bad">hereby</span></td><td><span class="good">（删掉）</span></td></tr>
+              <tr><td><span class="bad">enclosed please find</span></td><td><span class="good">attached is / I've attached</span></td></tr>
+              <tr><td><span class="bad">please do not hesitate to contact me</span></td><td><span class="good">let me know</span></td></tr>
+              <tr><td><span class="bad">should you have any questions</span></td><td><span class="good">if anything is unclear</span></td></tr>
+              <tr><td><span class="bad">we look forward to hearing from you</span></td><td><span class="good">looking forward to your reply</span></td></tr>
+              <tr><td><span class="bad">make a payment</span></td><td><span class="good">pay</span></td></tr>
+              <tr><td><span class="bad">provide assistance</span></td><td><span class="good">help</span></td></tr>
+              <tr><td><span class="bad">give consideration to</span></td><td><span class="good">consider</span></td></tr>
+              <tr><td><span class="bad">carry out an investigation</span></td><td><span class="good">investigate</span></td></tr>
+              <tr><td><span class="bad">take into consideration</span></td><td><span class="good">consider</span></td></tr>
+              <tr><td><span class="bad">in the amount of USD 8,400</span></td><td><span class="good">for USD 8,400</span></td></tr>
+              <tr><td><span class="bad">a total of 500 pieces</span></td><td><span class="good">500 pcs</span></td></tr>
+              <tr><td><span class="bad">at the present time we are unable to</span></td><td><span class="good">we can't yet</span></td></tr>
+              <tr><td><span class="bad">we regret to inform you that</span></td><td><span class="good">unfortunately</span></td></tr>
+              <tr><td><span class="bad">thank you for your kind understanding</span></td><td><span class="good">thanks for your patience</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          注意最后几组：<strong>删掉比替换更有效</strong>。「please be advised that」删掉之后句子几乎不变——
+          说明它本来就不承载信息。一段里能删掉三个这样的词，客户会明显觉得你的信「清爽」。
+        </p>
+
+        <h2 id="badnews"><span class="num">07</span>坏消息的四种结构</h2>
+        <p>
+          延误、涨价、拒绝、索赔，这四件事的写法不一样，但都要回答同一个问题：<strong>如何让对方在不开心的同时，还愿意继续和你做生意</strong>。
+          四种结构按对方与你的关系挑。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>结构</th><th>顺序</th><th>适合</th><th>代价</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>直接式</strong></td>
+                <td>坏消息 → 原因 → 方案</td>
+                <td>长期合作关系稳固、要的是效率（德国、荷兰、美国老客户）</td>
+                <td>显得冷；关系不够硬时容易被读成冷漠</td>
+              </tr>
+              <tr>
+                <td><strong>缓冲式</strong></td>
+                <td>一句中性铺垫 → 坏消息 → 原因 → 方案</td>
+                <td>多数情况；首次出问题、金额中等</td>
+                <td>缓冲写长了就变成「套路」，客户会警惕</td>
+              </tr>
+              <tr>
+                <td><strong>解释式</strong></td>
+                <td>背景 → 分析 → 结论 → 方案</td>
+                <td>责任需要共同确认、涉及技术问题（联合排查）</td>
+                <td>结论出现太晚，客户可能半路就回一句「so?」</td>
+              </tr>
+              <tr>
+                <td><strong>替代方案式</strong></td>
+                <td>坏消息 → 两个可选方案（含成本与时间）→ 请他选</td>
+                <td>客户产线会受影响、必须立刻有出路</td>
+                <td>方案要真实可执行，报一个做不到的选项等于二次失信</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          四种结构都必含一段：<strong>「我们做了什么，而不是我们打算做什么」</strong>。
+          <span class="en">We are looking into it</span> 是零信息；<span class="en">We replaced the batch and re-tested it on 6 March</span> 才是交代。
+        </p>
+
+        <h2 id="revise"><span class="num">08</span>三遍修改法</h2>
+        <p>写完别直接发。三遍，每遍只干一件事，总共五分钟。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>遍次</th><th>只看什么</th><th>具体动作</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>第一遍：事实</strong></td>
+                <td>数字、日期、单号、单位、条款</td>
+                <td>金额与数量对不对得上（单价 × 数量 = 总额）；日期有没有跨月/跨年写错；贸易术语带没带地点；附件名与正文说的是不是同一个文件。</td>
+              </tr>
+              <tr>
+                <td><strong>第二遍：结构</strong></td>
+                <td>顺序</td>
+                <td>结论是不是在第一屏；每个请求有没有日期；结尾那个动作客户能不能在 10 秒内完成。</td>
+              </tr>
+              <tr>
+                <td><strong>第三遍：语言</strong></td>
+                <td>长度与语气</td>
+                <td>朗读一遍——读起来要换气的地方就是该断句的地方；数一下「我们」出现了几次；硬词（must / unless / cannot）出现超过一次就删一个。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--tip">
+          <span class="co-title">两个便宜的检查</span>
+          <b>倒着读。</b>从最后一段往前读，能发现「结尾没有请求」这类结构问题。<br />
+          <b>把主题行单独读一遍。</b>只看主题行，你能不能知道这封信要他做什么？不能就重写主题行。
+        </div>
+
+        <h2 id="rewrite"><span class="num">09</span>整篇改写：180 词 → 110 词</h2>
+        <p>下面这封是典型的中式外贸邮件：事实都在，但客户要读到第三段才知道发生了什么。</p>
+        <h3>原文</h3>
+        <div class="mail">
+          <div class="mail-body">
+            <p>Dear Mr. Weber,</p>
+            <p>First of all, thank you very much for your kind inquiry and your interest in our products. We are a professional manufacturer of LED lighting with more than 10 years of experience, and we have exported to many countries all over the world.</p>
+            <p>Regarding your inquiry about the 500 pcs LED panel light, we would like to inform you that we are pleased to quote you as follows. The price is USD 12.40 per piece FOB Ningbo. The MOQ is 300 pcs. The lead time is 25 days after receipt of deposit.</p>
+            <p>Please kindly note that the price is valid until 25 March. After that date, due to the fact that the raw material price is increasing, we may need to adjust the price accordingly.</p>
+            <p>Should you have any questions, please do not hesitate to contact me at any time. We are looking forward to hearing from you and hope to establish long-term business relationship with your esteemed company.</p>
+            <p class="sig">Best regards,<br />Lin Tao</p>
+          </div>
+          <p class="mail-note">178 词。第一段 42 词没有一个字是客户需要的信息；「esteemed company」这种表达会让客户立刻判断这是群发模板。</p>
+        </div>
+
+        <h3>改写后</h3>
+        <div class="mail">
+          <dl class="mail-head">
+            <dt>Subject</dt><dd>Quotation — 500 pcs LED panel / RFQ-2603-18 (valid to 25 March)</dd>
+            <dt>To</dt><dd>p.weber@nordlicht-gmbh.example</dd>
+          </dl>
+          <div class="mail-body">
+            <p>Dear Mr. Weber,</p>
+            <p>Thank you for your inquiry of 12 March. We can supply all 500 pcs.</p>
+            <p>· USD 12.40/pc, FOB Ningbo (Incoterms 2020)<br />
+               · MOQ 300 pcs<br />
+               · Lead time 25 days after deposit<br />
+               · Price valid to 25 March</p>
+            <p>After 25 March a copper surcharge of about 3% applies — I can hold the current price if you confirm within the validity.</p>
+            <p>Two things would let me issue the PI today: the colour temperature (4000K or 5000K) and whether the cartons carry your label.</p>
+            <p class="sig">Best regards,<br />Lin Tao · Export Sales</p>
+          </div>
+          <p class="mail-note">113 词，比原文短 37%，但多了两样东西：一条能促成决定的理由（锁价），和两个具体要客户回答的问题。</p>
+        </div>
+
+        <h3>改了什么</h3>
+        <ol>
+          <li><strong>删掉公司介绍。</strong>客户没有问，而且「10 年经验」不构成任何决策依据。真要证明实力，放一句同行案例。</li>
+          <li><strong>条款改成列表。</strong>四项条件四行，客户可以逐条核对，也方便直接转给同事。</li>
+          <li><strong>「价格会上涨」改成「确认就锁价」。</strong>同一个事实，前者是通知，后者是行动理由。</li>
+          <li><strong>结尾从「有事联系我」改成两个问题。</strong>回答成本低，而且答案直接决定你能不能开 PI。</li>
+          <li><strong>主题行补上单号与有效期。</strong>客户按 RFQ 号归档，也一眼知道这封信有多紧急。</li>
+        </ol>
+
+        <div class="pager">
+          <a href="culture.html"><small>上一模块</small><strong>← 跨文化与分寸</strong></a>
+          <a class="next" href="templates.html"><small>配套资料</small><strong>模板库：26 封 →</strong></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="../index.html">首页</a>
+          <a href="index.html">邮件英语</a>
+          <a href="structure.html">结构与语气</a>
+          <a href="negotiation.html">询盘报价</a>
+          <a href="operations.html">订单货款</a>
+          <a href="culture.html">跨文化分寸</a>
+          <a href="craft.html">写作工艺</a>
+          <a href="templates.html">模板库</a>
+          <a href="phrases.html">句式库</a>
+          <a href="../glossary/index.html">行业词汇</a>
+          <a href="checklist.html">检查清单</a>
+          <a href="../practice.html">自测</a>
+          <a href="index.html#faq">常见问题</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：国际商务写作通用规范（business writing / plain English 实践）与外贸往来实例；例句中的公司、人名、单价、单号均为虚构。
+        </p>
+        <p class="foot-note">
+          写作建议针对英文商务邮件；合同、信用证与法律文件另有格式要求，不适用本页的简写原则。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right"><span class="app-version">v1.1.6</span></div>
+    </div>
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，与任何企业、机构或客户无隶属关系，不代表雇主或第三方立场。
+      </p>
+      <p>
+        站内句式、模板与讲解基于公开资料与个人实务整理，仅供学习与写作参考，不构成商业、法律或合规承诺；
+        因直接套用站内表述导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与整理成果著作权归作者所有，转载请注明出处且不得用于商业用途；
+        文中提及的公司名、产品名、标准与商标归各自权利人，仅作技术说明，不代表隶属或背书。如涉第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/theme.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
