@@ -446,3 +446,26 @@
     }, { passive: true });
   })();
 })();
+
+/* ── 导航里补「留言」入口（2026-11-10）──────────────────────────────────
+   本站是多页静态站，导航写在 13 个 HTML 里各一份，逐个改既繁琐又容易漏。
+   这里在公共脚本里统一追加，改动只此一处。
+
+   用绝对路径 /feedback.html：相对路径在 email/ 这类子目录页面下会指错。
+   本站没有 GitHub Pages 镜像（CI 直接推服务器），所以绝对路径安全。 */
+;(function () {
+  function addFeedbackLink() {
+    var nav = document.querySelector('.navlinks')
+    if (!nav) return
+    if (nav.querySelector('a[href="/feedback.html"]')) return
+    var a = document.createElement('a')
+    a.href = '/feedback.html'
+    a.textContent = '留言'
+    nav.appendChild(a)
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addFeedbackLink)
+  } else {
+    addFeedbackLink()
+  }
+})()

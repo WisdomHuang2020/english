@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>读者留言 · 外贸英语学习站</title>
+<meta name="description" content="外贸英语学习站的读者留言页：指出例句、模板或措辞上的问题，帮助作者改进。" />
+<link rel="canonical" href="https://www.english.power-knowledge.tech/" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = {
+      'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5',
+      'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7'
+    };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/css/theme-vars.css" />
+<link rel="stylesheet" href="assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="assets/css/header.css" />
+<link rel="stylesheet" href="assets/css/footer.css" />
+<link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/feedback.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="email/index.html" data-topic="email">邮件英语</a>
+      <a href="email/templates.html">模板库</a>
+      <a href="email/phrases.html">句式库</a>
+      <a href="glossary/index.html">行业词汇</a>
+      <a href="email/checklist.html">检查清单</a>
+      <a href="practice.html">自测</a>
+    </nav>
+<a class="group-entry" href="https://power-knowledge.tech/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+        <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      </svg>
+      站群入口
+    </a>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+<div class="fb-wrap">
+  <div class="fb-head">
+    <h1>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      读者留言
+    </h1>
+    <p>本站的例句、模板与措辞分寸都来自真实外贸往来，但仍可能有疏漏。如果你发现<b>某一句在实际商务场景里不合适</b>，或觉得某个模板漏了关键信息，请在这里指出——<strong>具体到哪一句、为什么</strong>，比「感觉不太对」有用得多。</p>
+  </div>
+
+  <div class="fb-tip">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+      <path d="m9 12 2 2 4-4"></path>
+    </svg>
+    <span>留言<strong>不会公开展示</strong>，也不会出现在任何页面上。只有作者能在后台查看。若你留了联系方式，仅用于回复你的问题。</span>
+  </div>
+
+  <div class="fb-card">
+    <h2>填写反馈</h2>
+    <div id="fb-alert" class="fb-alert" hidden></div>
+    <form id="fb-form" novalidate>
+      <label class="fb-field">
+        <span>涉及页面</span>
+        <select id="fb-page" class="fb-select">
+          <option value="首页">首页</option>
+          <option value="邮件英语">邮件英语</option>
+          <option value="模板库">模板库</option>
+          <option value="句式库">句式库</option>
+          <option value="行业词汇">行业词汇</option>
+          <option value="检查清单">检查清单</option>
+          <option value="自测">自测</option>
+          <option value="其他">其他 / 说不好</option>
+        </select>
+      </label>
+
+      <label class="fb-field">
+        <span>问题描述 <em>*</em><span class="fb-count" id="fb-count">0 / 4000</span></span>
+        <textarea id="fb-content" class="fb-textarea" maxlength="4000"
+          placeholder="建议写清三点：&#10;1. 是哪一句 / 哪个模板（原文摘一句）&#10;2. 你认为哪里不合适，为什么&#10;3. 你更习惯的说法，或客户的实际反馈"></textarea>
+      </label>
+
+      <label class="fb-field">
+        <span>联系方式（可选，便于回复你）</span>
+        <input id="fb-contact" class="fb-input" type="text" maxlength="120"
+               autocomplete="off" placeholder="邮箱 / 微信号，留空也可以">
+      </label>
+
+      <!-- 蜜罐：正常用户看不见，机器人会填 -->
+      <input id="fb-website" type="text" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+
+      <div class="fb-actions">
+        <span class="fb-note">提交即为同意作者在改进本站时参考该反馈。</span>
+        <button type="submit" id="fb-submit" class="fb-submit" disabled>提交</button>
+      </div>
+    </form>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="index.html">首页</a>
+          <a href="email/index.html">邮件英语</a>
+          <a href="email/structure.html">结构与语气</a>
+          <a href="email/negotiation.html">询盘报价</a>
+          <a href="email/operations.html">订单货款</a>
+          <a href="email/templates.html">模板库</a>
+          <a href="email/phrases.html">句式库</a>
+          <a href="glossary/index.html">行业词汇</a>
+          <a href="email/checklist.html">检查清单</a>
+          <a href="practice.html">自测</a>
+          <a href="email/index.html#faq">常见问题</a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：外贸业务往来邮件实例与商务英语写作惯例（BEC / 商务写作教材通用表述），以及行业缩写、高频词汇与商务精句的词汇积累（源表逐字保留，纠错单列勘误）。例句中的公司、人名、单价、单号均为虚构，仅作写法演示。
+        </p>
+        <p class="foot-note">
+          贸易术语表述以 Incoterms 2020 为准；付款方式、检验与索赔条款在具体合同下可能另有约定，实际以合同正文为准。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right">
+        <span class="app-version">v1.1.5</span>
+      </div>
+    </div>
+
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，与任何企业、机构或客户无隶属关系，不代表雇主或第三方立场。
+      </p>
+      <p>
+        站内句式、模板与讲解基于公开资料与个人实务整理，仅供学习与写作参考，不构成商业、法律或合规承诺；
+        因直接套用站内表述导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与整理成果著作权归作者所有，转载请注明出处且不得用于商业用途；
+        文中提及的公司名、产品名、标准与商标归各自权利人，仅作技术说明，不代表隶属或背书。如涉第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+
+</html>
+  <script src="assets/js/feedback.js" defer></script>
+</body>

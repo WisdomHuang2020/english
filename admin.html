@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>留言管理 · 外贸英语学习站</title>
+<meta name="description" content="本站留言管理后台，作者专用。" />
+<link rel="canonical" href="https://www.english.power-knowledge.tech/" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230f766e'/><path d='M9 13v10M23 13v10M9 18h14' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/></svg>" />
+<script>
+  (function () {
+    var IDS = ['dark-teal', 'blue', 'navy-tech', 'graphite', 'warm-paper', 'forest', 'indigo', 'sea-salt'];
+    var BG = {
+      'dark-teal': '#0a0a0a', blue: '#f6f7f9', 'navy-tech': '#0b1a2b', graphite: '#f2f3f5',
+      'warm-paper': '#faf6ed', forest: '#0c1712', indigo: '#f6f5fc', 'sea-salt': '#eef7f7'
+    };
+    try {
+      var q = new URLSearchParams(location.search).get('theme');
+      var v = IDS.indexOf(q) >= 0 ? q : localStorage.getItem('pk-theme');
+      if (IDS.indexOf(v) >= 0) {
+        document.documentElement.dataset.theme = v;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m && BG[v]) m.setAttribute('content', BG[v]);
+      }
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/css/theme-vars.css" />
+<link rel="stylesheet" href="assets/css/theme-switcher.css" />
+<link rel="stylesheet" href="assets/css/header.css" />
+<link rel="stylesheet" href="assets/css/footer.css" />
+<link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/feedback.css">
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="topbar">
+  <div class="bar">
+    <a class="brand" href="index.html" aria-label="外贸英语学习站首页">
+      <i class="mark" aria-hidden="true"></i>
+      <span class="brand-text">
+        <span class="brand-en">TRADE ENGLISH</span>
+        <span class="brand-sub">外贸英语 · 邮件写作</span>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navlinks">目录 ▾</button>
+    <nav class="navlinks" id="navlinks" aria-label="主导航">
+      <a href="index.html">首页</a>
+      <a href="email/index.html" data-topic="email">邮件英语</a>
+      <a href="email/templates.html">模板库</a>
+      <a href="email/phrases.html">句式库</a>
+      <a href="glossary/index.html">行业词汇</a>
+      <a href="email/checklist.html">检查清单</a>
+      <a href="practice.html">自测</a>
+    </nav>
+<a class="group-entry" href="https://power-knowledge.tech/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+        <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      </svg>
+      站群入口
+    </a>
+    <div id="pk-theme-switcher"></div>
+  </div>
+</header>
+
+<main id="main">
+<div class="fb-wrap" id="fb-admin">
+  <div class="fb-head">
+    <h1>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      留言管理
+    </h1>
+    <p>作者后台。读者留言不会公开，仅在此查看与处理。</p>
+  </div>
+
+  <div id="fb-alert" class="fb-alert" hidden></div>
+
+  <!-- 登录 -->
+  <div class="fb-card" id="fb-login-card" hidden>
+    <h2>登录</h2>
+    <form id="fb-login-form" novalidate>
+      <label class="fb-field">
+        <span>账号</span>
+        <input id="fb-username" class="fb-input" type="text" autocomplete="username" value="power-admin">
+      </label>
+      <label class="fb-field">
+        <span>密码</span>
+        <input id="fb-password" class="fb-input" type="password" autocomplete="current-password">
+      </label>
+      <div class="fb-actions">
+        <button type="submit" id="fb-login-submit" class="fb-submit">登录</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- 首次初始化 -->
+  <div class="fb-card" id="fb-setup-card" hidden>
+    <h2>首次初始化</h2>
+    <p class="fb-hint" style="margin-bottom:1rem">
+      在服务器上运行 <code>init-site.mjs --site english</code> 拿到一次性令牌，填在下面。
+      密码至少 8 位，需要输两遍确认。
+    </p>
+    <form id="fb-setup-form" novalidate>
+      <label class="fb-field">
+        <span>初始化令牌</span>
+        <input id="fb-setup-token" class="fb-input" type="text" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="fb-field">
+        <span>账号</span>
+        <input id="fb-setup-username" class="fb-input" type="text" autocomplete="username" value="power-admin">
+      </label>
+      <label class="fb-field">
+        <span>密码（至少 8 位）</span>
+        <input id="fb-setup-password" class="fb-input" type="password" autocomplete="new-password">
+      </label>
+      <label class="fb-field">
+        <span>再次输入密码</span>
+        <input id="fb-setup-password2" class="fb-input" type="password" autocomplete="new-password">
+        <p class="fb-hint" id="fb-setup-warn" style="color:var(--color-danger)" hidden></p>
+      </label>
+      <div class="fb-actions">
+        <button type="submit" id="fb-setup-submit" class="fb-submit" disabled>设定并登录</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- 留言面板 -->
+  <div id="fb-panel" hidden>
+    <div class="fb-toolbar">
+      <span class="fb-who" id="fb-who"></span>
+      <div class="fb-filters" id="fb-filters">
+        <button type="button" class="fb-filter" data-f="all" data-label="全部" aria-pressed="true">全部 0</button>
+        <button type="button" class="fb-filter" data-f="new" data-label="待读" aria-pressed="false">待读 0</button>
+        <button type="button" class="fb-filter" data-f="read" data-label="已读" aria-pressed="false">已读 0</button>
+        <button type="button" class="fb-filter" data-f="archived" data-label="已归档" aria-pressed="false">已归档 0</button>
+      </div>
+      <button type="button" class="fb-mini" id="fb-logout">退出</button>
+    </div>
+
+    <ul class="fb-list" id="fb-list"></ul>
+
+    <div class="fb-card" style="margin-top:1.5rem">
+      <h2>修改密码</h2>
+      <form id="fb-pw-form" novalidate>
+        <label class="fb-field">
+          <span>当前密码</span>
+          <input id="fb-pw-current" class="fb-input" type="password" autocomplete="current-password">
+        </label>
+        <label class="fb-field">
+          <span>新密码（至少 8 位）</span>
+          <input id="fb-pw-new" class="fb-input" type="password" autocomplete="new-password">
+        </label>
+        <label class="fb-field">
+          <span>再次输入新密码</span>
+          <input id="fb-pw-new2" class="fb-input" type="password" autocomplete="new-password">
+          <p class="fb-hint" id="fb-pw-warn" style="color:var(--color-danger)" hidden></p>
+        </label>
+        <div class="fb-actions">
+          <button type="submit" id="fb-pw-submit" class="fb-submit" disabled>确认修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="foot-wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="foot-brand">
+          <i class="mark" aria-hidden="true"></i>
+          <b>TRADE ENGLISH</b>
+        </div>
+        <p class="foot-desc">
+          外贸英语学习站。第一个主题做邮件：把询盘、报价、订单、货款、出货、索赔这条主线上真正会用到的结构、句式和语气分寸拆开讲，配可填变量的模板与发送前检查清单。
+        </p>
+        <p class="foot-note foot-note-tight">
+          视觉规范：power-knowledge.tech 站群通用 8 套主题，与主入口 / LLC 系列一致。
+        </p>
+        <a class="foot-back" href="https://power-knowledge.tech/">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+          </svg>
+          返回站群入口
+        </a>
+      </div>
+
+      <div class="foot-col">
+        <h4>章节导航</h4>
+        <div class="foot-links">
+          <a href="index.html">首页</a>
+          <a href="email/index.html">邮件英语</a>
+          <a href="email/structure.html">结构与语气</a>
+          <a href="email/negotiation.html">询盘报价</a>
+          <a href="email/operations.html">订单货款</a>
+          <a href="email/templates.html">模板库</a>
+          <a href="email/phrases.html">句式库</a>
+          <a href="glossary/index.html">行业词汇</a>
+          <a href="email/checklist.html">检查清单</a>
+          <a href="practice.html">自测</a>
+          <a href="email/index.html#faq">常见问题</a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h4>资料口径</h4>
+        <p class="foot-note">
+          内容基础：外贸业务往来邮件实例与商务英语写作惯例（BEC / 商务写作教材通用表述），以及行业缩写、高频词汇与商务精句的词汇积累（源表逐字保留，纠错单列勘误）。例句中的公司、人名、单价、单号均为虚构，仅作写法演示。
+        </p>
+        <p class="foot-note">
+          贸易术语表述以 Incoterms 2020 为准；付款方式、检验与索赔条款在具体合同下可能另有约定，实际以合同正文为准。
+        </p>
+        <h4 class="foot-h-gap">版权</h4>
+        <p class="foot-note">
+          站内例句、模板与讲解文字为作者整理撰写；提及的商标、标准与产品名称归各自权利人所有，仅作说明用途。
+        </p>
+      </div>
+    </div>
+
+    <div class="foot-legal">
+      <div>
+        <p class="foot-copy">© 2026 外贸英语学习站 · 内容仅供学习与写作参考</p>
+        <div class="foot-beian">
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">苏ICP备2026073104号-1</a>
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32021402005238"
+             target="_blank" rel="noreferrer">
+            <img src="/beian.png" alt="" />苏公网安备32021402005238号
+          </a>
+        </div>
+      </div>
+      <div class="foot-legal-right">
+        <span class="app-version">v1.1.5</span>
+      </div>
+    </div>
+
+    <div class="foot-disclaimer">
+      <p>
+        <b>免责声明：</b>本站为个人非商业性语言学习分享，与任何企业、机构或客户无隶属关系，不代表雇主或第三方立场。
+      </p>
+      <p>
+        站内句式、模板与讲解基于公开资料与个人实务整理，仅供学习与写作参考，不构成商业、法律或合规承诺；
+        因直接套用站内表述导致的商务损失或纠纷，作者不承担责任。
+      </p>
+      <p>
+        站内文字与整理成果著作权归作者所有，转载请注明出处且不得用于商业用途；
+        文中提及的公司名、产品名、标准与商标归各自权利人，仅作技术说明，不代表隶属或背书。如涉第三方权利，请联系删除。
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+
+</html>
+  <script src="assets/js/feedback.js" defer></script>
+</body>
