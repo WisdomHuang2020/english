@@ -431,7 +431,8 @@
         return api('/api/admin/messages', { credentials: 'include' })
       }).then(function (data) {
         clearAlert()
-        state.items = (data && data.messages) || []
+        // 接口返回 { items, total, counts }，不是 messages —— 写错会让后台永远显示空列表
+        state.items = (data && data.items) || []
         render()
       })
     }
