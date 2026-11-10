@@ -99,6 +99,26 @@
   font-size: 13px; cursor: pointer;
 }
 
+/* ---------- 站群入口 ----------
+   与 control-mode 的页眉同构：House 图标 + 文案，无背景无边框的轻量链接。
+   位置必须在 .navlinks 之后、切换器之前 —— .navlinks 带着 margin-left:auto，
+   它和切换器一起被推到右侧；插到 navlinks 之前会被夹在品牌和导航中间。 */
+.group-entry {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600;
+  line-height: 1.2;                     /* 不收行高它会比品牌高 3px，把顶栏从 53 撑到 56 */
+  color: var(--color-text-secondary);
+  padding: 6px 8px; border-radius: 7px;
+  flex-shrink: 0; white-space: nowrap;   /* 与切换器同等保护，不被导航挤扁 */
+  transition: color .15s, background-color .15s;
+}
+.group-entry svg { flex-shrink: 0; }
+.group-entry:hover {
+  color: var(--color-brand);
+  background: var(--color-surface);
+  text-decoration: none;
+}
+
 /* ---------- 切换器槽位 ----------
    flex-shrink:0 是硬要求。缺了它，窄屏下浏览器会先压切换器（因为 navlinks
    的 min-width:0 让它看起来"更能屈"），结果是色点被压成一条线。 */
@@ -141,6 +161,10 @@
   .brand .mark { height: 22px; }
   .brand-en { display: none; }
   .brand-sub { font-size: 12.5px; font-weight: 700; color: var(--color-text-primary); }
+  /* 站群入口在窄屏让位：375px 下 品牌+目录+入口+切换器 放不下，会把顶栏撑成两行
+     （实测栏高 50→96px、切换器掉行）。页脚还有「返回站群入口」，入口不丢。
+     control-mode 同样在窄屏隐藏（lg:flex，<1024 就没了）。 */
+  .group-entry { display: none; }
 }
 
 /* ④ ≤480：极窄屏，导航项按两列铺，避免每行一个字 */
