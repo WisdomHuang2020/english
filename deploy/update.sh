@@ -23,4 +23,7 @@ find . -path ./.git -prune -o -type d -print0 | xargs -0 chmod 755
 nginx -t
 systemctl reload nginx
 echo "== done =="
-curl -sS -o /dev/null -w 'local https=%{http_code}\n' -k https://127.0.0.1/ -H 'Host: english.power-knowledge.tech'
+# 本机自检：必须用 --resolve，否则 SNI 不带域名，通配证会报 unrecognized name
+curl -sS -o /dev/null -w 'local https=%{http_code}\n' \
+  --resolve english.power-knowledge.tech:443:127.0.0.1 \
+  https://english.power-knowledge.tech/
