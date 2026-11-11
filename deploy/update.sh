@@ -66,4 +66,20 @@ if [ "$live_code" != "200" ] || [ "$disk_md5" != "$live_md5" ]; then
   exit 1
 fi
 echo "  自检通过：nginx 服务的正是本目录"
+
+# 写版本哨兵（2026-11-11 补）。入口门户的 /api/version/english 直读这个文件，
+# 没有它时请求 404 被 SPA fallback 兜成 HTML，前端只能退回 sites.json 的静态值
+# —— 于是门户上长期显示 1.0.0，而站点实际已是 1.1.6。
+# 版本号从页脚抓而不是再建一个 VERSION 文件：本站的版本只维护在页脚一处，
+# 多一个来源就多一个漂移的机会。
+VER=$(grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' "$SITE_DIR/index.html" | head -1 | tr -d 'v')
+if [ -n "$VER" ]; then
+  printf '%s\n' "$VER" > "$SITE_DIR/.deployed-version"
+  chown www-data:www-data "$SITE_DIR/.deployed-version" 2>/dev/null || true
+  chmod 644 "$SITE_DIR/.deployed-version"
+  echo "  版本哨兵：$VER"
+else
+  echo "  !! 未能从 index.html 页脚解析出版本号，哨兵未更新" >&2
+fi
+
 echo "== done =="
