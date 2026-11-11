@@ -325,9 +325,11 @@
         clearAlert()
         var a = $('#fb-pw-new').value
         if (a !== pwNew2.value) { show('err', '两次输入的新密码不一致'); return }
+        // 参数名必须与后端一致：currentPassword / newPassword。
+        // 写成 current / next 会静默变成空串，后端一律报「当前密码不正确」。
         api('/api/admin/password', {
           method: 'POST',
-          body: { current: $('#fb-pw-current').value, next: a }
+          body: { currentPassword: $('#fb-pw-current').value, newPassword: a }
         }).then(function () {
           show('ok', '密码已修改。其它设备上的旧会话已失效。')
           pwForm.reset()
