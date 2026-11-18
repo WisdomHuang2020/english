@@ -16,6 +16,13 @@
   /* ---------- 小工具 ---------- */
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  /* 本页的规范路径。地址栏可能多带一段小节（/email/checklist/check），
+     直接拿 pathname 去比对导航会一条都不亮，故一律以 canonical 为准。 */
+  function canonicalPath() {
+    var c = document.querySelector('link[rel="canonical"]');
+    if (!c) return '';
+    try { return new URL(c.href).pathname; } catch (e) { return ''; }
+  }
   function store(key, val) {
     try {
       if (val === undefined) return localStorage.getItem(key);
@@ -134,7 +141,7 @@
       return p.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '')
               .replace(/^(\/glossary)\/(abbr|words|sentences)$/, '$1');
     }
-    var here = clean(location.pathname);
+    var here = clean(canonicalPath() || location.pathname);
     $$('.navlinks a').forEach(function (a) {
       var href = a.getAttribute('href');
       if (!href) return;
@@ -175,45 +182,62 @@
     update();
   })();
 
-  /* ---------- 页内锚点：跳到位，但不把 # 写进地址栏 ----------
-     这些 # 跟词汇库页签那种「假锚点」不同：确实指向 <h2 id="check"> 这类真标题，
-     标准做法就是留 #。但用户明确希望地址栏干净（2026-11-18），且原生锚点跳转
-     每点一次都会压一条历史记录 —— 连点几个目录后按后退键会逐个回弹。
-     所以改成：拦下点击，手动滚动 + 移焦点，地址栏保持 pathname。
-     仍然保留的能力：平滑滚动、目录高亮（scrollSpy 按 href 比例，不受影响）、
-     无障碍焦点跟随；带着 # 的旧链接/收藏照旧能直达某一节，落地后把地址收敛干净。 */
-  (function cleanAnchors() {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- 页内小节：/<page>/<section> 真路径，不再用 #hash ----------
+     以前是 /email/checklist#check。用户要求「把 # 改成 /」（2026-11-18），
+     和词汇库页签同一套思路：地址栏干净，而且「分享某一节」的能力反而保住了
+     （上一版直接抹掉 # 的做法会把小节信息彻底丢掉，用户判定「不对」）。
 
-    function stripHash() {
-      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+     约定：地址栏 = 本页 canonical 路径 + '/' + 小节 id，如 /email/checklist/check。
+     服务端由 nginx 的 @section 回退到该页 .html（见 deploy/nginx-english.conf）。
+     仍然保留：平滑滚动、无障碍焦点跟随、目录高亮；旧的 #check 链接会就地
+     收敛成新写法，不会失效。 */
+  (function sectionPaths() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var SKIP = { main: 1 };            // 跳过链接的目标，是无障碍装置，不算「小节」
+    var page = (canonicalPath() || location.pathname).replace(/\/+$/, '') || '/';
+
+    function sectionPath(id) { return (page === '/' ? '' : page) + '/' + id; }
+    function setPath(p) {
+      if (history.replaceState) history.replaceState(null, '', p + location.search);
     }
-    function focusTo(el) {
+    function jump(el, smooth) {
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
       try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+      el.scrollIntoView({ behavior: (smooth && !reduce) ? 'smooth' : 'auto', block: 'start' });
     }
 
     $$('a[href^="#"]').forEach(function (a) {
       var href = a.getAttribute('href');
       if (!href || href.length < 2) return;          // 纯 "#" 或空锚点不处理
+      var id = href.slice(1);
       a.addEventListener('click', function (e) {
-        var target = document.getElementById(href.slice(1));
+        var target = document.getElementById(id);
         if (!target) return;                          // 目标不在本页就交回浏览器
         e.preventDefault();
-        focusTo(target);
-        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-        stripHash();
+        jump(target, true);
+        /* 写成 replaceState 而不是让浏览器跳 #：
+           一是地址栏不留 #，二是原生锚点每点一次都压一条历史记录，
+           连点几个目录后按后退键要逐个回弹。 */
+        if (!SKIP[id] && page !== '/') setPath(sectionPath(id));
+        else if (location.pathname !== page) setPath(page);
       });
     });
 
-    /* 带 # 打开（旧外链、收藏）：立即跳到位并把地址洗干净。
-       这里用即时滚动而不是平滑 —— 一路上从页面顶部滑到第四节很怪，
-       而且要和浏览器自己的片段定位抢滚动，越简单越稳。 */
-    if (location.hash.length > 1) {
-      var hit = document.getElementById(location.hash.slice(1));
+    /* 落地：/<page>/<section>（新写法）或 /<page>#<section>（旧链接）都跳到位，
+       并统一收敛成新写法。用即时滚动 —— 从页顶一路滑到第四节很怪。 */
+    var arrived = null;
+    if (page !== '/' && location.pathname.indexOf(page + '/') === 0) {
+      arrived = location.pathname.slice(page.length + 1).replace(/\/+$/, '');
+    } else if (location.hash.length > 1) {
+      arrived = location.hash.slice(1);
+    }
+    if (arrived && !SKIP[arrived]) {
+      var hit = document.getElementById(arrived);
       if (hit) {
-        hit.scrollIntoView({ block: 'start' });
-        stripHash();
+        jump(hit, false);
+        setPath(sectionPath(arrived));
+      } else if (location.hash) {
+        setPath(page);                                // 小节不存在就别停在假地址上
       }
     }
   })();

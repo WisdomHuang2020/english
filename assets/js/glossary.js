@@ -333,37 +333,67 @@
 
   /* ── 高频词视图 ───────────────────────────────────────────────── */
   var wordIndex = [];
+  // 单词主题分类：NOTES.wordTaxonomy 按 data.words 的 0-based 序号映射，缺省归 general。
+  var WORD_TAX = NOTES.wordTaxonomy || {};
+  var WORD_GROUPS = NOTES.wordGroups || [];
+  function wordCat(i) { return WORD_TAX[String(i)] || 'general'; }
+  function groupMeta(key) {
+    for (var i = 0; i < WORD_GROUPS.length; i++) if (WORD_GROUPS[i].key === key) return WORD_GROUPS[i];
+    return { key: key, cn: key, en: '' };
+  }
 
   function renderWords() {
     var host = $('#word-list');
     if (!host) return;
-    var frag = [];
+
+    // 主题分组顺序：用 notes.wordGroups 的定义顺序；未列入的键兜底追加在后
+    var groupOrder = WORD_GROUPS.map(function (g) { return g.key; });
+    var groups = {};
     DATA.words.forEach(function (w, i) {
-      var note = NOTES.words[String(w.en).toLowerCase()] || NOTES.words[String(w.en).toLowerCase().trim()];
-      var key = norm(w.en);
-      var isDone = !!mastered[key];
-      var body = '';
-      if (note) {
-        body = '<div class="gx-note">' +
-          (note.pos ? '<span class="gx-tag">' + esc(note.pos) + '</span>' : '') +
-          (note.tag ? '<span class="gx-tag gx-tag--soft">' + esc(note.tag) + '</span>' : '') +
-          (note.err ? '<span class="gx-tag gx-tag--err">原表待核</span>' : '') +
-          '<p>' + rich(note.note) + '</p>' +
-          (note.ex ? '<p class="gx-ex"><span>例</span>' + rich(note.ex) + '</p>' : '') +
-          '</div>';
-      }
-      frag.push(
-        '<div class="wx-item' + (note ? ' has-note' : '') + (isDone ? ' done' : '') + '" data-i="' + i + '">' +
-          '<div class="gx-row">' +
-            '<label class="wx-check" title="标记为已掌握">' +
-              '<input type="checkbox" data-master="' + esc(key) + '"' + (isDone ? ' checked' : '') + ' />' +
-              '<span></span>' +
-            '</label>' +
-            '<div class="gx-main"><span class="gx-en">' + esc(w.en) + '</span>' +
-              '<span class="gx-cn">' + esc(w.cn) + '</span></div>' +
-            (note ? '<button class="gx-toggle" type="button" aria-expanded="false">详解</button>' : '') +
-          '</div>' + body +
-        '</div>');
+      var c = wordCat(i);
+      (groups[c] = groups[c] || []).push(i);
+    });
+    Object.keys(groups).forEach(function (c) { if (groupOrder.indexOf(c) < 0) groupOrder.push(c); });
+
+    var frag = [];
+    groupOrder.forEach(function (cat) {
+      var items = groups[cat];
+      if (!items || !items.length) return;
+      var meta = groupMeta(cat);
+      frag.push('<section class="gx-group" data-cat="' + esc(cat) + '">');
+      frag.push('<div class="gx-group-head"><h3>' + esc(meta.cn) +
+        (meta.en ? ' <span class="gx-group-en">' + esc(meta.en) + '</span>' : '') +
+        '<span class="gx-count">' + items.length + ' 条</span></h3></div>');
+      frag.push('<div class="gx-grid">');
+      items.forEach(function (i) {
+        var w = DATA.words[i];
+        var note = NOTES.words[String(w.en).toLowerCase()] || NOTES.words[String(w.en).toLowerCase().trim()];
+        var key = norm(w.en);
+        var isDone = !!mastered[key];
+        var body = '';
+        if (note) {
+          body = '<div class="gx-note">' +
+            (note.pos ? '<span class="gx-tag">' + esc(note.pos) + '</span>' : '') +
+            (note.tag ? '<span class="gx-tag gx-tag--soft">' + esc(note.tag) + '</span>' : '') +
+            (note.err ? '<span class="gx-tag gx-tag--err">原表待核</span>' : '') +
+            '<p>' + rich(note.note) + '</p>' +
+            (note.ex ? '<p class="gx-ex"><span>例</span>' + rich(note.ex) + '</p>' : '') +
+            '</div>';
+        }
+        frag.push(
+          '<div class="wx-item' + (note ? ' has-note' : '') + (isDone ? ' done' : '') + '" data-i="' + i + '" data-cat="' + esc(cat) + '">' +
+            '<div class="gx-row">' +
+              '<label class="wx-check" title="标记为已掌握">' +
+                '<input type="checkbox" data-master="' + esc(key) + '"' + (isDone ? ' checked' : '') + ' />' +
+                '<span></span>' +
+              '</label>' +
+              '<div class="gx-main"><span class="gx-en">' + esc(w.en) + '</span>' +
+                '<span class="gx-cn">' + esc(w.cn) + '</span></div>' +
+              (note ? '<button class="gx-toggle" type="button" aria-expanded="false">详解</button>' : '') +
+            '</div>' + body +
+          '</div>');
+      });
+      frag.push('</div></section>');
     });
     host.innerHTML = frag.join('');
 
@@ -372,9 +402,22 @@
       return {
         el: el,
         hay: norm(en + el.querySelector('.gx-cn').textContent),
-        letter: en.trim().charAt(0).toLowerCase()
+        letter: en.trim().charAt(0).toLowerCase(),
+        cat: el.getAttribute('data-cat')
       };
     });
+
+    // 主题分类 chips
+    var catBar = $('#word-cats');
+    if (catBar) {
+      var ch = ['<button class="chip on" type="button" data-cat="all">全部 <b>' + DATA.meta.wordCount + '</b></button>'];
+      groupOrder.forEach(function (cat) {
+        var meta = groupMeta(cat);
+        ch.push('<button class="chip" type="button" data-cat="' + esc(cat) + '">' +
+          esc(meta.cn) + ' <b>' + groups[cat].length + '</b></button>');
+      });
+      catBar.innerHTML = ch.join('');
+    }
 
     // 字母索引
     var letters = {};
@@ -407,17 +450,23 @@
     });
   }
 
-  var wordState = { q: '', letter: 'all', hideDone: false };
+  var wordState = { q: '', cat: 'all', letter: 'all', hideDone: false };
   function filterWords() {
     var q = norm(wordState.q);
     var shown = 0;
     wordIndex.forEach(function (r) {
       var ok = true;
-      if (wordState.letter !== 'all' && r.letter !== wordState.letter) ok = false;
+      if (wordState.cat !== 'all' && r.cat !== wordState.cat) ok = false;
+      if (ok && wordState.letter !== 'all' && r.letter !== wordState.letter) ok = false;
       if (ok && wordState.hideDone && r.el.classList.contains('done')) ok = false;
       if (ok && q && r.hay.indexOf(q) < 0) ok = false;
       r.el.hidden = !ok;
       if (ok) shown++;
+    });
+    // 分组标题跟随筛选隐藏：组内条目全部不可见时整组收起
+    $$('#word-list .gx-group').forEach(function (g) {
+      var visible = $$('.wx-item', g).some(function (el) { return !el.hidden; });
+      g.hidden = !visible;
     });
     var out = $('#word-count');
     if (out) out.textContent = '显示 ' + shown + ' / ' + DATA.meta.wordCount;
@@ -497,6 +546,16 @@
       $$('.gx-letter', letters).forEach(function (c) { c.classList.remove('on'); });
       b.classList.add('on');
       wordState.letter = b.getAttribute('data-letter');
+      filterWords();
+    });
+
+    var catBar = $('#word-cats');
+    if (catBar) catBar.addEventListener('click', function (e) {
+      var b = e.target.closest('.chip');
+      if (!b) return;
+      $$('.chip', catBar).forEach(function (c) { c.classList.remove('on'); });
+      b.classList.add('on');
+      wordState.cat = b.getAttribute('data-cat');
       filterWords();
     });
 
