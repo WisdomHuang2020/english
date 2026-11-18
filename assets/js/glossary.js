@@ -67,6 +67,34 @@
 
   /* ── 视图切换 ─────────────────────────────────────────────────── */
   var views = ['abbr', 'words', 'quotes'];
+
+  /* 页签用**真路径**寻址：/glossary/abbr · /glossary/words · /glossary/quotes
+     ────────────────────────────────────────────────────────────────
+     以前写成 `#abbr`。为什么换掉：
+       1. 页签是**页面状态**，不是页内锚点；页面上根本没有 id="abbr" 的元素，
+          地址栏里挂个 # 容易被当成「跳到某一段」（2026-11-18 用户就这么理解）。
+       2. 路径能被正常分享、收藏、刷新还原，也能进 canonical / 站点地图。
+     兼容：旧链接 /glossary/#words 仍可用 —— 路径里读不到页签时回落到 hash，
+           读到后立刻用 replaceState 换成规范路径，地址栏不会留 #。 */
+  function viewDir() {
+    // 返回去掉页签段之后的目录，如 /glossary/abbr → /glossary
+    var p = location.pathname.replace(/\/+$/, '');
+    var last = p.split('/').pop();
+    if (views.indexOf(last) >= 0) p = p.slice(0, p.length - last.length - 1);
+    return p || '/glossary';
+  }
+  function viewOfPath() {
+    var last = location.pathname.replace(/\/+$/, '').split('/').pop();
+    return views.indexOf(last) >= 0 ? last : null;
+  }
+  function viewUrl(name) { return viewDir() + '/' + name; }
+  function currentView() {
+    var v = viewOfPath();                       // 路径优先
+    if (v) return v;
+    var h = (location.hash || '').replace('#', '');
+    return views.indexOf(h) >= 0 ? h : 'abbr';  // 再兼容旧的 #hash
+  }
+
   function showView(name) {
     if (views.indexOf(name) < 0) name = 'abbr';
     views.forEach(function (v) {
@@ -77,11 +105,25 @@
       if (panel) panel.hidden = (v !== name);
       if (tab) tab.setAttribute('aria-selected', v === name ? 'true' : 'false');
     });
-    if (history.replaceState) history.replaceState(null, '', '#' + name);
+    var want = viewUrl(name);
+    // replaceState 而非 pushState：切页签不该往历史里堆记录，否则后退键要按七八下才离站
+    if (history.replaceState && location.pathname !== want) {
+      history.replaceState(null, '', want);
+    }
+    // canonical 跟着页签走，否则三个页签会被搜索引擎当成同一页的重复内容
+    var canon = document.querySelector('link[rel="canonical"]');
+    if (canon && history.replaceState) canon.setAttribute('href', location.origin + want);
   }
   $$('[data-view]').forEach(function (btn) {
-    btn.addEventListener('click', function () { showView(btn.getAttribute('data-view')); });
+    btn.addEventListener('click', function (e) {
+      // 首屏那两个是 <a href="#abbr">：放行默认跳转的话，每点一次就多一条历史记录，
+      // 后退键会在几个页签之间来回弹。页签切换一律由 showView 接管地址。
+      e.preventDefault();
+      showView(btn.getAttribute('data-view'));
+    });
   });
+  // 缓存前进/后退还原页面时，地址变了但不会重跑 DOMContentLoaded，这里补一次
+  window.addEventListener('popstate', function () { showView(currentView()); });
 
   /* ── 缩写视图 ─────────────────────────────────────────────────── */
   var abbrIndex = [];   // {el, hay, cat, hasNote}
@@ -472,7 +514,7 @@
     filterAbbr();
     filterWords();
     updateProgress();
-    var h = (location.hash || '').replace('#', '');
-    showView(views.indexOf(h) >= 0 ? h : 'abbr');
+    // 首屏：路径 → 旧 hash → 默认 abbr。showView 会把地址收敛成 /glossary/<view>
+    showView(currentView());
   });
 })();
