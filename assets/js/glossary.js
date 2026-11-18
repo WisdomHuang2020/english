@@ -28,6 +28,13 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
   }
+  /* 详解正文里的 **加粗**。
+     顺序不能反 —— 必须先 esc 再替换：反过来的话，内容里的尖括号会变成真标签。
+     esc 不产生 `*`，所以这步替换是安全的。
+     （2026-11-18 补：此前 esc 直接输出，25 处 ** 在页面上显示成字面星号。） */
+  function rich(s) {
+    return esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  }
   function store(key, val) {
     try {
       if (val === undefined) return localStorage.getItem(key);
@@ -84,11 +91,19 @@
     var chips = $('#abbr-chips');
     if (!host) return;
 
+    /* 编辑补充词条：原表没有、后来补进去的（数据见 glossary-notes.js 的 extras）。
+       按分类并进对应分组，并在条目上标「编辑补充」—— 不能让读者误以为是原表内容。 */
+    var EXTRAS = (NOTES.extras && NOTES.extras.abbr) || [];
+    var extrasIn = function (cat) {
+      return EXTRAS.filter(function (x) { return x.cat === cat; });
+    };
+    var totalAbbr = DATA.meta.abbrCount + EXTRAS.length;
+
     // 分类 chips
-    var html = ['<button class="chip on" type="button" data-cat="all">全部 <b>' + DATA.meta.abbrCount + '</b></button>'];
+    var html = ['<button class="chip on" type="button" data-cat="all">全部 <b>' + totalAbbr + '</b></button>'];
     DATA.abbr.forEach(function (c) {
       html.push('<button class="chip" type="button" data-cat="' + esc(c.en) + '">' +
-        esc(c.cn) + ' <b>' + c.items.length + '</b></button>');
+        esc(c.cn) + ' <b>' + (c.items.length + extrasIn(c.en).length) + '</b></button>');
     });
     chips.innerHTML = html.join('');
 
@@ -96,11 +111,12 @@
     var frag = [];
     DATA.abbr.forEach(function (c) {
       var intro = NOTES.categories[c.en] || NOTES.categories[c.en.toLowerCase()] || '';
+      var groupExtras = extrasIn(c.en);
       frag.push('<section class="gx-group" data-cat="' + esc(c.en) + '">');
       frag.push('<div class="gx-group-head"><h3>' + esc(c.cn) +
         ' <span class="gx-group-en">' + esc(c.en) + '</span>' +
-        '<span class="gx-count">' + c.items.length + ' 条</span></h3>' +
-        (intro ? '<p class="gx-intro">' + esc(intro) + '</p>' : '') + '</div>');
+        '<span class="gx-count">' + (c.items.length + groupExtras.length) + ' 条</span></h3>' +
+        (intro ? '<p class="gx-intro">' + rich(intro) + '</p>' : '') + '</div>');
       frag.push('<div class="gx-grid">');
       c.items.forEach(function (it) {
         var note = findAbbrNote(c.en, it.en);
@@ -109,8 +125,8 @@
           body = '<div class="gx-note">' +
             (note.tag ? '<span class="gx-tag">' + esc(note.tag) + '</span>' : '') +
             (note.err ? '<span class="gx-tag gx-tag--err">原表待核</span>' : '') +
-            '<p>' + esc(note.note) + '</p>' +
-            (note.ex ? '<p class="gx-ex"><span>例</span>' + esc(note.ex) + '</p>' : '') +
+            '<p>' + rich(note.note) + '</p>' +
+            (note.ex ? '<p class="gx-ex"><span>例</span>' + rich(note.ex) + '</p>' : '') +
             '</div>';
         }
         frag.push(
@@ -122,9 +138,32 @@
             '</div>' + body +
           '</div>');
       });
+      // 补充词条排在分组末尾，永远带详解
+      groupExtras.forEach(function (x) {
+        frag.push(
+          '<div class="gx-item has-note gx-item--extra" data-cat="' + esc(c.en) + '">' +
+            '<div class="gx-row">' +
+              '<div class="gx-main"><span class="gx-en">' + esc(x.en) + '</span>' +
+                '<span class="gx-cn">' + esc(x.cn) + '</span></div>' +
+              '<button class="gx-toggle" type="button" aria-expanded="false">详解</button>' +
+            '</div>' +
+            '<div class="gx-note">' +
+              '<span class="gx-tag gx-tag--extra">编辑补充</span>' +
+              (x.tag ? '<span class="gx-tag">' + esc(x.tag) + '</span>' : '') +
+              '<p>' + rich(x.note) + '</p>' +
+              (x.ex ? '<p class="gx-ex"><span>例</span>' + rich(x.ex) + '</p>' : '') +
+            '</div>' +
+          '</div>');
+      });
       frag.push('</div></section>');
     });
     host.innerHTML = frag.join('');
+
+    // 首屏统计与页签徽标里的缩写数同样运行时取，别和 chips 三份数字各说各话
+    ['#stat-abbr', '#tab-abbr-count'].forEach(function (sel) {
+      var el = $(sel);
+      if (el) el.textContent = String(totalAbbr);
+    });
 
     // 记录搜索索引
     abbrIndex = $$('.gx-item', host).map(function (el) {
@@ -186,8 +225,8 @@
           (note.pos ? '<span class="gx-tag">' + esc(note.pos) + '</span>' : '') +
           (note.tag ? '<span class="gx-tag gx-tag--soft">' + esc(note.tag) + '</span>' : '') +
           (note.err ? '<span class="gx-tag gx-tag--err">原表待核</span>' : '') +
-          '<p>' + esc(note.note) + '</p>' +
-          (note.ex ? '<p class="gx-ex"><span>例</span>' + esc(note.ex) + '</p>' : '') +
+          '<p>' + rich(note.note) + '</p>' +
+          (note.ex ? '<p class="gx-ex"><span>例</span>' + rich(note.ex) + '</p>' : '') +
           '</div>';
       }
       frag.push(
@@ -283,7 +322,7 @@
         '<blockquote>' + esc(q.en) + '</blockquote>' +
         '<figcaption>' + esc(q.cn) + '</figcaption>' +
         '<div class="q-src">' + esc(q.src) + '</div>' +
-        (c && c.note ? '<p class="q-note">' + esc(c.note) + '</p>' : '') +
+        (c && c.note ? '<p class="q-note">' + rich(c.note) + '</p>' : '') +
         '</figure>';
     }).join('');
   }

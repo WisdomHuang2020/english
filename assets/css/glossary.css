@@ -122,6 +122,8 @@
 }
 .gx-tag--soft { border-color: var(--color-border); color: var(--color-text-muted); }
 .gx-tag--err { border-color: #b45309; color: #b45309; }
+/* 编辑补充：与「原表待核」区分开 —— 一个说来源，一个说有问题，别混成一个颜色 */
+.gx-tag--extra { border-color: var(--color-text-secondary); color: var(--color-text-secondary); }
 
 /* ── 单词视图 ─────────────────────────────────────────────────── */
 .wx-item {
