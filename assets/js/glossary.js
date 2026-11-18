@@ -135,7 +135,10 @@
         }
         var dest = target ? bucket(target.en, target.cn, target.intro) : self;
         if (target) place(dest, self, target.atEnd);
-        dest.items.push({ en: it.en, cn: it.cn, orig: c.en });
+        /* origCn 供「原属 XX 栏」徽标显示原表中文栏名；
+           moved 只标**被 extract 搬到别栏**的条目 —— 改名（rename）不算搬家，
+           否则「质量/其他 → 质量管理」30 条会全挂上徽标，噪音盖过信号。 */
+        dest.items.push({ en: it.en, cn: it.cn, orig: c.en, origCn: c.cn, moved: !!target });
       });
 
       // items 为空的 extract = 新开一个空栏（供 notes.extras 落位），也要建桶
@@ -201,7 +204,9 @@
           '<div class="gx-item' + (note ? ' has-note' : '') + '" data-cat="' + esc(c.en) + '">' +
             '<div class="gx-row">' +
               '<div class="gx-main"><span class="gx-en">' + esc(it.en) + '</span>' +
-                '<span class="gx-cn">' + esc(it.cn) + '</span></div>' +
+                '<span class="gx-cn">' + esc(it.cn) + '</span>' +
+                (it.moved ? '<span class="gx-origin" title="原表「' + esc(it.origCn) + '」栏的条目，按语义归到这里">原属 ' + esc(it.origCn) + '</span>' : '') +
+              '</div>' +
               (note ? '<button class="gx-toggle" type="button" aria-expanded="false">详解</button>' : '') +
             '</div>' + body +
           '</div>');
