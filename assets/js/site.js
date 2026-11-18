@@ -124,22 +124,27 @@
   })();
 
   /* ---------- 当前导航高亮 ----------
-     用文件名 + 目录比对，子目录页面（/email/*.html）命中的是「邮件英语」。 */
+     2026-11-18：站内地址一律不带 .html（/practice、/email/checklist、/glossary/），
+     原先「取末段文件名比对」的写法会全部落空，改成把链接解析成绝对路径再比。
+     好处是两个首页（/ 与 /email/）不用再靠 data-topic 特判。 */
   (function activeNav() {
-    var here = location.pathname.split('/').pop() || 'index.html';
-    var inEmail = location.pathname.indexOf('/email/') >= 0;
+    function clean(p) {
+      return p.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '');
+    }
+    var here = clean(location.pathname);
     $$('.navlinks a').forEach(function (a) {
-      var href = (a.getAttribute('href') || '').split('/').pop();
-      var isTopic = a.getAttribute('data-topic') === 'email';
-      var match;
-      if (here === 'index.html') {
-        /* 两个首页：根首页只亮「首页」，主题首页亮「邮件英语」 */
-        match = inEmail ? isTopic : (!isTopic && href === 'index.html');
-      } else {
-        /* 其余页面按文件名精确命中，避免主题首页误亮 */
-        match = !isTopic && href === here;
+      var href = a.getAttribute('href');
+      if (!href) return;
+      var path;
+      try {
+        path = clean(new URL(href, location.href).pathname);
+      } catch (e) {
+        return;
       }
-      if (match) { a.classList.add('active'); a.setAttribute('aria-current', 'page'); }
+      if (path === here) {
+        a.classList.add('active');
+        a.setAttribute('aria-current', 'page');
+      }
     });
   })();
 
@@ -462,6 +467,12 @@
     a.href = '/feedback'
     a.textContent = '留言'
     nav.appendChild(a)
+    /* 这条是运行时才插进来的，上面的高亮早已跑完 —— 停在 /feedback 页时
+       导航会全灰，看着像坏了。就地补一次判断（规则同 activeNav）。 */
+    if (location.pathname.replace(/index\.html$/, '').replace(/\/+$/, '') === '/feedback') {
+      a.classList.add('active')
+      a.setAttribute('aria-current', 'page')
+    }
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', addFeedbackLink)
