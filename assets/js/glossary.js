@@ -88,45 +88,50 @@
   var TOTAL_ABBR = 0;   // 原表条数 + 编辑补充，renderAbbr 里写入，filterAbbr 复用
 
   /* 分类重排：按 notes.taxonomy 把原表分类改名 / 拆出新栏，并可追加原表没有的分类。
-     返回 [{en, cn, orig, items, intro}]，顺序即页面顺序。
+     返回 [{en, cn, items, intro}]，顺序即页面顺序；items 每项都带 orig（原始分类名）。
 
-     ⚠️ orig 必须保留原始分类名：详解是按「原分类 + 英文前缀」匹配的，
-        分类改名后若拿新名字去查，整组详解会静默消失（不报错，只是详解按钮全没了）。 */
+     ⚠️ orig 必须记在**每一条**上，不能只记在分类上：详解是按「原分类 + 英文前缀」匹配的。
+        一个栏可能同时收多个来源的条目（如「包装运输」从商务类抽 8 条、从物料类抽 5 条），
+        若只保留分类级的单一 orig，另一来源的条目详解会静默消失（不报错，按钮就是没了）。 */
   function buildCategories() {
     var plan = NOTES.taxonomy || {};
     var rename = plan.rename || {};
     var extracts = plan.extract || [];
-    var out = [];
-    var tail = [];
+    var out = [];       // 正常位置，按插入顺序
+    var tail = [];      // atEnd 的栏，排到全部分类之后
+    var byName = {};    // 同名栏合并：多条 extract 指向同一个新栏时共用一桶
+
+    function bucket(en, cn, intro) {
+      if (!byName[en]) byName[en] = { en: en, cn: cn, items: [], intro: intro || '' };
+      return byName[en];
+    }
+    function place(b, after, atEnd) {
+      if (out.indexOf(b) >= 0 || tail.indexOf(b) >= 0) return;
+      if (atEnd) tail.push(b);
+      else out.splice(out.indexOf(after) + 1, 0, b);
+    }
 
     DATA.abbr.forEach(function (c) {
       var r = rename[c.en] || null;
-      var mine = extracts.filter(function (x) { return x.from === c.en; });
-      var moved = {};
-      mine.forEach(function (x) { moved[x.en] = []; });
+      var self = bucket(r ? r.en : c.en, r ? r.cn : c.cn, r ? r.intro : '');
+      if (out.indexOf(self) < 0 && tail.indexOf(self) < 0) out.push(self);
 
-      var keep = [];
+      var mine = extracts.filter(function (x) { return x.from === c.en; });
+
       c.items.forEach(function (it) {
         var target = null;
         for (var i = 0; i < mine.length; i++) {
-          if (mine[i].items.indexOf(it.en) >= 0) { target = mine[i].en; break; }
+          if (mine[i].items.indexOf(it.en) >= 0) { target = mine[i]; break; }
         }
-        if (target) moved[target].push(it);
-        else keep.push(it);
+        var dest = target ? bucket(target.en, target.cn, target.intro) : self;
+        if (target) place(dest, self, target.atEnd);
+        dest.items.push({ en: it.en, cn: it.cn, orig: c.en });
       });
 
-      out.push({
-        en: r ? r.en : c.en,
-        cn: r ? r.cn : c.cn,
-        orig: c.en,
-        items: keep,
-        intro: r ? (r.intro || '') : '',
-      });
-
+      // items 为空的 extract = 新开一个空栏（供 notes.extras 落位），也要建桶
       mine.forEach(function (x) {
-        var cat = { en: x.en, cn: x.cn, orig: c.en, items: moved[x.en], intro: x.intro || '' };
-        if (x.atEnd) tail.push(cat);
-        else out.push(cat);
+        if (x.items && x.items.length) return;
+        place(bucket(x.en, x.cn, x.intro), self, x.atEnd);
       });
     });
 
@@ -172,7 +177,7 @@
         (intro ? '<p class="gx-intro">' + rich(intro) + '</p>' : '') + '</div>');
       frag.push('<div class="gx-grid">');
       c.items.forEach(function (it) {
-        var note = findAbbrNote(c.orig, it.en);
+        var note = findAbbrNote(it.orig, it.en);
         var body = '';
         if (note) {
           body = '<div class="gx-note">' +

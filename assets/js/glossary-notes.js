@@ -22,7 +22,7 @@ window.PK_GLOSSARY_NOTES = {
     'profession': '立项与规格阶段。PRD 定需求、TDS/TPD 给客户看参数、RFQ 是客户来问价、CEM 是 ABL 这类大客户的规格要求表、CFD 用来在开模前把散热算明白。这一组词不对，后面所有报价和承诺都会歪。',
     'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落）、安规（耐压、接地）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
     'Certification': '合规与准入阶段。安规（UL/ETL/CQC/CB）、能效（DLC/Energy Star/CEC）、化学（RoHS/REACH）、环境适应性（Dry/Damp/Wet、IC/NON-IC）。客户问「有没有 UL」通常指整灯安规认证，不是「有没有做过 UL 标准测试」，两者差别很大。',
-    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据（PO/PR/ECR/ECN）、包装（Dieline/Artwork/毛净重/柜型）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。',
+    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP/ECR/ECN）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」。',
     'Installation': '结构与安装适配阶段。开孔尺寸、吊装/吸顶/嵌入/壁装、龙骨与接线盒、调光深度（Regress）。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
     'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。',
     'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、检测（AOI/ATE/在线/离线）。DFM 评审就是拿这一组词跟工厂对话。',
@@ -275,15 +275,20 @@ window.PK_GLOSSARY_NOTES = {
      所以「拆分类」在源表层面等于改表，与本站「改表与改站分开」的原则冲突。
      这里只改**站内呈现**：不动 xlsx、不动 glossary-data.js，重建数据后仍然生效。
 
-     两处调整：
+     三处调整：
        ① 原表把质量体系与杂项挤在同一栏「质量/其他」（30 条），页面拆成
           「质量管理」（20 条）与「其他」（10 条）；
-       ② 新增原表没有的「经济类」，先收 VAVE（成本/价值方向，后续可继续补）。
+       ② 新增原表没有的「经济类」，先收 VAVE（成本/价值方向，后续可继续补）；
+       ③ 新增「包装运输类」，从「商务类」抽 8 条（刀线图/印刷图/三种重量/堆栈数量/两种柜型）、
+          再从「物料」抽 5 条（内盒/外箱/小盒包/托盘栈板/标签）—— 同一栏收两个来源，
+          所以条目的 orig 是逐条记的，不是分类级的（见 glossary.js buildCategories 注释）。
      边界判断写在这里，便于复核：
        · DFMEA / PFMEA 归质量管理 —— FMEA 是 APQP 的输出物，属质量工具；
        · DFM / DFX 归其他 —— 是设计方法，不属质量职能；
        · ISO14001 / ISO18001 归质量管理 —— 字面是环境与职业健康，但在 ODM 里
-         由质量/体系职能统一维护，跟着 ISO9001 走比拆开更贴合实际用法。 */
+         由质量/体系职能统一维护，跟着 ISO9001 走比拆开更贴合实际用法；
+       · 运输测试（堆码/跌落/振动/抗压）仍留在测试类 —— 它们说的是「怎么验」，
+         而包装运输类说的是「包什么、怎么装柜」，两件事。 */
   taxonomy: {
     rename: {
       'Quality and others': {
@@ -293,6 +298,28 @@ window.PK_GLOSSARY_NOTES = {
       },
     },
     extract: [
+      {
+        from: 'Bussiness',
+        en: 'Packaging & Shipping',
+        cn: '包装运输',
+        intro: '订单落地到出货这一段的实物语言。刀线图与印刷图决定外箱长什么样，三种重量（装运 / 净重 / 毛重）决定运费与柜型，Stack Count 决定能堆几层，HQ/HC 与 GP 是订舱时说的两种柜型；内盒、外箱、小盒、托盘、标签则是这套包装的组成件。重量单位或柜型说错一个，运费差额往往比货值还显眼。',
+        items: [
+          'Dieline',
+          'Artwork',
+          'Shipping Weight',
+          'Net Weight( N.W）',
+          'Gross Weight（G.W)',
+          'Stack Count',
+          'HQ/HC(High Cubic Container)',
+          'GP（General Purpose Container）',
+        ],
+      },
+      {
+        from: 'Material',
+        en: 'Packaging & Shipping',
+        cn: '包装运输',
+        items: ['Inner Box', 'Label', 'Master Carton', 'Packet', 'Pallet'],
+      },
       {
         from: 'Quality and others',
         en: 'Economics',
@@ -305,7 +332,7 @@ window.PK_GLOSSARY_NOTES = {
         en: 'Others',
         cn: '其他',
         atEnd: true,
-        intro: '不属于质量职能、但项目里绕不开的通用词：保密与采购协议、样机与工装、包装运输、以及可制造性/可设计性方法。',
+        intro: '不属于质量职能、但项目里绕不开的通用词：保密与采购协议、样机与工装、运输测试标准（ISTA）、以及可制造性/可设计性方法。',
         items: [
           'NDA(Non-disclosure Agreement)',
           'GPA（General Purchase Agreement 或 General Procurement Agreement）',
