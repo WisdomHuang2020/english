@@ -50,16 +50,22 @@
 
   /* 缩写详解匹配：分类一致 + 英文前缀命中（容忍全角括号与多余空格）。
      前缀后必须是非字母数字边界 —— 否则 'PCB' 会把 PCBA、PCB Layout 一起命中，
-     同一个详解挂到三条不同条目上，读起来就是错的。 */
+     同一个详解挂到三条不同条目上，读起来就是错的。
+     边界判定用**保留空格**的原文：归一化会把空格删掉，'CRI colour' 会被连成
+     'cricolour'，字母边界会把词内续词误判成缩写扩展（踩过）。 */
   function findAbbrNote(cat, en) {
+    var eRaw = String(en || '').toLowerCase().replace(/（/g,'(').replace(/）/g,')');
     var n = norm(en);
     for (var i = 0; i < NOTES.abbr.length; i++) {
       var it = NOTES.abbr[i];
       if (norm(it.cat) !== norm(cat)) continue;
-      var key = norm(it.match);
-      if (n.indexOf(key) !== 0) continue;
-      var next = n.charAt(key.length);
-      if (next && /[a-z0-9]/.test(next)) continue;
+      var keyRaw = String(it.match || '').toLowerCase().replace(/（/g,'(').replace(/）/g,')');
+      var at = eRaw.indexOf(keyRaw);
+      if (at !== 0) continue;
+      // 边界看原文前缀之后的字符：空格放行；裸字母/数字续接才算缩写扩展
+      // （防 PCB→PCBA、LT→LTOL、DFM→DFMEA）。
+      var next = eRaw.charAt(keyRaw.length);
+      if (next && next !== ' ' && /[a-z0-9]/.test(next)) continue;
       return it;
     }
     return null;
@@ -137,9 +143,8 @@
   /* 分类重排：按 notes.taxonomy 把原表分类改名 / 拆出新栏，并可追加原表没有的分类。
      返回 [{en, cn, items, intro}]，顺序即页面顺序；items 每项都带 orig（原始分类名）。
 
-     ⚠️ orig 必须记在**每一条**上，不能只记在分类上：详解是按「原分类 + 英文前缀」匹配的。
-        一个栏可能同时收多个来源的条目（如「包装运输」从商务类抽 8 条、从物料类抽 5 条），
-        若只保留分类级的单一 orig，另一来源的条目详解会静默消失（不报错，按钮就是没了）。 */
+     ⚠️ orig 只供「原属 XX 栏」徽标显示；详解按**条目当前所属分类** + 英文前缀匹配，
+        不按 orig —— 条目被 extract 搬到新栏后，详解 cat 跟随新栏，否则按钮会静默消失。 */
   function buildCategories() {
     var plan = NOTES.taxonomy || {};
     var rename = plan.rename || {};
@@ -170,7 +175,7 @@
       if (out.indexOf(b) < 0 && tail.indexOf(b) < 0) out.push(b);
     });
 
-    /* 第二遍：条目按 extract 规则分流。条目自带 orig，详解才能按原分类名匹配。 */
+    /* 第二遍：条目按 extract 规则分流。orig 仅记录原表栏名供徽标使用。 */
     DATA.abbr.forEach(function (c) {
       var self = selfOf[c.en];
       var mine = extracts.filter(function (x) { return x.from === c.en; });
@@ -237,7 +242,7 @@
         (intro ? '<p class="gx-intro">' + rich(intro) + '</p>' : '') + '</div>');
       frag.push('<div class="gx-grid">');
       c.items.forEach(function (it) {
-        var note = findAbbrNote(it.orig, it.en);
+        var note = findAbbrNote(c.en, it.en);
         var body = '';
         if (note) {
           body = '<div class="gx-note">' +
@@ -284,7 +289,7 @@
       var el = $(sel);
       if (el) el.textContent = String(totalAbbr);
     });
-    // 分类数同理：重排后是 12 栏，写死「10 类」就会跟 chips 对不上
+    // 分类数同理：栏数由 CATS 运行时算出，写死数字就会跟 chips 对不上
     var catStat = $('#stat-cats');
     if (catStat) catStat.textContent = '行业缩写 · ' + CATS.length + ' 类';
 

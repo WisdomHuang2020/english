@@ -25,7 +25,7 @@ window.PK_GLOSSARY_NOTES = {
     'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP/ECR/ECN）、协议（NDA/GPA/Purchase Agreement）与询价（RFQ）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」。',
     'Installation': '安装方式与安装环境。开孔尺寸、吊装/吸顶/嵌入/壁装、石膏板与龙骨条件、出光面内凹（Regress）与深眩，以及安装说明书。支架、吊绳、接线盒、螺丝这些**安装用的零件**已归到「零部件名称」。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
     'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。钢材牌号（SWP/SWC/SECC/SGCC/SPCC）与元器件（含 Photocell）也收在这一栏。',
-    'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、制程检测（AOI/ATE/在线/离线），以及小批量试产（Pilot Run）。DFM 评审就是拿这一组词跟工厂对话。',
+    'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、制程检测（AOI/ATE/在线/离线），以及小批量试产（Pilot Run）。降本价值分析（VAVE）也在这一段：在不牺牲质量与性能的前提下做功能/成本拆解。DFM 评审就是拿这一组词跟工厂对话。',
     'The name of the component': '图纸与规格书阶段。零部件叫什么，直接影响图纸标注、BOM 描述和客诉定位。同一颗件在客户图纸上可能叫 Canopy，在我们 BOM 里叫顶盖——对不上就要靠这一组词做翻译。安装辅件（支架、吊绳、接线盒、龙骨、螺丝螺母弹簧、安装工具）也收在这一栏。',
   },
 
@@ -35,20 +35,20 @@ window.PK_GLOSSARY_NOTES = {
   abbr: [
     /* 专业类 */
     { cat: 'profession', match: 'CFD', tag: '散热', note: '用数值方法算灯具内部/外部的空气流动与温度场，开模前判断散热器齿形够不够。客户要「thermal simulation report」时给的就是这个。', ex: 'We ran a CFD simulation at 25 °C ambient; the Tc is 78 °C, within the 85 °C limit.' },
-    { cat: 'profession', match: 'EOL', tag: '寿命', err: true, note: 'End of Life，寿命终止测试——不是「产品报废」。判据通常是光通维持到 L70（剩 70%）或 L90。注意原表把中文写成「end of life，寿命测试」并且英文列里混了中文，属于原表书写不规范。', ex: 'EOL testing is based on LM-80 data extrapolated to 36,000 h at L70.' },
+    { cat: 'Testing', match: 'EOL', tag: '寿命', err: true, note: 'End of Life，寿命终止测试——不是「产品报废」。判据通常是光通维持到 L70（剩 70%）或 L90。注意原表把中文写成「end of life，寿命测试」并且英文列里混了中文，属于原表书写不规范。', ex: 'EOL testing is based on LM-80 data extrapolated to 36,000 h at L70.' },
     { cat: 'profession', match: 'CEM', tag: '客户口径', note: 'Customer Experience Matrix，ABL 这类大客户用的**规格要求表**：把产品要满足的指标逐条列清楚，报价、打样、送样都按这份表对齐，回复时最好逐条给出对应值。这是**客户专有说法**，不是行业通用缩写，只在对这家客户的语境里用。' },
-    { cat: 'profession', match: 'RFQ', tag: '商务', note: 'Request for Quotation，客户发来的询价（含规格、数量、目标价、交期）。我们回的是 quotation，不是 RFQ。写邮件时别把两个词用反。', ex: 'Thanks for your RFQ of 12 Nov; quotation attached, valid for 30 days.' },
+    { cat: 'Bussiness', match: 'RFQ', tag: '商务', note: 'Request for Quotation，客户发来的询价（含规格、数量、目标价、交期）。我们回的是 quotation，不是 RFQ。写邮件时别把两个词用反。', ex: 'Thanks for your RFQ of 12 Nov; quotation attached, valid for 30 days.' },
     { cat: 'profession', match: 'PRD', tag: '需求', note: 'Product Requirement Document，产品需求文档。客户给 PRD，我们回 TPD/TDS；PRD 里的「shall」是强制项，「should」是建议项，评审时要逐条回应。' },
     { cat: 'profession', match: 'TDS', tag: '规格', note: 'Technical Datasheet。Ledvance 系客户叫 TDS，Signify 系叫 TPD（Technical Product Data），内容都是电气/光学/机械参数表。对客户时用他们习惯的叫法，别硬统一。' },
 
     /* 测试类 */
     { cat: 'Testing', match: 'ESD', tag: 'EMC', err: true, note: '静电放电抗扰度，IEC 61000-4-2，分接触放电与空气放电。灯具类常见要求 ±4 kV contact / ±8 kV air。原表英文写成 "Electronic Static Discharge"，规范写法是 **Electrostatic Discharge**（已登记勘误）。' },
     { cat: 'Testing', match: 'EFT', tag: 'EMC', note: '电快速瞬变脉冲群抗扰度，IEC 61000-4-4。和 Surge（4-5，能量大、次数少）不是一回事：EFT 是成串的快速小脉冲，主要考电源的滤波与 PCB 布线。' },
-    { cat: 'Testing', match: 'FAI', tag: '试产', note: 'First Article Inspection，首件检验。试产第一件全尺寸全参数测量，出 FAI 报告客户签样。和首件确认（first piece approval）在流程上通常合并做。' },
+    { cat: 'Quality', match: 'FAI', tag: '试产', note: 'First Article Inspection，首件检验。试产第一件全尺寸全参数测量，出 FAI 报告客户签样。和首件确认（first piece approval）在流程上通常合并做。' },
     { cat: 'Testing', match: 'Efficacy', tag: '光学', note: '光效，lm/W。注意和 efficiency（效率，%）区分：灯具说 efficacy 用 lm/W，电源说 efficiency 用百分比。写规格书混用会被客户挑。', ex: 'Efficacy: 130 lm/W at 4000 K, CRI 80.' },
     { cat: 'Testing', match: 'Correlated Colour Temperature', tag: '光学', note: '相关色温 CCT，单位 K。CCT 只描述「白光的冷暖」，不描述显色好坏——那是 CRI/R9 的事。客户说「色温偏了」时，先问是 CCT 偏还是 SDCM 偏。' },
     { cat: 'Testing', match: 'CRI', tag: '光学', note: '显色指数 Ra，常见 80/90。注意 Ra 是 R1–R8 的平均值，红色还原看 R9，很多客户会单独要求 R9 > 50。' },
-    { cat: 'Testing', match: 'Lumen Maintenance', tag: '寿命', note: '光通维持率，例如 L70 = 光通降到初始值 70%。和 Lifetime（实际寿命 h）、Warranty Life（质保年限）是三件事，报错一个就可能变成质保纠纷。' },
+    { cat: 'Testing', match: 'Lumen Maintenance Rate', tag: '寿命', note: '光通维持率，例如 L70 = 光通降到初始值 70%。和 Lifetime（实际寿命 h）、Warranty Life（质保年限）是三件事，报错一个就可能变成质保纠纷。' },
     { cat: 'Testing', match: 'Ta', tag: '温度', note: 'Ambient Temperature，环境温度。规格书里必须写清测试环境（如 Ta=25 °C / Ta=40 °C），否则光衰与功率数据没有可比性。' },
     { cat: 'Testing', match: 'Tc', tag: '温度', note: 'Case Temperature，外壳（Tc 点）温度，是 LED 灯具最常用的寿命基准点。客户问「Tc 多少」问的是实测点温，不是外壳平均温度。' },
     { cat: 'Testing', match: 'Ts', tag: '温度', note: 'Soldering temperature，LED 焊盘（负极）温度。做热设计验证时 Ts 与 Tj 常被混用：Ts 可测，Tj 只能算或推。' },
@@ -57,8 +57,8 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Testing', match: 'THD', tag: '电气', note: '总谐波失真，一般要求 <20%（照明类常按 IEC 61000-3-2 Class C 判定）。注意 THD 是电流谐波，不是电压谐波。' },
     { cat: 'Testing', match: 'Surge', tag: 'EMC', note: '浪涌抗扰度，IEC 61000-4-5，常见 L-N 1 kV / L-N 2 kV、L-N-PE 2 kV/4 kV。户外与商用照明客户会明确写「2 kV line-to-line, 4 kV line-to-earth」。' },
     { cat: 'Testing', match: 'Ring wave', tag: 'EMC', note: '振铃波，IEC 61000-4-12，模拟配电系统投切产生的衰减振荡。和 Surge 一起考，很多北美客户在规格书里单独列一项。' },
-    { cat: 'Testing', match: 'Hi-pot', tag: '安规', note: 'High Potential test，耐压（高压）测试，例如 1500 Vac/1 min 或 3750 Vac/1 s（加强绝缘）。产线做的是 routine test，时间短、判据是漏电流。' },
-    { cat: 'Testing', match: 'Burn-in', tag: '可靠性', note: '老化测试，成品通电跑一段时间筛早期失效（常见 2–8 h，高要求 24–168 h）。和 HTOL（高温运行寿命）目的不同：老化是筛选，HTOL 是验证寿命。' },
+    { cat: 'Testing', match: 'Hi-pot test', tag: '安规', note: 'High Potential test，耐压（高压）测试，例如 1500 Vac/1 min 或 3750 Vac/1 s（加强绝缘）。产线做的是 routine test，时间短、判据是漏电流。' },
+    { cat: 'Testing', match: 'Burn', tag: '可靠性', note: '老化测试，成品通电跑一段时间筛早期失效（常见 2–8 h，高要求 24–168 h）。和 HTOL（高温运行寿命）目的不同：老化是筛选，HTOL 是验证寿命。' },
     { cat: 'Testing', match: 'UGR', tag: '光学', note: '统一眩光值，办公/教育照明常用，一般要求 UGR < 19（严的 < 16）。由配光曲线算出，改透镜或加格栅都会变。' },
     { cat: 'Testing', match: 'IP Rating', tag: '防护', note: '防护等级，第一位防尘（0–6），第二位防水（0–8）。户外灯具常见 IP65/IP66/IP67。注意 IP 与 IK（防撞，0–10）是两套标准。' },
     { cat: 'Testing', match: 'Goniophotometer', tag: '光学', note: '分布光度计，测配光曲线（IES/LDT 文件的来源设备）。客户要 IES file，本质就是要这个设备测出的数据。' },
@@ -67,9 +67,9 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Testing', match: 'Round Robin', tag: '客户口径', note: 'Signify 专有说法：多家实验室/多家供应商对同一批样品做同项测试，比对结果一致性。不是通用的「循环赛」意思。' },
     { cat: 'Testing', match: 'HTOL', tag: '可靠性', note: 'High Temperature Operating Life，高温加电运行寿命测试。WHTOL 是湿热版（加 85 °C/85% RH），LTOL 是低温运行。三者常成组出现。' },
     { cat: 'Testing', match: 'Thermal shock', tag: '可靠性', note: '冷热冲击（温度循环），考焊点与封装。和 thermal cycling 的斜率不同：shock 是快速转换，cycling 是缓慢线性。' },
-    { cat: 'Testing', match: 'Salt Spray', tag: '可靠性', note: '盐雾测试，常见 48/96/500 h，判据是外观与功能。户外件、镀锌件、压铸件必做。' },
-    { cat: 'Testing', match: 'Photocell', tag: '器件', note: '光敏传感器（光控头），用于路灯/庭院灯自动开关。客户说「with photocell」是指整灯集成光控，不是外置传感器。' },
-    { cat: 'Testing', match: 'CISPR', tag: 'EMC', note: '国际无线电干扰特别委员会，CISPR 15 是照明设备的无线电骚扰限值标准，CE 认证的 EMC 部分常引用它。' },
+    { cat: 'Testing', match: 'Salt', tag: '可靠性', note: '盐雾测试，常见 48/96/500 h，判据是外观与功能。户外件、镀锌件、压铸件必做。' },
+    { cat: 'Material', match: 'Photocell', tag: '器件', note: '光敏传感器（光控头），用于路灯/庭院灯自动开关。客户说「with photocell」是指整灯集成光控，不是外置传感器。' },
+    { cat: 'Certification', match: 'CISPR', tag: 'EMC', note: '国际无线电干扰特别委员会，CISPR 15 是照明设备的无线电骚扰限值标准，CE 认证的 EMC 部分常引用它。' },
     { cat: 'Testing', match: 'Beam Angle', tag: '光学', note: '出光角度（通常按 50% 峰值光强定义）。同一个透镜，说「60°」还是「FWHM 60°」在客户那里可能被算成不同产品。' },
     { cat: 'Testing', match: 'Wall Wash', tag: '配光', note: '洗墙配光，光斑均匀铺在墙面上。商业空间常用，判据是墙面照度均匀度与「 scallop」形状。' },
 
@@ -84,16 +84,16 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Certification', match: 'ETL', tag: '安规', note: 'Intertek 的安规标志，与 UL 标准同源（UL 1598 等），NRTL 认可，美国市场可替代 UL 标。客户指定 UL 时不能用 ETL 顶。' },
     { cat: 'Certification', match: 'FCC', tag: 'EMC', note: '美国联邦通信委员会，照明产品主要看 Part 15（无意辐射体）。和 UL 是两件事：FCC 管电磁，UL 管安全。' },
     { cat: 'Certification', match: 'Fire rated', tag: '结构', note: '防火等级（天花/墙体耐火完整性）。fire-rated housing 要求火灾时灯具不破坏天花隔火层，测试按 ASTM E283/E814 或 UL 263 体系。' },
-    { cat: 'Certification', match: 'IC', tag: '结构', note: 'Insulation Contact rated：可接触保温棉。NON-IC 则不能，必须留出散热空间或加过温保护。北美嵌入式筒灯最常被问的一条。', ex: 'Is this fixture IC-rated? It will be installed under blown-in insulation.' },
-    { cat: 'Certification', match: 'IES file', tag: '光学', note: 'IES（IESNA LM-63）格式的光度文件，内含配光曲线与光通量。客户做照明设计（DIALux/AGi32）时要的就是这个文件。' },
+    { cat: 'Certification', match: 'IC / NON-IC', tag: '结构', note: 'Insulation Contact rated：可接触保温棉。NON-IC 则不能，必须留出散热空间或加过温保护。北美嵌入式筒灯最常被问的一条。', ex: 'Is this fixture IC-rated? It will be installed under blown-in insulation.' },
+    { cat: 'Testing', match: 'IES file', tag: '光学', note: 'IES（IESNA LM-63）格式的光度文件，内含配光曲线与光通量。客户做照明设计（DIALux/AGi32）时要的就是这个文件。' },
     { cat: 'Certification', match: 'LM80', tag: '寿命', note: 'LM-80 是 LED 封装/模组的光通维持率测试方法（不是整灯，也不是 UL 燃烧等级）。常见报 6000 h 数据 + 推算到 36000 h。' },
     { cat: 'Certification', match: 'LM79', tag: '光学', err: true, note: 'LM-79 测整灯电光参数（光通量、光效、色度、配光），LM-80 测 LED 封装光衰，LM-82 测光源/光引擎随温度的电光特性。**原表这一行中文写成「UL塑料燃烧等级」，与英文完全不符，属错位**（已登记勘误）。' },
     { cat: 'Certification', match: 'NSF', tag: '卫生', note: '美国国家卫生基金会认证，食品加工/餐饮环境照明与设备要求。客户做食品厂项目时会提「NSF listed」。' },
     { cat: 'Certification', match: 'RoHS', tag: '化学', note: '欧盟有害物质限制（铅、汞、镉、六价铬、多溴联苯等 10 项）。和 REACH（化学品注册评估授权）是两套法规，客户常一起要。' },
-    { cat: 'Certification', match: 'SDCM', tag: '光学', note: '色容差（色坐标偏差步长），5-step 是常规、3-step 是高端。SDCM 与 CCT 是两个维度：色温对了，色容差仍可能超。' },
+    { cat: 'Testing', match: 'SDCM', tag: '光学', note: '色容差（色坐标偏差步长），5-step 是常规、3-step 是高端。SDCM 与 CCT 是两个维度：色温对了，色容差仍可能超。' },
     { cat: 'Certification', match: 'UL', tag: '安规', note: 'UL 标志（Underwriters Laboratories）。灯具主标准 UL 1598，驱动 UL 8750，塑料燃烧等级 UL 94，电线 VW-1。客户说「UL 报告」时要问清是整灯还是元器件。' },
     { cat: 'Certification', match: 'VW-1', tag: '安规', note: 'UL 电线垂直燃烧等级（VW-1 为最严）：FT1/FT2/FT4/FT6 是 CSA 的对应等级。原表把两者合并成一行，实际是两套体系的对照。' },
-    { cat: 'Certification', match: 'Air-tight', tag: '结构', note: '气密型（北美筒灯常与 IC-rated 一起要求），防止天花内空气经灯具缝隙流动带走保温层热量。测试按 ASTM E283。' },
+    { cat: 'Testing', match: 'Air-tight', tag: '结构', note: '气密型（北美筒灯常与 IC-rated 一起要求），防止天花内空气经灯具缝隙流动带走保温层热量。测试按 ASTM E283。' },
     { cat: 'Certification', match: 'Energy star', tag: '能效', note: '美国能源之星，自愿性能效标签。灯具类现多并入 DLC 体系，但家电/灯泡类仍常见。' },
 
     /* 商务类 */
@@ -106,19 +106,19 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Bussiness', match: 'ECR', tag: '变更', note: 'Engineering Change Request，变更申请（还没批）。ECN 是变更通知（已批准、要执行）。发 ECN 前必须评估库存、在制、已出货三块影响。' },
     { cat: 'Bussiness', match: 'MRP', tag: '计划', note: 'Material Requirement Planning，物料需求计划。长交期物料（驱动 IC、电解电容、铝型材）的 LT 决定整单交期，MRP 跑出来才发现就晚了。' },
     { cat: 'Bussiness', match: 'MOQ', tag: '数量', note: '最小起订量。和 MPQ（最小包装量）配合看：MOQ 1000、MPQ 200 意味着只能按 1000/1200/1400 递增下单，不能下 1100。' },
-    { cat: 'Bussiness', match: 'Dieline', tag: '包装', note: '刀线图（包装盒展开的模切轮廓）。Artwork 是印刷稿（图案/文字/条码）。客户改包装，通常两个文件都要重新确认签字。' },
-    { cat: 'Bussiness', match: 'HQ', tag: '物流', note: 'HQ/HC = High Cube 高柜（40 尺高柜，约 76 m³）；GP = General Purpose 普柜（40 尺普柜约 67 m³，20 尺约 33 m³）。报价含运费时要写柜型。' },
-    { cat: 'Bussiness', match: 'Stack Count', tag: '包装', note: '堆码数量（每托盘/每箱可堆几层）。与 ISTA 运输测试、Stacking test 直接相关，客户仓库高度决定这个数。' },
+    { cat: 'Packaging & Shipping', match: 'Dieline', tag: '包装', note: '刀线图（包装盒展开的模切轮廓）。Artwork 是印刷稿（图案/文字/条码）。客户改包装，通常两个文件都要重新确认签字。' },
+    { cat: 'Packaging & Shipping', match: 'HQ', tag: '物流', note: 'HQ/HC = High Cube 高柜（40 尺高柜，约 76 m³）；GP = General Purpose 普柜（40 尺普柜约 67 m³，20 尺约 33 m³）。报价含运费时要写柜型。' },
+    { cat: 'Packaging & Shipping', match: 'Stack Count', tag: '包装', note: '堆码数量（每托盘/每箱可堆几层）。与 ISTA 运输测试、Stacking test 直接相关，客户仓库高度决定这个数。' },
 
     /* 安装类 */
     { cat: 'Installation', match: 'Cut-off', tag: '开孔', note: '开孔尺寸（口语说法），正式写 **cutout diameter / cut-out size**。图纸上必须给公差，否则石膏板开孔一偏就装不进。' },
-    { cat: 'Installation', match: 'Recessed', tag: '安装', note: '嵌入式（嵌进天花/墙体）。相关件：Recessed Housing（嵌入壳体/防火背板）、Mount Plate（安装板）、Spring（弹簧卡扣）。' },
+    { cat: 'The name of the component', match: 'Recessed Housing', tag: '安装', note: '嵌入式（嵌进天花/墙体）。相关件：Recessed Housing（嵌入壳体/防火背板）、Mount Plate（安装板）、Spring（弹簧卡扣）。' },
     { cat: 'Installation', match: 'Regress', tag: '光学结构', note: '发光面相对面环内凹的深度。Deep Regress = 深眩（光源藏得深，遮光角大，眩光低）。客户说「deep regress」通常是在要 UGR 低。' },
     { cat: 'Installation', match: 'Surface Mount', tag: '安装', note: '吸顶/明装。与 Suspended（吊装）、Wall Mount（壁装）、Recessed（嵌入）并列为四大安装方式，报价前必须确认。' },
-    { cat: 'Installation', match: 'T-Bar', tag: '龙骨', note: 'T 型龙骨（吊顶龙骨），T-Bar Bracket 是把灯具挂到龙骨上的卡件。北美办公室吊顶几乎都是这套。' },
-    { cat: 'Installation', match: 'Canopy', tag: '件名', note: '顶罩/华盖：吊装或吸顶时盖住接线处的那个罩子。客户图纸上可能叫 canopy，我们 BOM 里叫顶盖。' },
-    { cat: 'Installation', match: 'Junction BOX', tag: '电气', note: '接线盒。北美要求接线必须在接线盒内完成（NEC 规定），所以「能否直接接线」是产品能不能卖进美国的关键结构问题。' },
-    { cat: 'Installation', match: 'Joist Bar', tag: '结构', note: '托杆/横梁，跨在吊顶龙骨之间承力。与 crossbar 近似，具体看客户图纸标注。' },
+    { cat: 'The name of the component', match: 'T-Bar Bracket', tag: '龙骨', note: 'T 型龙骨（吊顶龙骨），T-Bar Bracket 是把灯具挂到龙骨上的卡件。北美办公室吊顶几乎都是这套。' },
+    { cat: 'The name of the component', match: 'Canopy', tag: '件名', note: '顶罩/华盖：吊装或吸顶时盖住接线处的那个罩子。客户图纸上可能叫 canopy，我们 BOM 里叫顶盖。' },
+    { cat: 'The name of the component', match: 'Junction BOX', tag: '电气', note: '接线盒。北美要求接线必须在接线盒内完成（NEC 规定），所以「能否直接接线」是产品能不能卖进美国的关键结构问题。' },
+    { cat: 'The name of the component', match: 'Joist Bar', tag: '结构', note: '托杆/横梁，跨在吊顶龙骨之间承力。与 crossbar 近似，具体看客户图纸标注。' },
 
     /* 物料类 */
     { cat: 'The name of the component', match: 'Cable', tag: '线材', note: '多股电缆（带护套、多芯）。这一组最容易混：**Cable** 电缆（多芯带护套）／**Cord** 带插头的软线／**Lead** 引出线／**Conductor** 裸导体／**Wire** 单根电线／**Harness** 线束（多根捆扎成组件）。' },
@@ -126,12 +126,12 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Material', match: 'Driver', tag: '电气', note: '驱动电源。独立式（independent）与内置式（built-in）在安规上要求不同；恒流/恒压、可调光与否都要在规格里写清。' },
     { cat: 'Material', match: 'Diffuser', tag: '光学', note: '扩散板（乳白 PC/PMMA），作用是把点光源打散成面光。透过率（transmittance）与雾度（haze）是两个指标。' },
     { cat: 'Material', match: 'Trim', tag: '结构', note: '面环（筒灯露在天花外面的那一圈）。Trim 的颜色/材质常常是客户选型的决定因素，报价要单独列。' },
-    { cat: 'Material', match: 'Pilot Run', tag: '试产', note: '小批量试产（一般在量产前，几十到几百台），用来验证工艺与治具。与 Prototype（样机，手工打样）不是一回事。' },
-    { cat: 'Material', match: 'Master Carton', tag: '包装', note: '外箱。Inner Box 内盒，Packet 小包。外箱要标毛重/净重/堆码数/箱唛，客户仓库收货按这个点数。' },
+    { cat: 'Production process', match: 'Pilot Run', tag: '试产', note: '小批量试产（一般在量产前，几十到几百台），用来验证工艺与治具。与 Prototype（样机，手工打样）不是一回事。' },
+    { cat: 'Packaging & Shipping', match: 'Master Carton', tag: '包装', note: '外箱。Inner Box 内盒，Packet 小包。外箱要标毛重/净重/堆码数/箱唛，客户仓库收货按这个点数。' },
     { cat: 'Material', match: 'Wago', tag: '器件', note: 'Wago（万可）是接线端子的品牌名，业内常直接当类名用（类似「乐泰」指胶）。规格书里最好写 push-in wire connector，注明可接线径。' },
     { cat: 'Material', match: 'E26', tag: '灯头', note: 'E26 是北美灯头（26 mm 螺纹），E27 是欧洲/中国（27 mm）。两者外观近似但安规与市场不同，标错直接退运。' },
     { cat: 'Material', match: 'Electrolytic Capacitor', tag: '器件', note: '电解电容，LED 驱动里决定寿命的短板件。选型看额定纹波电流与 105 °C 寿命（如 8000 h），高温环境要降额。' },
-    { cat: 'Material', match: 'Pallet', tag: '物流', note: '托盘/栈板。欧美常见 1200×800（欧标）与 48×40 in（美标），报价含托盘时要写材质（木/塑）与是否需熏蒸（ISPM 15）。' },
+    { cat: 'Packaging & Shipping', match: 'Pallet', tag: '物流', note: '托盘/栈板。欧美常见 1200×800（欧标）与 48×40 in（美标），报价含托盘时要写材质（木/塑）与是否需熏蒸（ISPM 15）。' },
 
     /* 工艺类 */
     { cat: 'Production process', match: 'Aluminium Die Casting', tag: '成型', note: '铝压铸（散热器主流工艺）。模具费高、单件便宜；开模前要评估拔模斜度、壁厚与气孔。与 Extrusion（挤型，等截面）、Spinning（旋压，回转体）是三种不同工艺，报价差异大。' },
@@ -139,23 +139,23 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Production process', match: 'COB', tag: '光源', note: 'Chip on Board，芯片直接绑定在线路板上（面光源）。DOB 是 Driver on Board，把驱动元件放到光源板上（省空间、散热要求更高）。两者常被混说，实际是不同层面的集成。' },
     { cat: 'Production process', match: 'SMT', tag: '装配', note: '表面贴装（贴片）。SMD 是贴片器件，DIP 是双列直插（插件）。SMT 线过回流焊（reflow），插件过波峰焊（wave soldering）——两条工艺路线。' },
     { cat: 'Production process', match: 'AOI', tag: '检测', note: '自动光学检测，贴片后看虚焊/偏移/缺件。ATE 是自动测试设备（电气功能测试）。on line / off line test 指在线与离线检测。' },
-    { cat: 'Production process', match: 'Gerber', tag: '文件', note: 'Gerber 是 PCB 光绘文件（给板厂投产用）。Schematic 是电气原理图，PCB Layout 是布线图。发板厂要 Gerber + 钻孔文件，别只发 Layout 截图。' },
-    { cat: 'Production process', match: 'SECC', tag: '材料', note: 'SECC 电镀锌钢板／SGCC 热浸镀锌钢板／SPCC 冷轧钢板。三者在盐雾与成本上不同，结构件报价必须写明是哪一种。' },
+    { cat: 'profession', match: 'Gerber File', tag: '文件', note: 'Gerber 是 PCB 光绘文件（给板厂投产用）。Schematic 是电气原理图，PCB Layout 是布线图。发板厂要 Gerber + 钻孔文件，别只发 Layout 截图。' },
+    { cat: 'Material', match: 'SECC', tag: '材料', note: 'SECC 电镀锌钢板／SGCC 热浸镀锌钢板／SPCC 冷轧钢板。三者在盐雾与成本上不同，结构件报价必须写明是哪一种。' },
     { cat: 'Production process', match: 'Zinc Plating', tag: '表面', note: '镀锌（电镀锌）。与 hot-dip galvanizing（热浸锌）不是一回事，盐雾小时数差很多，户外件要问清。' },
     { cat: 'Production process', match: 'Finish', tag: '表面', note: '表面处理的总称。客户选型会写 BN（拉丝镍）/ SN（沙丁镍）/ ORB（古铜）/ MB（黑），这些是颜色工艺代号，不是材质。' },
 
     /* 质量类 */
-    { cat: 'Quality and others', match: 'IQC', tag: '关卡', note: '进料检验（第一关）。顺序是 **IQC → IPQC（制程）→ OQC（出厂）→ PQA（产品质量保证/客户验货）→ FQC（最终检验）→ OBA（开箱审计）**。说错顺序，客户质量工程师会当场纠正你。' },
-    { cat: 'Quality and others', match: 'PQA', tag: '关卡', note: 'Product Quality Assurance。原表注明「OQC 后，SSE 内部一般指客户验货」——这是公司内部口径，通用语境里 PQA 更偏「产品质量保证体系」。对外沟通时建议直接说 customer inspection。' },
-    { cat: 'Quality and others', match: 'OBA', tag: '关卡', note: 'Out of Box Audit：对已包装成品开箱抽检，查包装、配件、标签、说明书。很多客户把它当作最后一关的门槛。' },
-    { cat: 'Quality and others', match: 'SQE', tag: '岗位', note: '供应商质量工程师（客户派来管我们的）；DQE 设计质量；CQE 客户质量（处理客诉）。三个角色对应三个阶段：来料/设计/售后。' },
-    { cat: 'Quality and others', match: 'ISO9001', tag: '体系', note: '质量管理体系。ISO 14001 环境、IATF 16949 汽车。原表另有一条「ISO18001」，实际应为 **OHSAS 18001**（职业健康安全，现已被 ISO 45001 取代），已登记勘误。' },
-    { cat: 'Quality and others', match: 'APQP', tag: '工具', note: '产品质量先期策划（汽车/大客户项目常用五阶段）。与 PPAP（生产件批准）、QCP（控制计划）、DFMEA/PFMEA 是一套组合拳；欧洲客户更常用 VDA 体系。' },
-    { cat: 'Quality and others', match: 'DPPM', tag: '指标', note: '百万分之不良数。注意分母口径：是出货数还是检验数，是件数还是批数——客户投诉时先对齐口径。' },
-    { cat: 'Quality and others', match: 'Golden Sample', tag: '样品', note: '封样（签样）样品，双方各留一份，作为后续验收基准。封样必须带日期、版本、签章，否则争议时说不清。' },
-    { cat: 'Quality and others', match: 'ISTA', tag: '包装', note: '国际安全运输协会，包装运输测试标准（ISTA 1A/2A/3A 等）。客户要「过 ISTA 3A」指的是整箱跌落+振动+堆码组合测试。' },
-    { cat: 'Quality and others', match: 'DFM', tag: '设计', note: '可制造性设计评审：开模前把结构拿去问工厂「这么做良率多少、成本多少」。DFX 是泛称（DFA 装配、DFC 成本、DFR 可靠性）。' },
-    { cat: 'Quality and others', match: 'NDA', tag: '法务', note: '保密协议。GPA 是通用采购协议。两者常在项目启动前一起签，注意 NDA 的有效期与例外条款。' },
+    { cat: 'Quality', match: 'IQC', tag: '关卡', note: '进料检验（第一关）。顺序是 **IQC → IPQC（制程）→ OQC（出厂）→ PQA（产品质量保证/客户验货）→ FQC（最终检验）→ OBA（开箱审计）**。说错顺序，客户质量工程师会当场纠正你。' },
+    { cat: 'Quality', match: 'PQA', tag: '关卡', note: 'Product Quality Assurance。原表注明「OQC 后，SSE 内部一般指客户验货」——这是公司内部口径，通用语境里 PQA 更偏「产品质量保证体系」。对外沟通时建议直接说 customer inspection。' },
+    { cat: 'Quality', match: 'OBA', tag: '关卡', note: 'Out of Box Audit：对已包装成品开箱抽检，查包装、配件、标签、说明书。很多客户把它当作最后一关的门槛。' },
+    { cat: 'Quality', match: 'SQE', tag: '岗位', note: '供应商质量工程师（客户派来管我们的）；DQE 设计质量；CQE 客户质量（处理客诉）。三个角色对应三个阶段：来料/设计/售后。' },
+    { cat: 'Quality', match: 'ISO9001', tag: '体系', note: '质量管理体系。ISO 14001 环境、IATF 16949 汽车。原表另有一条「ISO18001」，实际应为 **OHSAS 18001**（职业健康安全，现已被 ISO 45001 取代），已登记勘误。' },
+    { cat: 'Quality', match: 'APQP', tag: '工具', note: '产品质量先期策划（汽车/大客户项目常用五阶段）。与 PPAP（生产件批准）、QCP（控制计划）、DFMEA/PFMEA 是一套组合拳；欧洲客户更常用 VDA 体系。' },
+    { cat: 'Quality', match: 'DPPM', tag: '指标', note: '百万分之不良数。注意分母口径：是出货数还是检验数，是件数还是批数——客户投诉时先对齐口径。' },
+    { cat: 'Quality', match: 'Golden Sample', tag: '样品', note: '封样（签样）样品，双方各留一份，作为后续验收基准。封样必须带日期、版本、签章，否则争议时说不清。' },
+    { cat: 'Testing', match: 'ISTA', tag: '包装', note: '国际安全运输协会，包装运输测试标准（ISTA 1A/2A/3A 等）。客户要「过 ISTA 3A」指的是整箱跌落+振动+堆码组合测试。' },
+    { cat: 'profession', match: 'DFM', tag: '设计', note: '可制造性设计评审：开模前把结构拿去问工厂「这么做良率多少、成本多少」。DFX 是泛称（DFA 装配、DFC 成本、DFR 可靠性）。' },
+    { cat: 'Bussiness', match: 'NDA', tag: '法务', note: '保密协议。GPA 是通用采购协议。两者常在项目启动前一起签，注意 NDA 的有效期与例外条款。' },
 
     /* 零部件名称 */
     { cat: 'The name of the component', match: 'Heat Sink', tag: '件名', note: '散热器。压铸/挤型/冲压三种做法，谈结构方案时说「heat sink」要同时给工艺，否则报价差一倍。' },
@@ -165,8 +165,8 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'The name of the component', match: 'Endcap', tag: '件名', note: '尾盖/端盖（灯管、线条灯两端）。常内置接线端子与安装卡扣。' },
 
     /* 结构相关 */
-    { cat: 'Structure Related', match: 'Exposure Drawing', tag: '图纸', note: '爆炸图（装配关系图）。规范说法 exploded view，「exposure drawing」是中文直译，欧美工程师更认 exploded view / assembly breakdown。' },
-    { cat: 'Structure Related', match: 'Edge-lit', tag: '光路', note: '侧发光：LED 在导光板侧边，光经网点反射出射。优点是薄，缺点是效率与均匀度做高难。Back-lit（直下式）反之。' },
+    { cat: 'profession', match: 'Exposure Drawing', tag: '图纸', note: '爆炸图（装配关系图）。规范说法 exploded view，「exposure drawing」是中文直译，欧美工程师更认 exploded view / assembly breakdown。' },
+    { cat: 'profession', match: 'Edge-lit', tag: '光路', note: '侧发光：LED 在导光板侧边，光经网点反射出射。优点是薄，缺点是效率与均匀度做高难。Back-lit（直下式）反之。' },
   ],
 
   /* ── 单词详解（按小写英文精确匹配）──────────────────────────────── */
@@ -273,17 +273,19 @@ window.PK_GLOSSARY_NOTES = {
      所以「拆分类」在源表层面等于改表，与本站「改表与改站分开」的原则冲突。
      这里只改**站内呈现**：不动 xlsx、不动 glossary-data.js，重建数据后仍然生效。
 
-     2026-11-18 做过两轮：先拆出「质量管理 / 其他 / 经济类」与「包装运输」，
-     随后把 261 条逐条过了一遍，按下面四条边界统一归位（12 类）：
+     2026-11-18 做过两轮：先拆出「质量管理」与「包装运输」，随后把 261 条逐条过了一遍，
+     按下面四条边界统一归位；过薄栏再归并，最终 10 类：
 
        ① 改名合并：原「质量/其他」拆成「质量管理」；「结构设计相关」只有 3 条，
-          整栏并入专业类；原「其他」收窄并改名为「打样与工装」。
-       ② 新增栏：「经济类」（先收 VAVE）、「包装运输」（商务抽 8 + 物料抽 5）。
+          整栏并入专业类。
+       ② 新增栏：「包装运输」（商务抽 8 + 物料抽 5）。
        ③ 「怎么验」一律进测试类：EOL、气密、可靠性测试、SDCM、IES file、ISTA；
           「合不合规」进认证类：CISPR（标准组织，与 EMC/FCC 同族）。
        ④ 零件与材料各归其位：安装方式里的支架/吊绳/接线盒/螺丝等 13 件 →
           零部件名称；钢材牌号（SWP/SWC/SECC 等）→ 物料；Gerber/PCB Layout/
           原理图 → 专业类；Pilot Run → 工艺类；自攻螺丝 → 零部件名称。
+       ⑤ 过薄归并：原「打样与工装」4 条（命名/样机/封样/治具）并入质量管理；
+          仅 1 条的「经济类」撤销，VAVE 并入工艺类。
 
      边界判断写在这里，便于复核：
        · DFMEA / PFMEA 归质量管理 —— FMEA 是 APQP 的输出物，属质量工具；
@@ -299,7 +301,7 @@ window.PK_GLOSSARY_NOTES = {
       'Quality and others': {
         en: 'Quality',
         cn: '质量管理',
-        intro: '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。另加首件检验（FAI）、质量岗位（QE/SQE/DQE/CQE）、体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）。',
+        intro: '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。另加首件检验（FAI）、质量岗位（QE/SQE/DQE/CQE）、体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）；打样段的命名（Nomenclature）、样机（Prototype）、封样（Golden Sample）与治具夹具（Jig/Tool/Fixture）也归在这一栏，作为验收与一致性的基准。',
       },
       // 只有 3 条，单独成栏太薄，整栏并入专业类（条目 orig 仍是 Structure Related，详解照旧）
       'Structure Related': { en: 'profession', cn: '专业类' },
@@ -329,22 +331,11 @@ window.PK_GLOSSARY_NOTES = {
         items: ['Inner Box', 'Label', 'Master Carton', 'Packet', 'Pallet'],
       },
 
-      /* ── 经济类（原表没有，先收 VAVE）──────────────────────────── */
+      /* ── 打样与工装（并入质量管理：封样/样机/命名/治具与验收关联）── */
       {
         from: 'Quality and others',
-        en: 'Economics',
-        cn: '经济类',
-        intro: '成本与价值方向的词。原表没有这一栏，是站内新增：谈降本、谈价值工程时会用到，和「商务类」的交易条款不是一回事。',
-        items: [],
-      },
-
-      /* ── 打样与工装（原「其他」收窄：协议去商务、方法去专业、ISTA 去测试）── */
-      {
-        from: 'Quality and others',
-        en: 'Sampling & Tooling',
-        cn: '打样与工装',
-        atEnd: true,
-        intro: '从出图到出样这一段：零件怎么命名、第一台样机怎么评审、以哪一件封样、用什么工装保证一致性。这几件事串起来就是 NPI 的前半段，客户验厂时也常问。',
+        en: 'Quality',
+        cn: '质量管理',
         items: ['Nomenclature', 'Prototype', 'Golden Sample', 'Jig/Tool/Fixture'],
       },
 
@@ -433,7 +424,7 @@ window.PK_GLOSSARY_NOTES = {
   extras: {
     abbr: [
       {
-        cat: 'Economics',
+        cat: 'Production process',
         en: 'VAVE (Value Analysis / Value Engineering)',
         cn: '价值分析 / 价值工程',
         tag: '成本',
