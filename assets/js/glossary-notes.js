@@ -19,7 +19,7 @@
 window.PK_GLOSSARY_NOTES = {
   /* ── 分类导读：每一组在 ODM 流程里的位置 ─────────────────────────── */
   categories: {
-    'profession': '立项与规格阶段。PRD 定需求、TDS/TPD 给客户看参数、RFQ 是客户来问价、CEM 是 ABL 这类大客户的评分表、CFD 用来在开模前把散热算明白。这一组词不对，后面所有报价和承诺都会歪。',
+    'profession': '立项与规格阶段。PRD 定需求、TDS/TPD 给客户看参数、RFQ 是客户来问价、CEM 是 ABL 这类大客户的规格要求表、CFD 用来在开模前把散热算明白。这一组词不对，后面所有报价和承诺都会歪。',
     'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落）、安规（耐压、接地）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
     'Certification': '合规与准入阶段。安规（UL/ETL/CQC/CB）、能效（DLC/Energy Star/CEC）、化学（RoHS/REACH）、环境适应性（Dry/Damp/Wet、IC/NON-IC）。客户问「有没有 UL」通常指整灯安规认证，不是「有没有做过 UL 标准测试」，两者差别很大。',
     'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据（PO/PR/ECR/ECN）、包装（Dieline/Artwork/毛净重/柜型）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。',
@@ -38,7 +38,7 @@ window.PK_GLOSSARY_NOTES = {
     /* 专业类 */
     { cat: 'profession', match: 'CFD', tag: '散热', note: '用数值方法算灯具内部/外部的空气流动与温度场，开模前判断散热器齿形够不够。客户要「thermal simulation report」时给的就是这个。', ex: 'We ran a CFD simulation at 25 °C ambient; the Tc is 78 °C, within the 85 °C limit.' },
     { cat: 'profession', match: 'EOL', tag: '寿命', err: true, note: 'End of Life，寿命终止测试——不是「产品报废」。判据通常是光通维持到 L70（剩 70%）或 L90。注意原表把中文写成「end of life，寿命测试」并且英文列里混了中文，属于原表书写不规范。', ex: 'EOL testing is based on LM-80 data extrapolated to 36,000 h at L70.' },
-    { cat: 'profession', match: 'CEM', tag: '客户口径', note: 'Customer Experience Matrix，ABL 这类大客户内部的供应商评分矩阵：交期、质量、响应、技术各占权重，季度打分。这是**客户专有说法**，不是行业通用缩写，只在对这家客户的语境里用。' },
+    { cat: 'profession', match: 'CEM', tag: '客户口径', note: 'Customer Experience Matrix，ABL 这类大客户用的**规格要求表**：把产品要满足的指标逐条列清楚，报价、打样、送样都按这份表对齐，回复时最好逐条给出对应值。这是**客户专有说法**，不是行业通用缩写，只在对这家客户的语境里用。' },
     { cat: 'profession', match: 'RFQ', tag: '商务', note: 'Request for Quotation，客户发来的询价（含规格、数量、目标价、交期）。我们回的是 quotation，不是 RFQ。写邮件时别把两个词用反。', ex: 'Thanks for your RFQ of 12 Nov; quotation attached, valid for 30 days.' },
     { cat: 'profession', match: 'PRD', tag: '需求', note: 'Product Requirement Document，产品需求文档。客户给 PRD，我们回 TPD/TDS；PRD 里的「shall」是强制项，「should」是建议项，评审时要逐条回应。' },
     { cat: 'profession', match: 'TDS', tag: '规格', note: 'Technical Datasheet。Ledvance 系客户叫 TDS，Signify 系叫 TPD（Technical Product Data），内容都是电气/光学/机械参数表。对客户时用他们习惯的叫法，别硬统一。' },
