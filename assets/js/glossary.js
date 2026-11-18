@@ -85,6 +85,53 @@
 
   /* ── 缩写视图 ─────────────────────────────────────────────────── */
   var abbrIndex = [];   // {el, hay, cat, hasNote}
+  var TOTAL_ABBR = 0;   // 原表条数 + 编辑补充，renderAbbr 里写入，filterAbbr 复用
+
+  /* 分类重排：按 notes.taxonomy 把原表分类改名 / 拆出新栏，并可追加原表没有的分类。
+     返回 [{en, cn, orig, items, intro}]，顺序即页面顺序。
+
+     ⚠️ orig 必须保留原始分类名：详解是按「原分类 + 英文前缀」匹配的，
+        分类改名后若拿新名字去查，整组详解会静默消失（不报错，只是详解按钮全没了）。 */
+  function buildCategories() {
+    var plan = NOTES.taxonomy || {};
+    var rename = plan.rename || {};
+    var extracts = plan.extract || [];
+    var out = [];
+    var tail = [];
+
+    DATA.abbr.forEach(function (c) {
+      var r = rename[c.en] || null;
+      var mine = extracts.filter(function (x) { return x.from === c.en; });
+      var moved = {};
+      mine.forEach(function (x) { moved[x.en] = []; });
+
+      var keep = [];
+      c.items.forEach(function (it) {
+        var target = null;
+        for (var i = 0; i < mine.length; i++) {
+          if (mine[i].items.indexOf(it.en) >= 0) { target = mine[i].en; break; }
+        }
+        if (target) moved[target].push(it);
+        else keep.push(it);
+      });
+
+      out.push({
+        en: r ? r.en : c.en,
+        cn: r ? r.cn : c.cn,
+        orig: c.en,
+        items: keep,
+        intro: r ? (r.intro || '') : '',
+      });
+
+      mine.forEach(function (x) {
+        var cat = { en: x.en, cn: x.cn, orig: c.en, items: moved[x.en], intro: x.intro || '' };
+        if (x.atEnd) tail.push(cat);
+        else out.push(cat);
+      });
+    });
+
+    return out.concat(tail);
+  }
 
   function renderAbbr() {
     var host = $('#abbr-list');
@@ -98,10 +145,16 @@
       return EXTRAS.filter(function (x) { return x.cat === cat; });
     };
     var totalAbbr = DATA.meta.abbrCount + EXTRAS.length;
+    TOTAL_ABBR = totalAbbr;
+
+    // 重排后的分类，空分类（条目与补充都被搬空）不渲染，也不进 chips
+    var CATS = buildCategories().filter(function (c) {
+      return c.items.length + extrasIn(c.en).length > 0;
+    });
 
     // 分类 chips
     var html = ['<button class="chip on" type="button" data-cat="all">全部 <b>' + totalAbbr + '</b></button>'];
-    DATA.abbr.forEach(function (c) {
+    CATS.forEach(function (c) {
       html.push('<button class="chip" type="button" data-cat="' + esc(c.en) + '">' +
         esc(c.cn) + ' <b>' + (c.items.length + extrasIn(c.en).length) + '</b></button>');
     });
@@ -109,8 +162,8 @@
 
     // 分组列表
     var frag = [];
-    DATA.abbr.forEach(function (c) {
-      var intro = NOTES.categories[c.en] || NOTES.categories[c.en.toLowerCase()] || '';
+    CATS.forEach(function (c) {
+      var intro = c.intro || NOTES.categories[c.en] || NOTES.categories[c.en.toLowerCase()] || '';
       var groupExtras = extrasIn(c.en);
       frag.push('<section class="gx-group" data-cat="' + esc(c.en) + '">');
       frag.push('<div class="gx-group-head"><h3>' + esc(c.cn) +
@@ -119,7 +172,7 @@
         (intro ? '<p class="gx-intro">' + rich(intro) + '</p>' : '') + '</div>');
       frag.push('<div class="gx-grid">');
       c.items.forEach(function (it) {
-        var note = findAbbrNote(c.en, it.en);
+        var note = findAbbrNote(c.orig, it.en);
         var body = '';
         if (note) {
           body = '<div class="gx-note">' +
@@ -164,6 +217,9 @@
       var el = $(sel);
       if (el) el.textContent = String(totalAbbr);
     });
+    // 分类数同理：重排后是 12 栏，写死「10 类」就会跟 chips 对不上
+    var catStat = $('#stat-cats');
+    if (catStat) catStat.textContent = '行业缩写 · ' + CATS.length + ' 类';
 
     // 记录搜索索引
     abbrIndex = $$('.gx-item', host).map(function (el) {
@@ -203,7 +259,7 @@
       g.hidden = !visible;
     });
     var out = $('#abbr-count');
-    if (out) out.textContent = '显示 ' + shown + ' / ' + DATA.meta.abbrCount;
+    if (out) out.textContent = '显示 ' + shown + ' / ' + TOTAL_ABBR;
     var empty = $('#abbr-empty');
     if (empty) empty.hidden = shown !== 0;
   }

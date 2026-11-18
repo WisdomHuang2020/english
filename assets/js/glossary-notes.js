@@ -270,6 +270,58 @@ window.PK_GLOSSARY_NOTES = {
     { note: '狄更斯式的三项并列（heart / temper / touch），靠 never 重复形成韵律。注意 touch 在这里是「待人接物的态度/触感」，原表译文「一种用不受损的风格」应为「一种永不伤人的触感」——已登记勘误。' },
   ],
 
+  /* ── 分类重排（2026-11-18）───────────────────────────────────────
+     原表是宽表：每个分类占三列（Item / 英文 / 中文），分类就是表结构。
+     所以「拆分类」在源表层面等于改表，与本站「改表与改站分开」的原则冲突。
+     这里只改**站内呈现**：不动 xlsx、不动 glossary-data.js，重建数据后仍然生效。
+
+     两处调整：
+       ① 原表把质量体系与杂项挤在同一栏「质量/其他」（30 条），页面拆成
+          「质量管理」（20 条）与「其他」（10 条）；
+       ② 新增原表没有的「经济类」，先收 VAVE（成本/价值方向，后续可继续补）。
+     边界判断写在这里，便于复核：
+       · DFMEA / PFMEA 归质量管理 —— FMEA 是 APQP 的输出物，属质量工具；
+       · DFM / DFX 归其他 —— 是设计方法，不属质量职能；
+       · ISO14001 / ISO18001 归质量管理 —— 字面是环境与职业健康，但在 ODM 里
+         由质量/体系职能统一维护，跟着 ISO9001 走比拆开更贴合实际用法。 */
+  taxonomy: {
+    rename: {
+      'Quality and others': {
+        en: 'Quality',
+        cn: '质量管理',
+        intro: '从进料到出货的六个检验关卡（IQC→IPQC→OQC→PQA→FQC→OBA），加上质量岗位、体系与先期策划工具。这一栏管的是「东西合不合格、问题怎么拦住」。',
+      },
+    },
+    extract: [
+      {
+        from: 'Quality and others',
+        en: 'Economics',
+        cn: '经济类',
+        intro: '成本与价值方向的词。原表没有这一栏，是站内新增：谈降本、谈价值工程时会用到，和「商务类」的交易条款不是一回事。',
+        items: [],
+      },
+      {
+        from: 'Quality and others',
+        en: 'Others',
+        cn: '其他',
+        atEnd: true,
+        intro: '不属于质量职能、但项目里绕不开的通用词：保密与采购协议、样机与工装、包装运输、以及可制造性/可设计性方法。',
+        items: [
+          'NDA(Non-disclosure Agreement)',
+          'GPA（General Purchase Agreement 或 General Procurement Agreement）',
+          'Purchase Agreement',
+          'Nomenclature',
+          'Prototype',
+          'Golden Sample',
+          'Jig/Tool/Fixture',
+          'ISTA(International Safe Transit Association)',
+          'DFM(Design for Manufacture)',
+          'DFX(Design for X,Design for anything)',
+        ],
+      },
+    ],
+  },
+
   /* ── 编辑补充词条 ─────────────────────────────────────────────────
      原表里没有、后来单独补进去的条目。
 
@@ -284,7 +336,7 @@ window.PK_GLOSSARY_NOTES = {
   extras: {
     abbr: [
       {
-        cat: 'Quality and others',
+        cat: 'Economics',
         en: 'VAVE (Value Analysis / Value Engineering)',
         cn: '价值分析 / 价值工程',
         tag: '成本',
