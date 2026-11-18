@@ -23,10 +23,9 @@ window.PK_GLOSSARY_NOTES = {
     'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落、气密）、寿命（EOL 与光通维持）、运输验证（堆码与 ISTA）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
     'Certification': '合规与准入阶段。安规（UL/ETL/CQC/CB）、能效（DLC/Energy Star/CEC）、化学（RoHS/REACH）、环境适应性（Dry/Damp/Wet、IC/NON-IC）。客户问「有没有 UL」通常指整灯安规认证，不是「有没有做过 UL 标准测试」，两者差别很大。',
     'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP）、协议（NDA/GPA/Purchase Agreement）与询价（RFQ）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」；工程变更（ECR/ECN）归质量管理。',
-    'Installation': '安装方式与安装环境。开孔尺寸、吊装/吸顶/嵌入/壁装、石膏板与龙骨条件、出光面内凹（Regress）与深眩，以及安装说明书。支架、吊绳、接线盒、螺丝这些**安装用的零件**已归到「零部件名称」。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
-    'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。钢材牌号（SWP/SWC/SECC/SGCC/SPCC）与元器件（含 Photocell）也收在这一栏。',
+    'Installation': '安装方式与安装环境。开孔尺寸、吊装/吸顶/嵌入/壁装、石膏板与龙骨条件、出光面内凹（Regress）与深眩，以及安装说明书。支架、吊绳、接线盒、螺丝这些**安装用的零件**已归到「零件名称」。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
     'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、制程检测（AOI/ATE/在线/离线），以及小批量试产（Pilot Run）。降本价值分析（VAVE）也在这一段：在不牺牲质量与性能的前提下做功能/成本拆解。DFM 评审就是拿这一组词跟工厂对话。',
-    'The name of the component': '图纸与规格书阶段。零部件叫什么，直接影响图纸标注、BOM 描述和客诉定位。同一颗件在客户图纸上可能叫 Canopy，在我们 BOM 里叫顶盖——对不上就要靠这一组词做翻译。安装辅件（支架、吊绳、接线盒、龙骨、螺丝螺母弹簧、安装工具）也收在这一栏。',
+    'The name of the component': '图纸、BOM 与规格书阶段：这颗件叫什么、用什么料。零部件件名直接影响图纸标注、BOM 描述和客诉定位——同一颗件在客户图纸上可能叫 Canopy，在我们 BOM 里叫顶盖，对不上就要靠这一组词做翻译。BOM 物料也收在这一栏：区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功，报错一个词采购就买错料；PCB/PCBA/FPCB 不能混（裸板／贴完件的板／软板）；钢材牌号（SWP/SWC/SECC/SGCC/SPCC）、驱动、电解电容、扩散板、灯头与接线端子等元器件一并在这。安装辅件（支架、吊绳、接线盒、龙骨、螺丝螺母弹簧、安装工具）也在本栏。',
   },
 
   /* ── 缩写详解 ─────────────────────────────────────────────────────
@@ -68,7 +67,7 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Testing', match: 'HTOL', tag: '可靠性', note: 'High Temperature Operating Life，高温加电运行寿命测试。WHTOL 是湿热版（加 85 °C/85% RH），LTOL 是低温运行。三者常成组出现。' },
     { cat: 'Testing', match: 'Thermal shock', tag: '可靠性', note: '冷热冲击（温度循环），考焊点与封装。和 thermal cycling 的斜率不同：shock 是快速转换，cycling 是缓慢线性。' },
     { cat: 'Testing', match: 'Salt', tag: '可靠性', note: '盐雾测试，常见 48/96/500 h，判据是外观与功能。户外件、镀锌件、压铸件必做。' },
-    { cat: 'Material', match: 'Photocell', tag: '器件', note: '光敏传感器（光控头），用于路灯/庭院灯自动开关。客户说「with photocell」是指整灯集成光控，不是外置传感器。' },
+    { cat: 'The name of the component', match: 'Photocell', tag: '器件', note: '光敏传感器（光控头），用于路灯/庭院灯自动开关。客户说「with photocell」是指整灯集成光控，不是外置传感器。' },
     { cat: 'Certification', match: 'CISPR', tag: 'EMC', note: '国际无线电干扰特别委员会，CISPR 15 是照明设备的无线电骚扰限值标准，CE 认证的 EMC 部分常引用它。' },
     { cat: 'Testing', match: 'Beam Angle', tag: '光学', note: '出光角度（通常按 50% 峰值光强定义）。同一个透镜，说「60°」还是「FWHM 60°」在客户那里可能被算成不同产品。' },
     { cat: 'Testing', match: 'Wall Wash', tag: '配光', note: '洗墙配光，光斑均匀铺在墙面上。商业空间常用，判据是墙面照度均匀度与「 scallop」形状。' },
@@ -123,15 +122,15 @@ window.PK_GLOSSARY_NOTES = {
 
     /* 物料类 */
     { cat: 'The name of the component', match: 'Cable', tag: '线材', note: '多股电缆（带护套、多芯）。这一组最容易混：**Cable** 电缆（多芯带护套）／**Cord** 带插头的软线／**Lead** 引出线／**Conductor** 裸导体／**Wire** 单根电线／**Harness** 线束（多根捆扎成组件）。' },
-    { cat: 'Material', match: 'PCB', tag: '板材', note: 'PCB 裸板；PCBA 是贴装完元件的板；FPCB 是柔性板。报价时客户说「PCB price」可能指裸板价，别按 PCBA 报。' },
-    { cat: 'Material', match: 'Driver', tag: '电气', note: '驱动电源。独立式（independent）与内置式（built-in）在安规上要求不同；恒流/恒压、可调光与否都要在规格里写清。' },
-    { cat: 'Material', match: 'Diffuser', tag: '光学', note: '扩散板（乳白 PC/PMMA），作用是把点光源打散成面光。透过率（transmittance）与雾度（haze）是两个指标。' },
-    { cat: 'Material', match: 'Trim', tag: '结构', note: '面环（筒灯露在天花外面的那一圈）。Trim 的颜色/材质常常是客户选型的决定因素，报价要单独列。' },
+    { cat: 'The name of the component', match: 'PCB', tag: '板材', note: 'PCB 裸板；PCBA 是贴装完元件的板；FPCB 是柔性板。报价时客户说「PCB price」可能指裸板价，别按 PCBA 报。' },
+    { cat: 'The name of the component', match: 'Driver', exact: true, tag: '电气', note: '驱动电源。独立式（independent）与内置式（built-in）在安规上要求不同；恒流/恒压、可调光与否都要在规格里写清。注意只指 Driver 本体，不串到 Driver Box（电源盒）、Driver PCB（电源裸板）。' },
+    { cat: 'The name of the component', match: 'Diffuser', tag: '光学', note: '扩散板（乳白 PC/PMMA），作用是把点光源打散成面光。透过率（transmittance）与雾度（haze）是两个指标。' },
+    { cat: 'The name of the component', match: 'Trim', tag: '结构', note: '面环（筒灯露在天花外面的那一圈）。Trim 的颜色/材质常常是客户选型的决定因素，报价要单独列。' },
     { cat: 'Production process', match: 'Pilot Run', tag: '试产', note: '小批量试产（一般在量产前，几十到几百台），用来验证工艺与治具。与 Prototype（样机，手工打样）不是一回事。' },
     { cat: 'Packaging & Shipping', match: 'Master Carton', tag: '包装', note: '外箱。Inner Box 内盒，Packet 小包。外箱要标毛重/净重/堆码数/箱唛，客户仓库收货按这个点数。' },
-    { cat: 'Material', match: 'Wago', tag: '器件', note: 'Wago（万可）是接线端子的品牌名，业内常直接当类名用（类似「乐泰」指胶）。规格书里最好写 push-in wire connector，注明可接线径。' },
-    { cat: 'Material', match: 'E26', tag: '灯头', note: 'E26 是北美灯头（26 mm 螺纹），E27 是欧洲/中国（27 mm）。两者外观近似但安规与市场不同，标错直接退运。' },
-    { cat: 'Material', match: 'Electrolytic Capacitor', tag: '器件', note: '电解电容，LED 驱动里决定寿命的短板件。选型看额定纹波电流与 105 °C 寿命（如 8000 h），高温环境要降额。' },
+    { cat: 'The name of the component', match: 'Wago', tag: '器件', note: 'Wago（万可）是接线端子的品牌名，业内常直接当类名用（类似「乐泰」指胶）。规格书里最好写 push-in wire connector，注明可接线径。' },
+    { cat: 'The name of the component', match: 'E26', tag: '灯头', note: 'E26 是北美灯头（26 mm 螺纹），E27 是欧洲/中国（27 mm）。两者外观近似但安规与市场不同，标错直接退运。' },
+    { cat: 'The name of the component', match: 'Electrolytic Capacitor', tag: '器件', note: '电解电容，LED 驱动里决定寿命的短板件。选型看额定纹波电流与 105 °C 寿命（如 8000 h），高温环境要降额。' },
     { cat: 'Packaging & Shipping', match: 'Pallet', tag: '物流', note: '托盘/栈板。欧美常见 1200×800（欧标）与 48×40 in（美标），报价含托盘时要写材质（木/塑）与是否需熏蒸（ISPM 15）。' },
 
     /* 工艺类 */
@@ -141,7 +140,7 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Production process', match: 'SMT', tag: '装配', note: '表面贴装（贴片）。SMD 是贴片器件，DIP 是双列直插（插件）。SMT 线过回流焊（reflow），插件过波峰焊（wave soldering）——两条工艺路线。' },
     { cat: 'Production process', match: 'AOI', tag: '检测', note: '自动光学检测，贴片后看虚焊/偏移/缺件。ATE 是自动测试设备（电气功能测试）。on line / off line test 指在线与离线检测。' },
     { cat: 'profession', match: 'Gerber File', tag: '文件', note: 'Gerber 是 PCB 光绘文件（给板厂投产用）。Schematic 是电气原理图，PCB Layout 是布线图。发板厂要 Gerber + 钻孔文件，别只发 Layout 截图。' },
-    { cat: 'Material', match: 'SECC', tag: '材料', note: 'SECC 电镀锌钢板／SGCC 热浸镀锌钢板／SPCC 冷轧钢板。三者在盐雾与成本上不同，结构件报价必须写明是哪一种。' },
+    { cat: 'The name of the component', match: 'SECC', tag: '材料', note: 'SECC 电镀锌钢板／SGCC 热浸镀锌钢板／SPCC 冷轧钢板。三者在盐雾与成本上不同，结构件报价必须写明是哪一种。' },
     { cat: 'Production process', match: 'Zinc Plating', tag: '表面', note: '镀锌（电镀锌）。与 hot-dip galvanizing（热浸锌）不是一回事，盐雾小时数差很多，户外件要问清。' },
     { cat: 'Production process', match: 'Finish', tag: '表面', note: '表面处理的总称。客户选型会写 BN（拉丝镍）/ SN（沙丁镍）/ ORB（古铜）/ MB（黑），这些是颜色工艺代号，不是材质。' },
 
@@ -306,6 +305,10 @@ window.PK_GLOSSARY_NOTES = {
       },
       // 只有 3 条，单独成栏太薄，整栏并入专业类（条目 orig 仍是 Structure Related，详解照旧）
       'Structure Related': { en: 'profession', cn: '专业类' },
+      // 工艺类只改显示名，内部键 Production process 不变（详解匹配/筛选都按键）
+      'Production process': { en: 'Production process', cn: '工艺生产类' },
+      // 物料整栏并入零件名称：BOM 元器件/板材/线材与零部件件名同属「这颗件叫什么」
+      'Material': { en: 'The name of the component', cn: '零件名称' },
     },
     extract: [
       /* ── 包装运输（商务类抽 8 + 物料抽 5）────────────────────────── */
@@ -375,10 +378,10 @@ window.PK_GLOSSARY_NOTES = {
       { from: 'Quality and others', en: 'profession', cn: '专业类',
         items: ['DFM(Design for Manufacture)', 'DFX(Design for X,Design for anything)'] },
 
-      /* ── 物料：原材料牌号与元器件 ──────────────────────────────── */
-      { from: 'Testing', en: 'Material', cn: '物料',
+      /* ── 零件名称：原材料牌号、元器件与结构件同栏（物料已整栏并入）───────── */
+      { from: 'Testing', en: 'The name of the component', cn: '零件名称',
         items: ['Photocell'] },
-      { from: 'Production process', en: 'Material', cn: '物料',
+      { from: 'Production process', en: 'The name of the component', cn: '零件名称',
         items: ['SWP(Spring Wire Products)', 'SWC(Spring Wire Cold drawn)', 'SECC/SGCC/SPCC'] },
 
       /* ── 工艺类：试产属生产阶段，不属物料 ──────────────────────── */

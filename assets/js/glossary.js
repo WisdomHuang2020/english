@@ -62,8 +62,10 @@
       var keyRaw = String(it.match || '').toLowerCase().replace(/（/g,'(').replace(/）/g,')');
       var at = eRaw.indexOf(keyRaw);
       if (at !== 0) continue;
-      // 边界看原文前缀之后的字符：空格放行；裸字母/数字续接才算缩写扩展
-      // （防 PCB→PCBA、LT→LTOL、DFM→DFMEA）。
+      // 边界看原文前缀之后的字符：空格放行；裸字母/数字续接算缩写扩展
+      // （防 PCB→PCBA、LT→LTOL、DFM→DFMEA）。要求精确等于的条目（it.exact，
+      // 如 Driver 不串到 Driver Box/Driver PCB）单独判断。
+      if (it.exact && eRaw !== keyRaw) continue;
       var next = eRaw.charAt(keyRaw.length);
       if (next && next !== ' ' && /[a-z0-9]/.test(next)) continue;
       return it;
