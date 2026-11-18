@@ -175,6 +175,49 @@
     update();
   })();
 
+  /* ---------- 页内锚点：跳到位，但不把 # 写进地址栏 ----------
+     这些 # 跟词汇库页签那种「假锚点」不同：确实指向 <h2 id="check"> 这类真标题，
+     标准做法就是留 #。但用户明确希望地址栏干净（2026-11-18），且原生锚点跳转
+     每点一次都会压一条历史记录 —— 连点几个目录后按后退键会逐个回弹。
+     所以改成：拦下点击，手动滚动 + 移焦点，地址栏保持 pathname。
+     仍然保留的能力：平滑滚动、目录高亮（scrollSpy 按 href 比例，不受影响）、
+     无障碍焦点跟随；带着 # 的旧链接/收藏照旧能直达某一节，落地后把地址收敛干净。 */
+  (function cleanAnchors() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function stripHash() {
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    }
+    function focusTo(el) {
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+    }
+
+    $$('a[href^="#"]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href || href.length < 2) return;          // 纯 "#" 或空锚点不处理
+      a.addEventListener('click', function (e) {
+        var target = document.getElementById(href.slice(1));
+        if (!target) return;                          // 目标不在本页就交回浏览器
+        e.preventDefault();
+        focusTo(target);
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        stripHash();
+      });
+    });
+
+    /* 带 # 打开（旧外链、收藏）：立即跳到位并把地址洗干净。
+       这里用即时滚动而不是平滑 —— 一路上从页面顶部滑到第四节很怪，
+       而且要和浏览器自己的片段定位抢滚动，越简单越稳。 */
+    if (location.hash.length > 1) {
+      var hit = document.getElementById(location.hash.slice(1));
+      if (hit) {
+        hit.scrollIntoView({ block: 'start' });
+        stripHash();
+      }
+    }
+  })();
+
   /* ---------- 模板库：变量实时替换 ---------- */
   (function templates() {
     var blocks = $$('[data-template]');

@@ -243,6 +243,9 @@ a.card:hover {
   display: block; margin-bottom: 6px; letter-spacing: .1em;
 }
 .prose > h3 { font-size: 17px; margin: 30px 0 10px; scroll-margin-top: 84px; }
+/* 页内跳转后会把焦点移到标题上（无障碍要求），这类程序性焦点不画描边；
+   tabindex="-1" 的元素本来就进不了 Tab 顺序，不会影响键盘可见性 */
+[tabindex="-1"]:focus { outline: none; }
 .prose p { margin: 0 0 14px; color: var(--color-text-secondary); font-size: 15.5px; }
 .prose strong { color: var(--color-text-primary); font-weight: 700; }
 .prose ul, .prose ol { margin: 0 0 16px; padding-left: 22px; color: var(--color-text-secondary); font-size: 15.5px; }
