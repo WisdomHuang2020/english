@@ -1,2 +1,8 @@
 .verify/
 .DS_Store
+
+# 部署收尾写入的版本哨兵（deploy/update.sh）。
+# 门户的 /api/version/english 直读这个文件，所以要留；但它不是源码，
+# 必须忽略 —— 否则每次部署后 `git status --porcelain` 都会多一条 `?? .deployed-version`，
+# CI 的「工作区必须干净」守卫就会拒绝下一次推送，形成自我阻塞（2026-11-18 踩过）。
+.deployed-version
