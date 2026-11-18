@@ -97,25 +97,35 @@
     var plan = NOTES.taxonomy || {};
     var rename = plan.rename || {};
     var extracts = plan.extract || [];
-    var out = [];       // 正常位置，按插入顺序
-    var tail = [];      // atEnd 的栏，排到全部分类之后
-    var byName = {};    // 同名栏合并：多条 extract 指向同一个新栏时共用一桶
+    var out = [];        // 正常位置，按原表分类顺序
+    var tail = [];       // atEnd 的栏，排到全部分类之后
+    var byName = {};     // 同名栏合并：多条 extract 指向同一个新栏时共用一桶
+    var selfOf = {};     // 原分类 en -> 它落的桶（改名后可能与别的分类同桶）
 
     function bucket(en, cn, intro) {
       if (!byName[en]) byName[en] = { en: en, cn: cn, items: [], intro: intro || '' };
       return byName[en];
     }
-    function place(b, after, atEnd) {
+    function place(b, anchor, atEnd) {
       if (out.indexOf(b) >= 0 || tail.indexOf(b) >= 0) return;
-      if (atEnd) tail.push(b);
-      else out.splice(out.indexOf(after) + 1, 0, b);
+      if (atEnd) { tail.push(b); return; }
+      var i = out.indexOf(anchor);
+      if (i < 0) out.push(b); else out.splice(i + 1, 0, b);
     }
 
+    /* 第一遍：按原表顺序把各分类的桶建好。
+       必须先建完再分流 —— 否则「零部件名称」会被「安装方式」搬件时提前插入，
+       整个栏位顺序就跟着乱了（踩过）。改名合并到同一桶时不会重复入列。 */
     DATA.abbr.forEach(function (c) {
       var r = rename[c.en] || null;
-      var self = bucket(r ? r.en : c.en, r ? r.cn : c.cn, r ? r.intro : '');
-      if (out.indexOf(self) < 0 && tail.indexOf(self) < 0) out.push(self);
+      var b = bucket(r ? r.en : c.en, r ? r.cn : c.cn, r ? r.intro : '');
+      selfOf[c.en] = b;
+      if (out.indexOf(b) < 0 && tail.indexOf(b) < 0) out.push(b);
+    });
 
+    /* 第二遍：条目按 extract 规则分流。条目自带 orig，详解才能按原分类名匹配。 */
+    DATA.abbr.forEach(function (c) {
+      var self = selfOf[c.en];
       var mine = extracts.filter(function (x) { return x.from === c.en; });
 
       c.items.forEach(function (it) {

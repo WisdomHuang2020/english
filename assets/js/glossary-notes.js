@@ -19,16 +19,14 @@
 window.PK_GLOSSARY_NOTES = {
   /* ── 分类导读：每一组在 ODM 流程里的位置 ─────────────────────────── */
   categories: {
-    'profession': '立项与规格阶段。PRD 定需求、TDS/TPD 给客户看参数、RFQ 是客户来问价、CEM 是 ABL 这类大客户的规格要求表、CFD 用来在开模前把散热算明白。这一组词不对，后面所有报价和承诺都会歪。',
-    'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落）、安规（耐压、接地）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
+    'profession': '立项、规格与设计阶段。PRD 定需求、TDS/TPD 给客户看参数、CEM 是 ABL 这类大客户的规格要求表、CFD 在开模前把散热算明白；再往下一层是设计本身：Structural / Optical Design 两个职能、Gerber 与 PCB Layout 这套图纸、DFM/DFX 这类可制造性方法，以及爆炸图与侧发光/直下式两种光路结构。这一组词不对，后面所有报价和承诺都会歪。',
+    'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落、气密）、寿命（EOL 与光通维持）、运输验证（堆码与 ISTA）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
     'Certification': '合规与准入阶段。安规（UL/ETL/CQC/CB）、能效（DLC/Energy Star/CEC）、化学（RoHS/REACH）、环境适应性（Dry/Damp/Wet、IC/NON-IC）。客户问「有没有 UL」通常指整灯安规认证，不是「有没有做过 UL 标准测试」，两者差别很大。',
-    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP/ECR/ECN）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」。',
-    'Installation': '结构与安装适配阶段。开孔尺寸、吊装/吸顶/嵌入/壁装、龙骨与接线盒、调光深度（Regress）。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
-    'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。',
-    'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、检测（AOI/ATE/在线/离线）。DFM 评审就是拿这一组词跟工厂对话。',
-    'Quality and others': '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。再往后是体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）。',
-    'The name of the component': '图纸与规格书阶段。零部件叫什么，直接影响图纸标注、BOM 描述和客诉定位。同一颗件在客户图纸上可能叫 Canopy，在我们 BOM 里叫顶盖——对不上就要靠这一组词做翻译。',
-    'Structure Related': '结构表达阶段。爆炸图（Exposure Drawing）是装配关系的标准表达；Edge-lit / Back-lit 是侧发光与直下式两种光路，谈结构方案时最先要定的就是它。',
+    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP/ECR/ECN）、协议（NDA/GPA/Purchase Agreement）与询价（RFQ）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」。',
+    'Installation': '安装方式与安装环境。开孔尺寸、吊装/吸顶/嵌入/壁装、石膏板与龙骨条件、出光面内凹（Regress）与深眩，以及安装说明书。支架、吊绳、接线盒、螺丝这些**安装用的零件**已归到「零部件名称」。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
+    'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。钢材牌号（SWP/SWC/SECC/SGCC/SPCC）与元器件（含 Photocell）也收在这一栏。',
+    'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、制程检测（AOI/ATE/在线/离线），以及小批量试产（Pilot Run）。DFM 评审就是拿这一组词跟工厂对话。',
+    'The name of the component': '图纸与规格书阶段。零部件叫什么，直接影响图纸标注、BOM 描述和客诉定位。同一颗件在客户图纸上可能叫 Canopy，在我们 BOM 里叫顶盖——对不上就要靠这一组词做翻译。安装辅件（支架、吊绳、接线盒、龙骨、螺丝螺母弹簧、安装工具）也收在这一栏。',
   },
 
   /* ── 缩写详解 ─────────────────────────────────────────────────────
@@ -275,29 +273,39 @@ window.PK_GLOSSARY_NOTES = {
      所以「拆分类」在源表层面等于改表，与本站「改表与改站分开」的原则冲突。
      这里只改**站内呈现**：不动 xlsx、不动 glossary-data.js，重建数据后仍然生效。
 
-     三处调整：
-       ① 原表把质量体系与杂项挤在同一栏「质量/其他」（30 条），页面拆成
-          「质量管理」（20 条）与「其他」（10 条）；
-       ② 新增原表没有的「经济类」，先收 VAVE（成本/价值方向，后续可继续补）；
-       ③ 新增「包装运输类」，从「商务类」抽 8 条（刀线图/印刷图/三种重量/堆栈数量/两种柜型）、
-          再从「物料」抽 5 条（内盒/外箱/小盒包/托盘栈板/标签）—— 同一栏收两个来源，
-          所以条目的 orig 是逐条记的，不是分类级的（见 glossary.js buildCategories 注释）。
+     2026-11-18 做过两轮：先拆出「质量管理 / 其他 / 经济类」与「包装运输」，
+     随后把 261 条逐条过了一遍，按下面四条边界统一归位（12 类）：
+
+       ① 改名合并：原「质量/其他」拆成「质量管理」；「结构设计相关」只有 3 条，
+          整栏并入专业类；原「其他」收窄并改名为「打样与工装」。
+       ② 新增栏：「经济类」（先收 VAVE）、「包装运输」（商务抽 8 + 物料抽 5）。
+       ③ 「怎么验」一律进测试类：EOL、气密、可靠性测试、SDCM、IES file、ISTA；
+          「合不合规」进认证类：CISPR（标准组织，与 EMC/FCC 同族）。
+       ④ 零件与材料各归其位：安装方式里的支架/吊绳/接线盒/螺丝等 13 件 →
+          零部件名称；钢材牌号（SWP/SWC/SECC 等）→ 物料；Gerber/PCB Layout/
+          原理图 → 专业类；Pilot Run → 工艺类；自攻螺丝 → 零部件名称。
+
      边界判断写在这里，便于复核：
        · DFMEA / PFMEA 归质量管理 —— FMEA 是 APQP 的输出物，属质量工具；
-       · DFM / DFX 归其他 —— 是设计方法，不属质量职能；
+       · DFM / DFX 归专业类 —— 是设计方法，不是质量职能，也不是「杂项」；
        · ISO14001 / ISO18001 归质量管理 —— 字面是环境与职业健康，但在 ODM 里
          由质量/体系职能统一维护，跟着 ISO9001 走比拆开更贴合实际用法；
        · 运输测试（堆码/跌落/振动/抗压）仍留在测试类 —— 它们说的是「怎么验」，
-         而包装运输类说的是「包什么、怎么装柜」，两件事。 */
+         而包装运输类说的是「包什么、怎么装柜」，两件事；
+       · AOI / ATE / 在线离线检测留在工艺类 —— 是制程环节上的检测工位，
+         和实验室里「怎么验」不是一回事。 */
   taxonomy: {
     rename: {
       'Quality and others': {
         en: 'Quality',
         cn: '质量管理',
-        intro: '从进料到出货的六个检验关卡（IQC→IPQC→OQC→PQA→FQC→OBA），加上质量岗位、体系与先期策划工具。这一栏管的是「东西合不合格、问题怎么拦住」。',
+        intro: '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。另加首件检验（FAI）、质量岗位（QE/SQE/DQE/CQE）、体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）。',
       },
+      // 只有 3 条，单独成栏太薄，整栏并入专业类（条目 orig 仍是 Structure Related，详解照旧）
+      'Structure Related': { en: 'profession', cn: '专业类' },
     },
     extract: [
+      /* ── 包装运输（商务类抽 8 + 物料抽 5）────────────────────────── */
       {
         from: 'Bussiness',
         en: 'Packaging & Shipping',
@@ -320,6 +328,8 @@ window.PK_GLOSSARY_NOTES = {
         cn: '包装运输',
         items: ['Inner Box', 'Label', 'Master Carton', 'Packet', 'Pallet'],
       },
+
+      /* ── 经济类（原表没有，先收 VAVE）──────────────────────────── */
       {
         from: 'Quality and others',
         en: 'Economics',
@@ -327,25 +337,85 @@ window.PK_GLOSSARY_NOTES = {
         intro: '成本与价值方向的词。原表没有这一栏，是站内新增：谈降本、谈价值工程时会用到，和「商务类」的交易条款不是一回事。',
         items: [],
       },
+
+      /* ── 打样与工装（原「其他」收窄：协议去商务、方法去专业、ISTA 去测试）── */
       {
         from: 'Quality and others',
-        en: 'Others',
-        cn: '其他',
+        en: 'Sampling & Tooling',
+        cn: '打样与工装',
         atEnd: true,
-        intro: '不属于质量职能、但项目里绕不开的通用词：保密与采购协议、样机与工装、运输测试标准（ISTA）、以及可制造性/可设计性方法。',
+        intro: '从出图到出样这一段：零件怎么命名、第一台样机怎么评审、以哪一件封样、用什么工装保证一致性。这几件事串起来就是 NPI 的前半段，客户验厂时也常问。',
+        items: ['Nomenclature', 'Prototype', 'Golden Sample', 'Jig/Tool/Fixture'],
+      },
+
+      /* ── 测试类：把「怎么验」和「测出来的参数」都收回来 ──────────── */
+      { from: 'profession', en: 'Testing', cn: '测试类',
+        items: ['EOL测试'] },
+      { from: 'Certification', en: 'Testing', cn: '测试类',
+        items: [
+          'Air-tight',
+          'Reliability test',
+          'SDCM (Step) （Standard Deviation of Color Matching）',
+          'IES file',
+        ] },
+      { from: 'Quality and others', en: 'Testing', cn: '测试类',
+        items: ['ISTA(International Safe Transit Association)'] },
+
+      /* ── 认证类 ────────────────────────────────────────────────── */
+      { from: 'Testing', en: 'Certification', cn: '认证类',
+        items: ['CISPR'] },
+
+      /* ── 商务类 ────────────────────────────────────────────────── */
+      { from: 'profession', en: 'Bussiness', cn: '商务类',
+        items: ['RFQ'] },
+      { from: 'Quality and others', en: 'Bussiness', cn: '商务类',
         items: [
           'NDA(Non-disclosure Agreement)',
           'GPA（General Purchase Agreement 或 General Procurement Agreement）',
           'Purchase Agreement',
-          'Nomenclature',
-          'Prototype',
-          'Golden Sample',
-          'Jig/Tool/Fixture',
-          'ISTA(International Safe Transit Association)',
-          'DFM(Design for Manufacture)',
-          'DFX(Design for X,Design for anything)',
-        ],
-      },
+        ] },
+
+      /* ── 专业类：设计学科、设计图纸、设计方法 ───────────────────── */
+      { from: 'Testing', en: 'profession', cn: '专业类',
+        items: ['Structural Design', 'Optical Design'] },
+      { from: 'Production process', en: 'profession', cn: '专业类',
+        items: ['Gerber File', 'PCB Layout', 'Schematic/Circuit'] },
+      { from: 'Quality and others', en: 'profession', cn: '专业类',
+        items: ['DFM(Design for Manufacture)', 'DFX(Design for X,Design for anything)'] },
+
+      /* ── 物料：原材料牌号与元器件 ──────────────────────────────── */
+      { from: 'Testing', en: 'Material', cn: '物料',
+        items: ['Photocell'] },
+      { from: 'Production process', en: 'Material', cn: '物料',
+        items: ['SWP(Spring Wire Products)', 'SWC(Spring Wire Cold drawn)', 'SECC/SGCC/SPCC'] },
+
+      /* ── 工艺类：试产属生产阶段，不属物料 ──────────────────────── */
+      { from: 'Material', en: 'Production process', cn: '工艺类',
+        items: ['Pilot Run'] },
+
+      /* ── 质量管理：首件检验是质量动作 ──────────────────────────── */
+      { from: 'Testing', en: 'Quality', cn: '质量管理',
+        items: ['FAI(First article inspection)'] },
+
+      /* ── 零部件名称：安装件与紧固件归位 ────────────────────────── */
+      { from: 'Installation', en: 'The name of the component', cn: '零部件名称',
+        items: [
+          'Bracket',
+          'Mount Plate',
+          'Canopy',
+          'Suspension Cable',
+          'Junction BOX',
+          'Recessed Housing',
+          'Flexible Conduit',
+          'T-Bar Bracket',
+          'Joist Bar',
+          'Screw',
+          'Nut',
+          'Spring',
+          'Phillips/Cross Screwdriver',
+        ] },
+      { from: 'Production process', en: 'The name of the component', cn: '零部件名称',
+        items: ['Self-tapping screw'] },
     ],
   },
 
