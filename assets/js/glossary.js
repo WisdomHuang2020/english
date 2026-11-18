@@ -66,16 +66,22 @@
   }
 
   /* ── 视图切换 ─────────────────────────────────────────────────── */
-  var views = ['abbr', 'words', 'quotes'];
+  var views = ['abbr', 'words', 'sentences'];
 
-  /* 页签用**真路径**寻址：/glossary/abbr · /glossary/words · /glossary/quotes
+  /* 页签用**真路径**寻址：/glossary/abbr · /glossary/words · /glossary/sentences
      ────────────────────────────────────────────────────────────────
      以前写成 `#abbr`。为什么换掉：
        1. 页签是**页面状态**，不是页内锚点；页面上根本没有 id="abbr" 的元素，
           地址栏里挂个 # 容易被当成「跳到某一段」（2026-11-18 用户就这么理解）。
        2. 路径能被正常分享、收藏、刷新还原，也能进 canonical / 站点地图。
      兼容：旧链接 /glossary/#words 仍可用 —— 路径里读不到页签时回落到 hash，
-           读到后立刻用 replaceState 换成规范路径，地址栏不会留 #。 */
+           读到后立刻用 replaceState 换成规范路径，地址栏不会留 #。
+
+     ⚠️ 视图名与数据键**故意不一致**，别顺手统一：
+        视图/路由叫 sentences（贴着「句子」这个语义，URL 更好读），
+        数据键仍是 DATA.quotes / NOTES.quotes —— 那两个是 xlsx「英语精句」表
+        生成的产物，改了就得重跑 build_glossary.py 并连带换快照口径，不值得。 */
+  var VIEW_ALIAS = { quotes: 'sentences' };   // 更名前的旧 hash（#quotes 曾长期有效）
   function viewDir() {
     // 返回去掉页签段之后的目录，如 /glossary/abbr → /glossary
     var p = location.pathname.replace(/\/+$/, '');
@@ -89,10 +95,9 @@
   }
   function viewUrl(name) { return viewDir() + '/' + name; }
   function currentView() {
-    var v = viewOfPath();                       // 路径优先
-    if (v) return v;
-    var h = (location.hash || '').replace('#', '');
-    return views.indexOf(h) >= 0 ? h : 'abbr';  // 再兼容旧的 #hash
+    var v = viewOfPath() || (location.hash || '').replace('#', '');  // 路径优先，再兼容旧 hash
+    v = VIEW_ALIAS[v] || v;
+    return views.indexOf(v) >= 0 ? v : 'abbr';
   }
 
   function showView(name) {
@@ -430,8 +435,8 @@
     if (txt) txt.textContent = '已掌握 ' + done + ' / ' + total + '（' + pct + '%）';
   }
 
-  /* ── 精句视图 ─────────────────────────────────────────────────── */
-  function renderQuotes() {
+  /* ── 精句视图（路由名 sentences，数据键仍是 quotes，原因见 views 处注释）── */
+  function renderSentences() {
     var host = $('#quote-list');
     if (!host) return;
     host.innerHTML = DATA.quotes.map(function (q, i) {
@@ -508,7 +513,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     renderAbbr();
     renderWords();
-    renderQuotes();
+    renderSentences();
     renderErrata();
     bind();
     filterAbbr();

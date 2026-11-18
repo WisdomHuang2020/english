@@ -129,10 +129,10 @@
      好处是两个首页（/ 与 /email/）不用再靠 data-topic 特判。 */
   (function activeNav() {
     function clean(p) {
-      /* 词汇库的页签是真路径（/glossary/abbr|words|quotes），高亮按目录算，
+      /* 词汇库的页签是真路径（/glossary/abbr|words|sentences），高亮按目录算，
          否则在这三条地址上「行业词汇」这一项不会亮（2026-11-18）。 */
       return p.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '')
-              .replace(/^(\/glossary)\/(abbr|words|quotes)$/, '$1');
+              .replace(/^(\/glossary)\/(abbr|words|sentences)$/, '$1');
     }
     var here = clean(location.pathname);
     $$('.navlinks a').forEach(function (a) {
