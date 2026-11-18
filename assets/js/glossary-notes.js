@@ -22,7 +22,7 @@ window.PK_GLOSSARY_NOTES = {
     'profession': '立项、规格与设计阶段。PRD 定需求、TDS/TPD 给客户看参数、CEM 是 ABL 这类大客户的规格要求表、CFD 在开模前把散热算明白；再往下一层是设计本身：Structural / Optical Design 两个职能、Gerber 与 PCB Layout 这套图纸、DFM/DFX 这类可制造性方法，以及爆炸图与侧发光/直下式两种光路结构。这一组词不对，后面所有报价和承诺都会歪。',
     'Testing': '送样与验证阶段。客户实验室和第三方实验室说的话基本都在这一组：光学（光通量、光效、色温、显色、配光）、电气（PF、THD、浪涌、振铃波）、环境与可靠性（高低温、湿热、盐雾、振动、跌落、气密）、寿命（EOL 与光通维持）、运输验证（堆码与 ISTA）。谈测试条件时，Ta/Tc/Ts/Tj 四个温度点必须说清楚是哪一个，这是最容易扯皮的地方。',
     'Certification': '合规与准入阶段。安规（UL/ETL/CQC/CB）、能效（DLC/Energy Star/CEC）、化学（RoHS/REACH）、环境适应性（Dry/Damp/Wet、IC/NON-IC）。客户问「有没有 UL」通常指整灯安规认证，不是「有没有做过 UL 标准测试」，两者差别很大。',
-    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP/ECR/ECN）、协议（NDA/GPA/Purchase Agreement）与询价（RFQ）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」。',
+    'Bussiness': '报价与订单执行阶段。价格条款（FOB/VAT）、交付（LT/MOQ/MPQ）、单据与流程（PO/PR/MRP）、协议（NDA/GPA/Purchase Agreement）与询价（RFQ）。邮件里 80% 的争议出在这一组词的理解偏差上，尤其是 LT 从哪天起算。包装、重量与柜型已单独归到「包装运输类」；工程变更（ECR/ECN）归质量管理。',
     'Installation': '安装方式与安装环境。开孔尺寸、吊装/吸顶/嵌入/壁装、石膏板与龙骨条件、出光面内凹（Regress）与深眩，以及安装说明书。支架、吊绳、接线盒、螺丝这些**安装用的零件**已归到「零部件名称」。寄样前先把客户的安装方式问清，否则样品到了装不进去，退回的运费比样品贵。',
     'Material': 'BOM 与物料阶段。区分 Cable/Cord/Lead/Conductor/Wire/Harness 是基本功——报错一个词，采购就可能买错料。PCB/PCBA/FPCB 三者也不能混：一个是裸板，一个是贴完件的板，一个是软板。钢材牌号（SWP/SWC/SECC/SGCC/SPCC）与元器件（含 Photocell）也收在这一栏。',
     'Production process': '工艺与可制造性阶段。成型（压铸/挤型/旋压/冲压/注塑）、表面处理（电镀/电泳/喷漆/丝印）、电子装配（SMT/DIP/回流焊/波峰焊）、制程检测（AOI/ATE/在线/离线），以及小批量试产（Pilot Run）。降本价值分析（VAVE）也在这一段：在不牺牲质量与性能的前提下做功能/成本拆解。DFM 评审就是拿这一组词跟工厂对话。',
@@ -103,7 +103,8 @@ window.PK_GLOSSARY_NOTES = {
     { cat: 'Bussiness', match: 'OA', tag: '付款', err: true, note: '原表口径是「月结」，属公司内部用法。对外报价/合同里不要写 OA，要写 **payment terms: 30 days net / monthly settlement**。OA 在其它语境通常指办公自动化系统。' },
     { cat: 'Bussiness', match: 'VAT', tag: '税务', err: true, note: 'Value-added Tax，增值税。原表中文标「含税价」不准确：VAT 是税种，含税价应写 **price incl. VAT**，不含税写 **excl. VAT**。欧盟客户报价务必标注，否则对账必吵。' },
     { cat: 'Bussiness', match: 'PO', tag: '订单', note: 'Purchase Order，客户正式采购订单。PO 一旦确认即具合同效力；改数量/交期要走变更流程（见 ECR/ECN）。' },
-    { cat: 'Bussiness', match: 'ECR', tag: '变更', note: 'Engineering Change Request，变更申请（还没批）。ECN 是变更通知（已批准、要执行）。发 ECN 前必须评估库存、在制、已出货三块影响。' },
+    { cat: 'Quality', match: 'ECR', tag: '变更', note: 'Engineering Change Request，变更申请（还没批）。ECN 是变更通知（已批准、要执行）。发 ECN 前必须评估库存、在制、已出货三块影响。' },
+    { cat: 'Quality', match: 'ECN', tag: '变更', note: 'Engineering Change Notice，变更通知（ECR 已批准、正式下发执行）。通知里必须写清改什么、生效批次、库存/在制/已出货如何处置，以及旧物料停用节点；没有 ECR 审批就直接发 ECN 属于越权变更。' },
     { cat: 'Bussiness', match: 'MRP', tag: '计划', note: 'Material Requirement Planning，物料需求计划。长交期物料（驱动 IC、电解电容、铝型材）的 LT 决定整单交期，MRP 跑出来才发现就晚了。' },
     { cat: 'Bussiness', match: 'MOQ', tag: '数量', note: '最小起订量。和 MPQ（最小包装量）配合看：MOQ 1000、MPQ 200 意味着只能按 1000/1200/1400 递增下单，不能下 1100。' },
     { cat: 'Packaging & Shipping', match: 'Dieline', tag: '包装', note: '刀线图（包装盒展开的模切轮廓）。Artwork 是印刷稿（图案/文字/条码）。客户改包装，通常两个文件都要重新确认签字。' },
@@ -301,7 +302,7 @@ window.PK_GLOSSARY_NOTES = {
       'Quality and others': {
         en: 'Quality',
         cn: '质量管理',
-        intro: '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。另加首件检验（FAI）、质量岗位（QE/SQE/DQE/CQE）、体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）；打样段的命名（Nomenclature）、样机（Prototype）、封样（Golden Sample）与治具夹具（Jig/Tool/Fixture）也归在这一栏，作为验收与一致性的基准。',
+        intro: '质量体系与客诉阶段。IQC→IPQC→OQC→PQA→FQC→OBA 是**有先后顺序的六个关卡**，说错顺序会被客户质量工程师当场纠正。另加首件检验（FAI）、质量岗位（QE/SQE/DQE/CQE）、体系（ISO 9001/14001/IATF 16949）与工具（APQP/PPAP/QCP/FMEA）；工程变更流程（ECR 申请 → ECN 通知）由质量把关，发 ECN 前必须评估库存、在制、已出货三块影响；打样段的命名（Nomenclature）、样机（Prototype）、封样（Golden Sample）与治具夹具（Jig/Tool/Fixture）也归在这一栏，作为验收与一致性的基准。',
       },
       // 只有 3 条，单独成栏太薄，整栏并入专业类（条目 orig 仍是 Structure Related，详解照旧）
       'Structure Related': { en: 'profession', cn: '专业类' },
@@ -384,9 +385,11 @@ window.PK_GLOSSARY_NOTES = {
       { from: 'Material', en: 'Production process', cn: '工艺类',
         items: ['Pilot Run'] },
 
-      /* ── 质量管理：首件检验是质量动作 ──────────────────────────── */
+      /* ── 质量管理：首件检验是质量动作；工程变更流程 ECR/ECN 归质量 ── */
       { from: 'Testing', en: 'Quality', cn: '质量管理',
         items: ['FAI(First article inspection)'] },
+      { from: 'Bussiness', en: 'Quality', cn: '质量管理',
+        items: ['ECR(Engineering Change Request)', 'ECN(Engineering Change Notice)'] },
 
       /* ── 零部件名称：安装件与紧固件归位 ────────────────────────── */
       { from: 'Installation', en: 'The name of the component', cn: '零部件名称',
